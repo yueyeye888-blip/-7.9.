@@ -260,11 +260,43 @@ class ExecutionEngine:
         if pos.unrealized_pnl_pct < pos.max_loss_pct:
             pos.max_loss_pct = pos.unrealized_pnl_pct
 
+        holding_sec = time.time() - pos.opened_at
+        pos.exit_diag = self._build_exit_diag(pos, f, holding_sec)
+
         self._log_hold_diagnostics(pos, f)
 
         should_exit, reason = self._should_exit(pos, f)
         if should_exit:
             await self._exit(pos, f, reason)
+
+    def _build_exit_diag(self, pos: Position, f: Features, holding_sec: float) -> dict:
+        depth_ratio = 0.0
+        if pos.entry_bid_depth_03 > 0:
+            depth_ratio = f.bid_depth_03 / pos.entry_bid_depth_03
+
+        return {
+            "holding_sec": round(holding_sec, 1),
+            "ready": {
+                "book_imbalance_reversed": holding_sec > 30 and f.book_imbalance_03 < 1.0,
+                "taker_buy_weakened": holding_sec > 30 and f.taker_buy_ratio_10s < 0.40,
+                "bid_depth_disappeared": (
+                    pos.entry_bid_depth_03 > 0 and
+                    f.bid_depth_03 < pos.entry_bid_depth_03 * 0.30
+                ),
+                "spread_abnormal": f.spread_abnormal,
+            },
+            "metrics": {
+                "book_imbalance_03": round(f.book_imbalance_03, 3),
+                "taker_buy_ratio_10s": round(f.taker_buy_ratio_10s, 4),
+                "depth_ratio_vs_entry": round(depth_ratio, 4),
+                "spread_abnormal": f.spread_abnormal,
+            },
+            "gap": {
+                "book_imbalance_to_1": round(f.book_imbalance_03 - 1.0, 3),
+                "taker_buy_to_40pct": round(f.taker_buy_ratio_10s - 0.40, 4),
+                "depth_ratio_to_30pct": round(depth_ratio - 0.30, 4),
+            },
+        }
 
     def _log_hold_diagnostics(self, pos: Position, f: Features) -> None:
         now = time.time()
@@ -277,17 +309,9 @@ class ExecutionEngine:
             return
         self._last_hold_diag_ts[pos.symbol] = now
 
-        bi_ready = holding_sec > 30 and f.book_imbalance_03 < 1.0
-        taker_ready = holding_sec > 30 and f.taker_buy_ratio_10s < 0.40
-        depth_ready = (
-            pos.entry_bid_depth_03 > 0 and
-            f.bid_depth_03 < pos.entry_bid_depth_03 * 0.30
-        )
-        spread_ready = f.spread_abnormal
-
-        depth_ratio = 0.0
-        if pos.entry_bid_depth_03 > 0:
-            depth_ratio = f.bid_depth_03 / pos.entry_bid_depth_03
+        diag = self._build_exit_diag(pos, f, holding_sec)
+        ready = diag["ready"]
+        metrics = diag["metrics"]
 
         logger.info(
             "[HOLD] %s hold=%.0fs pnl=%+.3f%% bi=%.2f tb10=%.0f%% depth=%.0f%% "
@@ -295,14 +319,14 @@ class ExecutionEngine:
             pos.symbol,
             holding_sec,
             pos.unrealized_pnl_pct * 100,
-            f.book_imbalance_03,
-            f.taker_buy_ratio_10s * 100,
-            depth_ratio * 100,
-            spread_ready,
-            bi_ready,
-            taker_ready,
-            depth_ready,
-            spread_ready,
+            metrics["book_imbalance_03"],
+            metrics["taker_buy_ratio_10s"] * 100,
+            metrics["depth_ratio_vs_entry"] * 100,
+            ready["spread_abnormal"],
+            ready["book_imbalance_reversed"],
+            ready["taker_buy_weakened"],
+            ready["bid_depth_disappeared"],
+            ready["spread_abnormal"],
         )
 
     def _should_exit(self, pos: Position, f: Features):

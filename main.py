@@ -58,6 +58,7 @@ def _pos_to_dict(pos) -> dict:
         "max_loss_pct": pos.max_loss_pct,
         "opened_at": pos.opened_at,
         "signal_id": pos.signal_id,
+        "exit_diag": getattr(pos, "exit_diag", {}),
         "status": pos.status,
     }
 

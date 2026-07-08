@@ -151,4 +151,7 @@ class Position:
     # 已减仓比例
     reduced_pct: float = 0.0
 
+    # 平仓诊断数据（用于 Dashboard 可解释性展示）
+    exit_diag: dict = field(default_factory=dict)
+
     status: str = "HOLDING"          # HOLDING | EXITING | CLOSED

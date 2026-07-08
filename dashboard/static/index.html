@@ -80,6 +80,11 @@ td:first-child{text-align:left}
 .pos-side{color:var(--green);font-size:12px}
 .pos-row{display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
 .pos-row b{color:var(--text)}
+.pos-diag{margin-top:8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.diag-item{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:8px}
+.diag-title{font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.diag-state{font-size:12px;font-weight:bold}
+.diag-gap{font-size:11px;color:var(--muted);margin-top:2px}
 
 /* ─── Risk ─── */
 .risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;padding:14px}
@@ -424,6 +429,10 @@ function renderPositions(positions) {
   el.innerHTML = positions.map(p => {
     const held = Math.round(Date.now()/1000 - p.opened_at);
     const pnl = p.unrealized_pnl_pct || 0;
+    const d = p.exit_diag || {};
+    const ready = d.ready || {};
+    const gap = d.gap || {};
+    const tag = (ok) => ok ? '<span class="up">READY</span>' : '<span class="nu">WAIT</span>';
     return `<div class="pos-card">
       <div class="pos-head">
         <div class="pos-sym">${p.symbol}</div>
@@ -436,6 +445,28 @@ function renderPositions(positions) {
         <span>浮盈 <b class="${pnl>=0?'up':'dn'}">${pct(pnl*100)}</b></span>
         <span>最大浮盈 <b class="up">${pct((p.max_profit_pct||0)*100)}</b></span>
         <span>持仓 <b>${held}s</b></span>
+      </div>
+      <div class="pos-diag">
+        <div class="diag-item">
+          <div class="diag-title">BOOK_IMBALANCE_REVERSED</div>
+          <div class="diag-state">${tag(!!ready.book_imbalance_reversed)}</div>
+          <div class="diag-gap">bi-1.0=${fmtGap(gap.book_imbalance_to_1, 3)}</div>
+        </div>
+        <div class="diag-item">
+          <div class="diag-title">TAKER_BUY_WEAKENED</div>
+          <div class="diag-state">${tag(!!ready.taker_buy_weakened)}</div>
+          <div class="diag-gap">tb10-40%=${fmtGap((gap.taker_buy_to_40pct||0)*100, 2)}%</div>
+        </div>
+        <div class="diag-item">
+          <div class="diag-title">BID_DEPTH_DISAPPEARED</div>
+          <div class="diag-state">${tag(!!ready.bid_depth_disappeared)}</div>
+          <div class="diag-gap">depth-30%=${fmtGap((gap.depth_ratio_to_30pct||0)*100, 2)}%</div>
+        </div>
+        <div class="diag-item">
+          <div class="diag-title">SPREAD_ABNORMAL</div>
+          <div class="diag-state">${tag(!!ready.spread_abnormal)}</div>
+          <div class="diag-gap">按点差异常布尔触发</div>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -515,6 +546,7 @@ function renderRisk(r, ws, mode) {
 // ── 工具函数 ──────────────────────────────────────────────────────────
 const fmt  = (v, d=1) => typeof v==='number'?v.toFixed(d):'--';
 const pct  = v => (v>=0?'+':'')+fmt(v)+'%';
+const fmtGap = (v, d=2) => typeof v==='number' ? `${v>=0?'+':''}${v.toFixed(d)}` : '--';
 const pc   = v => v>.5?'up':v<-.5?'dn':'nu';
 const rc   = v => v>60?'up':v<40?'dn':'nu';
 const pad  = n => String(n).padStart(2,'0');
