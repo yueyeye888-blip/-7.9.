@@ -86,9 +86,8 @@ async def main_loop(
         ws_stats = ws_service.stats()
         ws_ok, ws_reason = risk_engine.is_ws_healthy(ws_stats["lag_seconds"])
         if not ws_ok:
-            logger.warning(f"WS unhealthy: {ws_reason} — skipping signal eval")
+            logger.warning(f"WS unhealthy: {ws_reason} — disable new entries, keep exit checks")
             shared_state.ws_stats = ws_stats
-            continue
 
         positions_snap = {}
 
@@ -111,28 +110,31 @@ async def main_loop(
                 if cnt % FEATURES_WRITE_EVERY == 0:
                     asyncio.create_task(recorder.save_features(f))
 
-                # 风控检查
-                allowed, reason = risk_engine.can_enter(sym, f)
+                signal = None
+                if ws_ok:
+                    # 风控检查
+                    allowed, reason = risk_engine.can_enter(sym, f)
 
-                # 信号评估
-                signal = signal_engine.evaluate(f) if allowed else None
+                    # 信号评估
+                    signal = signal_engine.evaluate(f) if allowed else None
 
-                # 发出预警（节流：同标的未持仓且 60s 内不重复推送）
-                if signal and signal.is_valid:
-                    not_in_pos = sym not in execution_engine.positions
-                    not_recently = time.time() - _last_signal_alert.get(sym, 0) > 60
-                    if not_in_pos and not_recently:
-                        _last_signal_alert[sym] = time.time()
-                        asyncio.create_task(alerter.on_signal(signal))
-                    shared_state.add_signal({
-                        "symbol": signal.symbol,
-                        "timestamp": signal.timestamp,
-                        "score": signal.opportunity_score,
-                        "type": signal.signal_type,
-                        "price": str(signal.entry_price),
-                    })
+                    # 发出预警（节流：同标的未持仓且 60s 内不重复推送）
+                    if signal and signal.is_valid:
+                        not_in_pos = sym not in execution_engine.positions
+                        not_recently = time.time() - _last_signal_alert.get(sym, 0) > 60
+                        if not_in_pos and not_recently:
+                            _last_signal_alert[sym] = time.time()
+                            asyncio.create_task(alerter.on_signal(signal))
+                        shared_state.add_signal({
+                            "symbol": signal.symbol,
+                            "timestamp": signal.timestamp,
+                            "score": signal.opportunity_score,
+                            "type": signal.signal_type,
+                            "price": str(signal.entry_price),
+                        })
 
                 # 执行（paper/live）
+                # WS 异常时 signal=None：不允许新开仓，但仍会更新持仓并执行平仓判断。
                 await execution_engine.on_features(f, signal)
 
             except Exception as e:
