@@ -42,6 +42,7 @@ class ExecutionEngine:
         self._positions: Dict[str, Position] = {}  # symbol -> Position
         self._closed_positions: List[Position] = []
         self._last_exit_ts: Dict[str, float] = {}   # symbol -> 平仓时间，用于冷却期
+        self._last_hold_diag_ts: Dict[str, float] = {}  # symbol -> 最近一次持仓诊断日志时间
 
         # 实盘上下文（由 main.py 通过 set_live_context 注入）
         self._api_key: str = ""
@@ -259,9 +260,50 @@ class ExecutionEngine:
         if pos.unrealized_pnl_pct < pos.max_loss_pct:
             pos.max_loss_pct = pos.unrealized_pnl_pct
 
+        self._log_hold_diagnostics(pos, f)
+
         should_exit, reason = self._should_exit(pos, f)
         if should_exit:
             await self._exit(pos, f, reason)
+
+    def _log_hold_diagnostics(self, pos: Position, f: Features) -> None:
+        now = time.time()
+        holding_sec = now - pos.opened_at
+
+        # 新开仓阶段更频繁输出，后续每 30s 输出一次，避免刷屏。
+        interval = 15 if holding_sec < 120 else 30
+        last_ts = self._last_hold_diag_ts.get(pos.symbol, 0)
+        if now - last_ts < interval:
+            return
+        self._last_hold_diag_ts[pos.symbol] = now
+
+        bi_ready = holding_sec > 30 and f.book_imbalance_03 < 1.0
+        taker_ready = holding_sec > 30 and f.taker_buy_ratio_10s < 0.40
+        depth_ready = (
+            pos.entry_bid_depth_03 > 0 and
+            f.bid_depth_03 < pos.entry_bid_depth_03 * 0.30
+        )
+        spread_ready = f.spread_abnormal
+
+        depth_ratio = 0.0
+        if pos.entry_bid_depth_03 > 0:
+            depth_ratio = f.bid_depth_03 / pos.entry_bid_depth_03
+
+        logger.info(
+            "[HOLD] %s hold=%.0fs pnl=%+.3f%% bi=%.2f tb10=%.0f%% depth=%.0f%% "
+            "spread_abn=%s ready={bi:%s,taker:%s,depth:%s,spread:%s}",
+            pos.symbol,
+            holding_sec,
+            pos.unrealized_pnl_pct * 100,
+            f.book_imbalance_03,
+            f.taker_buy_ratio_10s * 100,
+            depth_ratio * 100,
+            spread_ready,
+            bi_ready,
+            taker_ready,
+            depth_ready,
+            spread_ready,
+        )
 
     def _should_exit(self, pos: Position, f: Features):
         holding_sec = time.time() - pos.opened_at
@@ -317,6 +359,7 @@ class ExecutionEngine:
         self._closed_positions.append(pos)
         del self._positions[pos.symbol]
         self._last_exit_ts[pos.symbol] = time.time()   # 记录平仓时间，开始冷却
+        self._last_hold_diag_ts.pop(pos.symbol, None)
 
         # 实盘模式：买卖完后更新实际权益
         if self._cfg.mode == "live":
