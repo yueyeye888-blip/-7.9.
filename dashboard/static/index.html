@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ambush Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0d1117;--bg2:#161b22;--bg3:#21262d;
+  --border:#30363d;--text:#e6edf3;--muted:#8b949e;
+  --green:#3fb950;--red:#f85149;--yellow:#e3b341;
+  --blue:#58a6ff;--purple:#bc8cff;--orange:#db6d28;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Courier New',monospace;font-size:13px;height:100vh;display:flex;flex-direction:column}
+
+/* ─── Header ─── */
+header{display:flex;align-items:center;gap:12px;padding:8px 14px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap}
+.logo{font-size:15px;font-weight:bold;color:var(--blue);white-space:nowrap}
+.pills{display:flex;gap:6px}
+.pill{padding:2px 8px;border-radius:10px;font-size:11px;font-weight:bold;background:var(--bg3);border:1px solid var(--border)}
+.pill.green{background:#0d2b0f;border-color:var(--green);color:var(--green)}
+.pill.red{background:#2b0d0d;border-color:var(--red);color:var(--red)}
+.pill.yellow{background:#2b200d;border-color:var(--yellow);color:var(--yellow)}
+.stat-row{display:flex;gap:16px;margin-left:auto;font-size:11px;color:var(--muted);flex-wrap:wrap}
+.stat-row b{color:var(--text)}
+
+/* ─── Tabs ─── */
+nav{display:flex;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0}
+.tab-btn{padding:8px 18px;background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);cursor:pointer;font:inherit;font-size:13px;white-space:nowrap}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+.badge{display:inline-block;background:var(--bg3);border-radius:8px;padding:0 5px;font-size:10px;margin-left:3px;color:var(--muted)}
+
+/* ─── Tab content ─── */
+.tab-pane{display:none;overflow:auto;flex:1}
+.tab-pane.active{display:flex;flex-direction:column}
+
+/* ─── Table ─── */
+.tbl-wrap{overflow:auto;flex:1}
+table{width:100%;border-collapse:collapse;min-width:800px}
+thead th{padding:7px 10px;text-align:right;color:var(--muted);border-bottom:1px solid var(--border);font-weight:normal;white-space:nowrap;position:sticky;top:0;background:var(--bg)}
+thead th:first-child{text-align:left}
+tbody tr{border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
+tbody tr:hover{background:var(--bg2)}
+tbody tr.selected{background:#0d2233!important}
+tbody tr.sig-active td:first-child::before{content:"⚡ ";color:var(--yellow)}
+td{padding:6px 10px;text-align:right;white-space:nowrap}
+td:first-child{text-align:left}
+
+/* ─── Score ─── */
+.sc{font-weight:bold;font-size:14px}
+.sc.lo{color:var(--muted)}.sc.mi{color:var(--yellow)}.sc.hi{color:var(--orange)}
+.sc.sig{color:var(--green);text-shadow:0 0 6px #3fb95066}
+.pos-tag{font-size:10px;padding:1px 5px;border-radius:3px;background:#0d1e2b;color:var(--blue);border:1px solid var(--blue)}
+.up{color:var(--green)}.dn{color:var(--red)}.nu{color:var(--muted)}
+
+/* ─── Detail panel ─── */
+#detail-panel{border-top:2px solid var(--blue);background:var(--bg2);padding:14px;flex-shrink:0}
+#detail-panel.hidden{display:none}
+.dp-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.dp-sym{font-size:17px;font-weight:bold;color:var(--blue)}
+.dp-score{font-size:22px;font-weight:bold}
+.dp-close{margin-left:auto;background:none;border:1px solid var(--border);color:var(--muted);cursor:pointer;padding:3px 8px;border-radius:4px;font:inherit}
+.dp-close:hover{color:var(--text);border-color:var(--text)}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.chart-card{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px}
+.ct{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.chart-card canvas{max-height:110px}
+.mets{display:flex;gap:8px;flex-wrap:wrap}
+.met{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:8px 12px;min-width:100px;flex:1}
+.ml{font-size:10px;color:var(--muted);text-transform:uppercase}
+.mv{font-size:16px;font-weight:bold;margin-top:2px}
+
+/* ─── Positions ─── */
+.pos-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:12px 14px;margin:8px 12px}
+.pos-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.pos-sym{font-size:15px;font-weight:bold}
+.pos-side{color:var(--green);font-size:12px}
+.pos-row{display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.pos-row b{color:var(--text)}
+
+/* ─── Risk ─── */
+.risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;padding:14px}
+.rc{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px}
+.rc .rl{font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.rc .rv{font-size:20px;font-weight:bold}
+.rc .ok{color:var(--green)}.rc .warn{color:var(--yellow)}.rc .err{color:var(--red)}
+.pause-sec{padding:0 14px 14px}
+.ptag{display:inline-block;background:#2b200d;border:1px solid var(--yellow);color:var(--yellow);border-radius:4px;padding:3px 8px;margin:3px;font-size:11px}
+
+/* ─── Signals / Trades ─── */
+.pg-hdr{padding:10px 14px;color:var(--muted);font-size:11px}
+.empty{text-align:center;padding:40px;color:var(--muted)}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- ═══ Header ═══ -->
+<header>
+  <div class="logo">🎯 Ambush</div>
+  <div class="pills">
+    <span class="pill" id="mode-pill">--</span>
+    <span class="pill" id="ws-pill">WS --</span>
+  </div>
+  <div class="stat-row">
+    <span>日盈亏 <b id="h-pnl" class="nu">--</b></span>
+    <span>今日交易 <b id="h-trades">--</b></span>
+    <span>连续亏损 <b id="h-consec">--</b></span>
+    <span>运行 <b id="h-uptime">--</b></span>
+  </div>
+</header>
+
+<!-- ═══ Tabs ═══ -->
+<nav>
+  <button class="tab-btn active" data-tab="opp">机会榜</button>
+  <button class="tab-btn" data-tab="pos">持仓 <span class="badge" id="b-pos">0</span></button>
+  <button class="tab-btn" data-tab="sig">信号记录 <span class="badge" id="b-sig">0</span></button>
+  <button class="tab-btn" data-tab="trades">复盘</button>
+  <button class="tab-btn" data-tab="risk">风控</button>
+</nav>
+
+<!-- ═══ 机会榜 ═══ -->
+<div id="tab-opp" class="tab-pane active">
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th style="text-align:left">Symbol</th>
+        <th>价格</th>
+        <th>1m%</th>
+        <th>5m%</th>
+        <th>OI 5m%</th>
+        <th>OI 15m%</th>
+        <th>主买10s</th>
+        <th>主买30s</th>
+        <th>盘口失衡</th>
+        <th>点差bp</th>
+        <th>费率bp</th>
+        <th>评分</th>
+        <th>状态</th>
+      </tr></thead>
+      <tbody id="opp-body"></tbody>
+    </table>
+  </div>
+
+  <!-- 详情面板 -->
+  <div id="detail-panel" class="hidden">
+    <div class="dp-head">
+      <div class="dp-sym" id="dp-sym">--</div>
+      <div class="dp-score nu" id="dp-sc">--</div>
+      <button class="dp-close" id="dp-close">✕ 关闭</button>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card"><div class="ct">价格走势</div><canvas id="c-price"></canvas></div>
+      <div class="chart-card"><div class="ct">机会评分</div><canvas id="c-score"></canvas></div>
+      <div class="chart-card"><div class="ct">主动买入占比 10s</div><canvas id="c-taker"></canvas></div>
+      <div class="chart-card"><div class="ct">OI 变化 5m / 15m</div><canvas id="c-oi"></canvas></div>
+    </div>
+    <div class="mets" id="dp-mets"></div>
+  </div>
+</div>
+
+<!-- ═══ 持仓 ═══ -->
+<div id="tab-pos" class="tab-pane">
+  <div id="pos-content"><div class="empty">暂无持仓</div></div>
+</div>
+
+<!-- ═══ 信号记录 ═══ -->
+<div id="tab-sig" class="tab-pane">
+  <div class="pg-hdr">实时触发信号（最近 100 条）</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th style="text-align:left">时间</th>
+        <th style="text-align:left">Symbol</th>
+        <th>评分</th>
+        <th style="text-align:left">类型</th>
+        <th>价格</th>
+      </tr></thead>
+      <tbody id="sig-body"><tr><td colspan="5" class="empty">暂无信号</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ 复盘 ═══ -->
+<div id="tab-trades" class="tab-pane">
+  <div class="pg-hdr">已平仓记录 <button onclick="loadTrades()" style="margin-left:8px;background:var(--bg3);border:1px solid var(--border);color:var(--muted);cursor:pointer;padding:2px 8px;border-radius:4px;font:inherit">刷新</button></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th style="text-align:left">时间</th>
+        <th style="text-align:left">Symbol</th>
+        <th>入场价</th>
+        <th>出场价</th>
+        <th>PnL%</th>
+        <th>最大浮盈</th>
+        <th>持仓秒</th>
+        <th style="text-align:left">原因</th>
+      </tr></thead>
+      <tbody id="trades-body"><tr><td colspan="8" class="empty">点击刷新加载</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ 风控 ═══ -->
+<div id="tab-risk" class="tab-pane">
+  <div class="risk-grid">
+    <div class="rc"><div class="rl">系统模式</div><div class="rv ok" id="rc-mode">--</div></div>
+    <div class="rc"><div class="rl">WS 延迟</div><div class="rv" id="rc-lag">--</div></div>
+    <div class="rc"><div class="rl">今日盈亏</div><div class="rv" id="rc-pnl">--</div></div>
+    <div class="rc"><div class="rl">今日交易次数</div><div class="rv" id="rc-trades">--</div></div>
+    <div class="rc"><div class="rl">连续亏损</div><div class="rv" id="rc-consec">--</div></div>
+    <div class="rc"><div class="rl">系统状态</div><div class="rv ok" id="rc-status">正常</div></div>
+  </div>
+  <div class="pause-sec" id="pause-list"></div>
+</div>
+
+<script>
+'use strict';
+const HIST = 120; // 1 分钟 * 1s 每点
+
+const A = {
+  ws: null, hist: {}, sel: null, charts: {}, startAt: null, sigs: [],
+};
+
+// ── Tab 切换 ────────────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById('tab-' + b.dataset.tab).classList.add('active');
+    if (b.dataset.tab === 'trades') loadTrades();
+  });
+});
+
+// ── WebSocket ────────────────────────────────────────────────────────
+function connect() {
+  A.ws = new WebSocket(`ws://${location.host}/ws/live`);
+  A.ws.onopen = () => pill('ws-pill', 'WS ✓', 'green');
+  A.ws.onclose = () => { pill('ws-pill', 'WS ✗', 'red'); setTimeout(connect, 3000); };
+  A.ws.onerror = () => pill('ws-pill', 'WS ✗', 'red');
+  A.ws.onmessage = e => { try { onMsg(JSON.parse(e.data)); } catch(_) {} };
+}
+
+function onMsg(m) {
+  if (m.type !== 'snapshot') return;
+  if (!A.startAt) A.startAt = m.started_at;
+  renderHeader(m);
+  renderOpp(m.opportunities || []);
+  renderPositions(m.positions || []);
+  renderRisk(m.risk || {}, m.ws || {}, m.mode);
+  if ((m.recent_signals || []).length !== A.sigs.length) {
+    A.sigs = m.recent_signals || [];
+    renderSigs(A.sigs);
+  }
+  (m.opportunities || []).forEach(o => pushHist(o, m.ts));
+  if (A.sel && A.charts['c-price']) refreshCharts();
+}
+
+// ── Header ────────────────────────────────────────────────────────────
+function renderHeader(m) {
+  if (A.startAt) {
+    const s = Math.floor(Date.now()/1000 - A.startAt);
+    const h = Math.floor(s/3600), mn = Math.floor((s%3600)/60), sc = s%60;
+    setText('h-uptime', `${h}h${pad(mn)}m${pad(sc)}s`);
+  }
+  const r = m.risk || {};
+  const pnl = r.daily_loss_pct || 0;
+  setHtml('h-pnl', pct(pnl*100), pnl < 0 ? 'dn' : 'nu');
+  setText('h-trades', r.daily_trade_count || 0);
+  setText('h-consec', r.consecutive_losses || 0);
+  const mode = m.mode || '--';
+  pill('mode-pill', mode.toUpperCase(), mode === 'live' ? 'red' : 'green');
+}
+
+// ── 机会榜 ────────────────────────────────────────────────────────────
+function renderOpp(opps) {
+  const tbody = document.getElementById('opp-body');
+  opps.sort((a, b) => b.sc - a.sc);
+  opps.forEach(o => {
+    let row = document.getElementById('r-' + o.sym);
+    if (!row) {
+      row = document.createElement('tr');
+      row.id = 'r-' + o.sym;
+      row.addEventListener('click', () => openDetail(o.sym));
+      tbody.appendChild(row);
+    }
+    row.className = A.sel === o.sym ? 'selected' : (o.sig ? 'sig-active' : '');
+    const sc = o.sc || 0;
+    const scCls = sc >= 75 ? 'sig' : sc >= 60 ? 'hi' : sc >= 40 ? 'mi' : 'lo';
+    const status = o.pos ? '<span class="pos-tag">持仓中</span>' : (sc >= 75 ? '🟢' : '--');
+    const sym = o.sym.replace('USDT','') + '<span style="color:var(--muted)">USDT</span>';
+    row.innerHTML = `
+      <td>${sym}</td>
+      <td>${fmtPrice(o.price)}</td>
+      <td class="${pc(o.p1m)}">${fmt(o.p1m)}%</td>
+      <td class="${pc(o.p5m)}">${fmt(o.p5m)}%</td>
+      <td class="${pc(o.oi5)}">${fmt(o.oi5)}%</td>
+      <td class="${pc(o.oi15)}">${fmt(o.oi15)}%</td>
+      <td class="${rc(o.tb10)}">${fmt(o.tb10)}%</td>
+      <td class="${rc(o.tb30)}">${fmt(o.tb30)}%</td>
+      <td class="${o.bi > 1.3 ? 'up' : 'nu'}">${fmt(o.bi,2)}</td>
+      <td class="${o.sp > 8 ? 'dn' : 'nu'}">${fmt(o.sp,1)}</td>
+      <td class="nu">${fmt(o.fr,2)}</td>
+      <td><span class="sc ${scCls}">${Math.round(sc)}</span></td>
+      <td>${status}</td>`;
+  });
+}
+
+// ── 详情面板 ──────────────────────────────────────────────────────────
+function openDetail(sym) {
+  A.sel = sym;
+  document.querySelectorAll('#opp-body tr').forEach(r => r.classList.toggle('selected', r.id === 'r-' + sym));
+  document.getElementById('dp-sym').textContent = sym;
+  document.getElementById('detail-panel').classList.remove('hidden');
+  initCharts();
+  refreshCharts();
+  fetch('/api/symbols/' + sym).then(r => r.json()).then(d => renderMets(d.features || {}, d.score || {}));
+}
+
+document.getElementById('dp-close').addEventListener('click', () => {
+  A.sel = null;
+  document.getElementById('detail-panel').classList.add('hidden');
+  document.querySelectorAll('#opp-body tr').forEach(r => r.classList.remove('selected'));
+});
+
+function initCharts() {
+  const defs = [
+    {id:'c-price', color:'#58a6ff', fill:false},
+    {id:'c-score', color:'#3fb950', fill:true, yMin:0, yMax:100},
+    {id:'c-taker', color:'#bc8cff', fill:false, yMin:30, yMax:100},
+    {id:'c-oi',   color:'#e3b341', fill:false},
+  ];
+  defs.forEach(({id, color, fill, yMin, yMax}) => {
+    if (A.charts[id]) A.charts[id].destroy();
+    const ctx = document.getElementById(id).getContext('2d');
+    A.charts[id] = new Chart(ctx, {
+      type:'line',
+      data:{labels:[],datasets:[{data:[],borderColor:color,borderWidth:1.5,
+        backgroundColor:fill?color+'25':'transparent',pointRadius:0,tension:.3,fill}]},
+      options:{responsive:true,maintainAspectRatio:false,animation:{duration:0},
+        plugins:{legend:{display:false}},
+        scales:{x:{display:false},y:{display:true,min:yMin,max:yMax,
+          ticks:{color:'#8b949e',font:{size:10},maxTicksLimit:4},
+          grid:{color:'#21262d'}}}}
+    });
+  });
+  // OI 第二条线 (15m)
+  A.charts['c-oi'].data.datasets.push({
+    data:[],borderColor:'#db6d28',borderWidth:1.5,pointRadius:0,tension:.3
+  });
+  A.charts['c-oi'].update();
+}
+
+function refreshCharts() {
+  const h = A.hist[A.sel];
+  if (!h || !h.prices.length) return;
+  const lb = h.ts.map(() => '');
+  setChart('c-price', lb, h.prices);
+  setChart('c-score', lb, h.scores);
+  setChart('c-taker', lb, h.takerBuy);
+  const oi = A.charts['c-oi'];
+  if (oi) {
+    oi.data.labels = lb;
+    oi.data.datasets[0].data = h.oi5m;
+    if (oi.data.datasets[1]) oi.data.datasets[1].data = h.oi15m;
+    oi.update('none');
+  }
+  const lastSc = h.scores[h.scores.length-1] || 0;
+  const scEl = document.getElementById('dp-sc');
+  scEl.textContent = Math.round(lastSc);
+  scEl.className = 'dp-score ' + (lastSc >= 75 ? 'up' : lastSc >= 40 ? 'nu' : 'dn');
+}
+
+function setChart(id, lb, data) {
+  const c = A.charts[id]; if (!c) return;
+  c.data.labels = lb; c.data.datasets[0].data = data; c.update('none');
+}
+
+function renderMets(f, s) {
+  const el = document.getElementById('dp-mets');
+  const rows = [
+    ['OI 5m', pct((f.oi_change_5m||0)*100), pc((f.oi_change_5m||0)*100)],
+    ['OI 15m', pct((f.oi_change_15m||0)*100), pc((f.oi_change_15m||0)*100)],
+    ['主买10s', pct((f.taker_buy_ratio_10s||.5)*100), rc((f.taker_buy_ratio_10s||.5)*100)],
+    ['主买30s', pct((f.taker_buy_ratio_30s||.5)*100), rc((f.taker_buy_ratio_30s||.5)*100)],
+    ['盘口失衡', ((f.book_imbalance_03||1)).toFixed(3), (f.book_imbalance_03||1)>1.3?'up':'nu'],
+    ['深度变化', pct((f.bid_depth_03_change||0)*100), pc((f.bid_depth_03_change||0)*100)],
+    ['点差', ((f.spread_rate||0)*10000).toFixed(1)+'bp', (f.spread_rate||0)>.0008?'dn':'nu'],
+    ['费率', ((f.funding_rate||0)*10000).toFixed(2)+'bp', 'nu'],
+    ['突破1m', f.price_breaks_1m_high?'✓ 是':'✗ 否', f.price_breaks_1m_high?'up':'dn'],
+  ];
+  el.innerHTML = rows.map(([l,v,c])=>`
+    <div class="met"><div class="ml">${l}</div><div class="mv ${c}">${v}</div></div>`).join('');
+}
+
+// ── 历史缓冲 ──────────────────────────────────────────────────────────
+function pushHist(o, ts) {
+  if (!A.hist[o.sym]) A.hist[o.sym] = {prices:[],takerBuy:[],scores:[],oi5m:[],oi15m:[],ts:[]};
+  const h = A.hist[o.sym];
+  h.prices.push(parseFloat(o.price)||0);
+  h.takerBuy.push(o.tb10||50);
+  h.scores.push(o.sc||0);
+  h.oi5m.push(o.oi5||0);
+  h.oi15m.push(o.oi15||0);
+  h.ts.push(ts);
+  if (h.prices.length > HIST) {
+    ['prices','takerBuy','scores','oi5m','oi15m','ts'].forEach(k => h[k].shift());
+  }
+}
+
+// ── 持仓 ─────────────────────────────────────────────────────────────
+function renderPositions(positions) {
+  document.getElementById('b-pos').textContent = positions.length;
+  const el = document.getElementById('pos-content');
+  if (!positions.length) { el.innerHTML = '<div class="empty">暂无持仓</div>'; return; }
+  el.innerHTML = positions.map(p => {
+    const held = Math.round(Date.now()/1000 - p.opened_at);
+    const pnl = p.unrealized_pnl_pct || 0;
+    return `<div class="pos-card">
+      <div class="pos-head">
+        <div class="pos-sym">${p.symbol}</div>
+        <span class="pos-side">LONG</span>
+        <span style="color:var(--muted);font-size:11px">${(p.signal_id||'').slice(0,8)}</span>
+      </div>
+      <div class="pos-row">
+        <span>入场价 <b>${p.entry_price}</b></span>
+        <span>数量 <b>${parseFloat(p.qty).toFixed(4)}</b></span>
+        <span>浮盈 <b class="${pnl>=0?'up':'dn'}">${pct(pnl*100)}</b></span>
+        <span>最大浮盈 <b class="up">${pct((p.max_profit_pct||0)*100)}</b></span>
+        <span>持仓 <b>${held}s</b></span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── 信号记录 ──────────────────────────────────────────────────────────
+function renderSigs(sigs) {
+  document.getElementById('b-sig').textContent = sigs.length;
+  const tbody = document.getElementById('sig-body');
+  if (!sigs.length) { tbody.innerHTML = '<tr><td colspan="5" class="empty">暂无信号</td></tr>'; return; }
+  tbody.innerHTML = sigs.map(s => {
+    const t = new Date(s.timestamp*1000).toTimeString().slice(0,8);
+    return `<tr>
+      <td style="text-align:left">${t}</td>
+      <td style="text-align:left">${s.symbol}</td>
+      <td class="${(s.score||0)>=75?'up':'nu'}">${(s.score||0).toFixed(1)}</td>
+      <td style="text-align:left;color:var(--muted)">${s.type||''}</td>
+      <td>${s.price||'--'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ── 复盘 ─────────────────────────────────────────────────────────────
+async function loadTrades() {
+  const tbody = document.getElementById('trades-body');
+  tbody.innerHTML = '<tr><td colspan="8" class="empty">加载中...</td></tr>';
+  try {
+    const data = await fetch('/api/trades?limit=100').then(r => r.json());
+    if (!data.length) { tbody.innerHTML = '<tr><td colspan="8" class="empty">暂无记录</td></tr>'; return; }
+    tbody.innerHTML = data.map(t => {
+      const time = t.closed_at ? new Date(t.closed_at*1000).toLocaleString('zh-CN') : '--';
+      const pnl = t.pnl_pct || 0;
+      return `<tr>
+        <td style="text-align:left;font-size:11px">${time}</td>
+        <td style="text-align:left">${t.symbol||'--'}</td>
+        <td>${t.entry_price||'--'}</td>
+        <td>${t.exit_price||'--'}</td>
+        <td class="${pnl>=0?'up':'dn'}">${pct((pnl)*100)}</td>
+        <td class="up">${pct((t.max_profit_pct||0)*100)}</td>
+        <td>${(t.holding_seconds||0).toFixed(0)}</td>
+        <td style="text-align:left;color:var(--muted);font-size:11px">${t.exit_reason||'--'}</td>
+      </tr>`;
+    }).join('');
+  } catch(e) { tbody.innerHTML = '<tr><td colspan="8" class="empty">加载失败</td></tr>'; }
+}
+
+// ── 风控 ─────────────────────────────────────────────────────────────
+function renderRisk(r, ws, mode) {
+  const pnl = r.daily_loss_pct || 0;
+  setText('rc-mode', (mode||'--').toUpperCase());
+  setClass('rc-mode', 'rv ' + (mode==='live'?'err':'ok'));
+  const lag = ws.lag_seconds;
+  if (lag == null) { setText('rc-lag','--'); setClass('rc-lag','rv warn'); }
+  else { setText('rc-lag', lag.toFixed(2)+'s'); setClass('rc-lag','rv '+(lag>1?'err':lag>.5?'warn':'ok')); }
+  setHtml('rc-pnl', pct(pnl*100), 'rv '+(pnl<-0.01?'err':pnl<0?'warn':'ok'));
+  setText('rc-trades', r.daily_trade_count||0);
+  const c = r.consecutive_losses||0;
+  setText('rc-consec', c);
+  setClass('rc-consec','rv '+(c>=3?'err':c>=1?'warn':'ok'));
+  const paused = r.system_paused||false;
+  setText('rc-status', paused?'🔴 已暂停':'🟢 正常');
+  setClass('rc-status','rv '+(paused?'err':'ok'));
+  const pSyms = r.paused_symbols||{};
+  const now = Date.now()/1000;
+  const pl = document.getElementById('pause-list');
+  const keys = Object.keys(pSyms).filter(k => pSyms[k] > now);
+  pl.innerHTML = keys.length
+    ? '<div style="color:var(--muted);font-size:10px;text-transform:uppercase;margin-bottom:4px">暂停中</div>'
+      + keys.map(k => `<span class="ptag">${k} (${Math.round(pSyms[k]-now)}s)</span>`).join('')
+    : '';
+  // 同步 header
+  setHtml('h-pnl', pct(pnl*100), pnl<0?'dn':'nu');
+  setText('h-trades', r.daily_trade_count||0);
+  setText('h-consec', c);
+}
+
+// ── 工具函数 ──────────────────────────────────────────────────────────
+const fmt  = (v, d=1) => typeof v==='number'?v.toFixed(d):'--';
+const pct  = v => (v>=0?'+':'')+fmt(v)+'%';
+const pc   = v => v>.5?'up':v<-.5?'dn':'nu';
+const rc   = v => v>60?'up':v<40?'dn':'nu';
+const pad  = n => String(n).padStart(2,'0');
+const fmtPrice = s => { const n=parseFloat(s); return isNaN(n)?'--':n<0.01?n.toPrecision(4):n.toFixed(4); };
+function setText(id, val) { const e=document.getElementById(id); if(e) e.textContent=val; }
+function setClass(id, cls) { const e=document.getElementById(id); if(e) e.className=cls; }
+function setHtml(id, val, cls) { const e=document.getElementById(id); if(!e) return; e.textContent=val; if(cls) e.className=cls; }
+function pill(id, text, type) { const e=document.getElementById(id); if(!e) return; e.textContent=text; e.className='pill '+type; }
+
+// ── 启动 ──────────────────────────────────────────────────────────────
+connect();
+</script>
+</body>
+</html>

@@ -1,0 +1,1255 @@
+2026-07-08 06:19:54,136 [INFO] startup: ============================================================
+2026-07-08 06:19:54,136 [INFO] startup: Binance Ambush System starting
+2026-07-08 06:19:54,136 [INFO] startup: Mode: paper
+2026-07-08 06:19:54,136 [INFO] startup: Symbols: ['MITOUSDT', 'BLUAIUSDT', 'B2USDT', 'GPSUSDT', 'SIRENUSDT', 'AKEUSDT', 'BILLUSDT', 'OUSDT', 'HUSDT', 'TRUTHUSDT']
+2026-07-08 06:19:54,136 [INFO] startup: ============================================================
+2026-07-08 06:19:54,800 [INFO] services.symbol_service: [MITOUSDT] ✓ confirmed on Binance Futures
+2026-07-08 06:19:54,800 [INFO] services.symbol_service: [BLUAIUSDT] ✓ confirmed on Binance Futures
+2026-07-08 06:19:54,800 [INFO] services.symbol_service: [B2USDT] ✓ confirmed on Binance Futures
+2026-07-08 06:19:54,800 [INFO] services.symbol_service: [GPSUSDT] ✓ confirmed on Binance Futures
+2026-07-08 06:19:54,800 [INFO] services.symbol_service: [SIRENUSDT] ✓ confirmed on Binance Futures
+2026-07-08 06:19:54,800 [INFO] services.symbol_service: [AKEUSDT] ✓ confirmed on Binance Futures
+2026-07-08 06:19:54,800 [INFO] services.symbol_service: [BILLUSDT] ✓ confirmed on Binance Futures
+2026-07-08 06:19:54,800 [INFO] services.symbol_service: [OUSDT] ✓ confirmed on Binance Futures
+2026-07-08 06:19:54,800 [INFO] services.symbol_service: [HUSDT] ✓ confirmed on Binance Futures
+2026-07-08 06:19:54,800 [INFO] services.symbol_service: [TRUTHUSDT] ✓ confirmed on Binance Futures
+2026-07-08 06:19:54,801 [INFO] startup: Active symbols (10): ['MITOUSDT', 'BLUAIUSDT', 'B2USDT', 'GPSUSDT', 'SIRENUSDT', 'AKEUSDT', 'BILLUSDT', 'OUSDT', 'HUSDT', 'TRUTHUSDT']
+2026-07-08 06:19:54,803 [INFO] services.recorder: DB ready: data/ambush.db
+2026-07-08 06:19:54,803 [INFO] startup: Waiting for WS to connect...
+2026-07-08 06:19:54,803 [INFO] services.market_data: WS streams: 10 symbols × 5 = 50 streams
+2026-07-08 06:19:55,436 [INFO] services.market_data: WS connected
+2026-07-08 06:19:55,436 [INFO] startup: Fetching orderbook snapshots (WS is buffering)...
+2026-07-08 06:19:55,666 [INFO] services.orderbook: [MITOUSDT] snapshot applied: lastUpdateId=10993787161774, bids=294, asks=500, buffered=0
+2026-07-08 06:19:56,042 [INFO] services.orderbook: [B2USDT] snapshot applied: lastUpdateId=10993787218392, bids=251, asks=320, buffered=6
+2026-07-08 06:19:56,048 [INFO] services.orderbook: [OUSDT] snapshot applied: lastUpdateId=10993787121794, bids=500, asks=500, buffered=0
+2026-07-08 06:19:56,141 [INFO] services.orderbook: [TRUTHUSDT] snapshot applied: lastUpdateId=10993787079255, bids=416, asks=500, buffered=0
+2026-07-08 06:19:56,144 [INFO] services.orderbook: [BLUAIUSDT] snapshot applied: lastUpdateId=10993787218870, bids=500, asks=500, buffered=4
+2026-07-08 06:19:56,145 [INFO] services.orderbook: [AKEUSDT] snapshot applied: lastUpdateId=10993787219543, bids=433, asks=500, buffered=5
+2026-07-08 06:19:56,146 [INFO] services.orderbook: [GPSUSDT] snapshot applied: lastUpdateId=10993787218550, bids=459, asks=500, buffered=4
+2026-07-08 06:19:56,147 [INFO] services.orderbook: [HUSDT] snapshot applied: lastUpdateId=10993787220210, bids=500, asks=500, buffered=3
+2026-07-08 06:19:56,150 [INFO] services.orderbook: [BILLUSDT] snapshot applied: lastUpdateId=10993787214629, bids=463, asks=500, buffered=1
+2026-07-08 06:19:56,151 [INFO] services.orderbook: [SIRENUSDT] snapshot applied: lastUpdateId=10993787209889, bids=500, asks=500, buffered=2
+2026-07-08 06:19:56,151 [INFO] startup: Orderbook snapshots ready
+2026-07-08 06:19:56,151 [INFO] startup: All services started.
+2026-07-08 06:19:56,151 [INFO] startup: 📊 Dashboard: http://localhost:8080
+2026-07-08 06:19:56,152 [INFO] services.oi_poller: OI poller started: 10 symbols, interval=5s
+2026-07-08 06:19:56,152 [INFO] main_loop: Main loop started, evaluating 10 symbols every 0.5s
+2026-07-08 06:19:56,657 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.11  bdc=0%  p5=0.00%  vol=1.0x  sp=3.5bp  brk1m=False
+2026-07-08 06:19:56,659 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.76  bdc=0%  p5=0.00%  vol=1.0x  sp=4.4bp  brk1m=False
+2026-07-08 06:19:57,165 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.61  bdc=1%  p5=0.00%  vol=1.0x  sp=1.8bp  brk1m=False
+2026-07-08 06:19:57,670 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=9.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.31  bdc=-0%  p5=0.00%  vol=1.0x  sp=3.2bp  brk1m=False
+2026-07-08 06:19:57,672 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=10.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=2.09  bdc=-0%  p5=0.00%  vol=1.0x  sp=5.0bp  brk1m=False
+2026-07-08 06:19:58,175 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.58  bdc=-3%  p5=0.00%  vol=1.0x  sp=4.7bp  brk1m=False
+2026-07-08 06:19:58,683 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=4.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.24  bdc=-0%  p5=0.00%  vol=1.0x  sp=6.5bp  brk1m=False
+2026-07-08 06:20:00,196 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=4.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.55  bdc=7%  p5=0.00%  vol=1.0x  sp=6.7bp  brk1m=False
+2026-07-08 06:20:30,700 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=13.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.75  bdc=66%  p5=0.00%  vol=1.0x  sp=5.1bp  brk1m=False
+2026-07-08 06:22:20,648 [INFO] services.signal_engine: [STATUS] B2USDT  score=4.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.90  bdc=-18%  p5=0.00%  vol=1.0x  sp=5.8bp  brk1m=False
+2026-07-08 06:24:56,744 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=-0.09%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.90  bdc=-14%  p5=-0.28%  vol=1.0x  sp=3.5bp  brk1m=False
+2026-07-08 06:24:56,750 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.03%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.02  bdc=33%  p5=-0.21%  vol=1.0x  sp=2.9bp  brk1m=False
+2026-07-08 06:24:57,265 [INFO] services.signal_engine: [STATUS] OUSDT  score=9.0  oi5=0.04%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.34  bdc=-3%  p5=0.02%  vol=1.0x  sp=1.8bp  brk1m=False
+2026-07-08 06:24:57,783 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=10.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.69  bdc=54%  p5=0.28%  vol=1.0x  sp=1.1bp  brk1m=False
+2026-07-08 06:24:57,788 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=4.0  oi5=0.15%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=-12%  p5=-0.13%  vol=1.0x  sp=5.0bp  brk1m=False
+2026-07-08 06:24:58,299 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=9.0  oi5=-0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.35  bdc=35%  p5=-0.05%  vol=1.0x  sp=4.7bp  brk1m=False
+2026-07-08 06:25:00,367 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.88  bdc=12%  p5=0.10%  vol=1.0x  sp=2.0bp  brk1m=False
+2026-07-08 06:25:00,891 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=8.0  oi5=-0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.36  bdc=25%  p5=-0.43%  vol=1.0x  sp=6.5bp  brk1m=False
+2026-07-08 06:25:37,970 [WARNING] main_loop: WS unhealthy: WS_LAG(1.0s) — skipping signal eval
+2026-07-08 06:25:38,473 [WARNING] main_loop: WS unhealthy: WS_LAG(1.5s) — skipping signal eval
+2026-07-08 06:25:43,120 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=10.0  oi5=0.46%  oi15=0.00%  tb10=50%  tb30=50%  bi=2.01  bdc=21%  p5=0.74%  vol=1.0x  sp=5.1bp  brk1m=False
+2026-07-08 06:28:00,094 [INFO] services.signal_engine: [STATUS] B2USDT  score=4.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.88  bdc=-21%  p5=-0.02%  vol=1.0x  sp=7.8bp  brk1m=False
+2026-07-08 06:29:56,851 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=-0.05%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.78  bdc=-11%  p5=0.03%  vol=1.0x  sp=3.5bp  brk1m=False
+2026-07-08 06:29:56,866 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.04%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.43  bdc=-26%  p5=-0.05%  vol=1.0x  sp=1.5bp  brk1m=False
+2026-07-08 06:29:57,383 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.15%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.81  bdc=-7%  p5=0.09%  vol=1.0x  sp=1.8bp  brk1m=False
+2026-07-08 06:29:57,908 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=-0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.89  bdc=-24%  p5=-0.06%  vol=1.0x  sp=2.1bp  brk1m=False
+2026-07-08 06:29:57,914 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=9.0  oi5=0.03%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.57  bdc=-24%  p5=0.69%  vol=1.0x  sp=2.5bp  brk1m=False
+2026-07-08 06:29:58,437 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.79  bdc=-23%  p5=0.00%  vol=1.0x  sp=4.7bp  brk1m=False
+2026-07-08 06:30:00,561 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=-0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.69  bdc=36%  p5=0.31%  vol=1.0x  sp=4.6bp  brk1m=False
+2026-07-08 06:30:12,282 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=4.0  oi5=-0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.09  bdc=10%  p5=0.16%  vol=1.0x  sp=5.5bp  brk1m=False
+2026-07-08 06:30:43,633 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=10.0  oi5=0.14%  oi15=0.00%  tb10=50%  tb30=50%  bi=2.74  bdc=-1%  p5=0.25%  vol=1.0x  sp=5.1bp  brk1m=False
+2026-07-08 06:34:57,249 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=-0.01%  oi15=-0.14%  tb10=50%  tb30=50%  bi=1.30  bdc=1%  p5=-0.10%  vol=1.0x  sp=3.5bp  brk1m=False
+2026-07-08 06:34:57,276 [INFO] services.signal_engine: [STATUS] HUSDT  score=-11.5  oi5=-0.00%  oi15=0.06%  tb10=50%  tb30=50%  bi=4.44  bdc=24%  p5=0.64%  vol=1.0x  sp=4.4bp  brk1m=False
+2026-07-08 06:34:57,796 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=0.07%  oi15=-0.03%  tb10=50%  tb30=50%  bi=0.83  bdc=2%  p5=-0.01%  vol=1.0x  sp=3.6bp  brk1m=False
+2026-07-08 06:34:58,326 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=-0.01%  oi15=-0.02%  tb10=50%  tb30=50%  bi=0.85  bdc=10%  p5=-0.11%  vol=1.0x  sp=1.1bp  brk1m=False
+2026-07-08 06:34:58,335 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=9.0  oi5=0.01%  oi15=0.19%  tb10=50%  tb30=50%  bi=1.32  bdc=-64%  p5=0.55%  vol=1.0x  sp=2.5bp  brk1m=False
+2026-07-08 06:35:01,017 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=-0.02%  oi15=-0.03%  tb10=50%  tb30=50%  bi=1.04  bdc=-10%  p5=0.21%  vol=1.0x  sp=1.3bp  brk1m=False
+2026-07-08 06:35:03,698 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=16.0  oi5=-0.01%  oi15=-0.01%  tb10=50%  tb30=50%  bi=3.79  bdc=56%  p5=0.33%  vol=1.0x  sp=4.7bp  brk1m=False
+2026-07-08 06:35:12,911 [INFO] services.signal_engine: [STATUS] B2USDT  score=4.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.04  bdc=21%  p5=0.16%  vol=1.0x  sp=7.8bp  brk1m=False
+2026-07-08 06:35:22,282 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=4.0  oi5=0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.20  bdc=8%  p5=0.19%  vol=1.0x  sp=6.5bp  brk1m=False
+2026-07-08 06:36:10,232 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=4.0  oi5=0.00%  oi15=0.60%  tb10=50%  tb30=50%  bi=0.86  bdc=-11%  p5=-0.28%  vol=1.0x  sp=5.1bp  brk1m=False
+2026-07-08 06:39:57,416 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=6.5  oi5=0.00%  oi15=-0.05%  tb10=50%  tb30=50%  bi=1.31  bdc=-3%  p5=0.03%  vol=1.0x  sp=3.5bp  brk1m=False
+2026-07-08 06:39:57,443 [INFO] services.signal_engine: [STATUS] HUSDT  score=-11.5  oi5=0.01%  oi15=0.05%  tb10=50%  tb30=50%  bi=1.95  bdc=-11%  p5=0.07%  vol=1.0x  sp=2.9bp  brk1m=False
+2026-07-08 06:39:57,965 [INFO] services.signal_engine: [STATUS] OUSDT  score=10.0  oi5=-0.09%  oi15=-0.23%  tb10=50%  tb30=50%  bi=1.14  bdc=79%  p5=0.87%  vol=1.0x  sp=1.8bp  brk1m=False
+2026-07-08 06:39:58,490 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=-0.04%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.67  bdc=-7%  p5=-0.40%  vol=1.0x  sp=1.1bp  brk1m=False
+2026-07-08 06:39:58,494 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=11.0  oi5=0.00%  oi15=0.04%  tb10=50%  tb30=50%  bi=3.43  bdc=16%  p5=-0.26%  vol=1.0x  sp=5.0bp  brk1m=False
+2026-07-08 06:40:01,139 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=-0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=-4%  p5=0.08%  vol=1.0x  sp=4.6bp  brk1m=False
+2026-07-08 06:40:14,066 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=9.0  oi5=0.07%  oi15=0.06%  tb10=50%  tb30=50%  bi=1.32  bdc=-17%  p5=0.28%  vol=1.0x  sp=4.7bp  brk1m=False
+2026-07-08 06:40:22,377 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.13%  oi15=-0.13%  tb10=50%  tb30=50%  bi=0.89  bdc=13%  p5=-0.08%  vol=1.0x  sp=3.7bp  brk1m=False
+2026-07-08 06:40:22,883 [INFO] services.signal_engine: [STATUS] B2USDT  score=4.0  oi5=-0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.65  bdc=19%  p5=0.08%  vol=1.0x  sp=7.8bp  brk1m=False
+2026-07-08 06:41:31,012 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=10.0  oi5=-0.00%  oi15=0.16%  tb10=50%  tb30=50%  bi=2.43  bdc=21%  p5=-0.20%  vol=1.0x  sp=5.1bp  brk1m=False
+2026-07-08 06:44:57,718 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=-0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.83  bdc=-6%  p5=-0.07%  vol=1.0x  sp=3.5bp  brk1m=False
+2026-07-08 06:44:57,738 [INFO] services.signal_engine: [STATUS] HUSDT  score=-11.5  oi5=-0.02%  oi15=-0.01%  tb10=50%  tb30=50%  bi=3.53  bdc=39%  p5=-0.07%  vol=1.0x  sp=4.4bp  brk1m=False
+2026-07-08 06:44:58,280 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.12%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.73  bdc=-16%  p5=0.86%  vol=1.0x  sp=1.8bp  brk1m=False
+2026-07-08 06:44:58,817 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.72  bdc=-20%  p5=0.21%  vol=1.0x  sp=3.2bp  brk1m=False
+2026-07-08 06:44:58,826 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=0.30%  oi15=0.00%  tb10=50%  tb30=50%  bi=0.68  bdc=-67%  p5=-0.56%  vol=1.0x  sp=2.5bp  brk1m=False
+2026-07-08 06:45:01,572 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.00%  oi15=-0.02%  tb10=50%  tb30=50%  bi=0.61  bdc=1%  p5=-0.08%  vol=1.0x  sp=2.6bp  brk1m=False
+2026-07-08 06:45:14,213 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.00%  oi15=0.05%  tb10=50%  tb30=50%  bi=1.07  bdc=0%  p5=0.00%  vol=1.0x  sp=4.7bp  brk1m=False
+2026-07-08 06:45:23,055 [INFO] services.signal_engine: [STATUS] B2USDT  score=4.0  oi5=0.00%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.11  bdc=3%  p5=-0.18%  vol=1.0x  sp=5.8bp  brk1m=False
+2026-07-08 06:45:29,149 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=4.0  oi5=-0.00%  oi15=-0.13%  tb10=50%  tb30=50%  bi=0.96  bdc=4%  p5=0.16%  vol=1.0x  sp=5.5bp  brk1m=False
+2026-07-08 06:46:31,487 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=8.0  oi5=-0.00%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.60  bdc=19%  p5=0.51%  vol=1.0x  sp=5.1bp  brk1m=False
+2026-07-08 06:48:55,936 [WARNING] main_loop: WS unhealthy: WS_LAG(1.5s) — skipping signal eval
+2026-07-08 06:48:56,439 [WARNING] main_loop: WS unhealthy: WS_LAG(2.0s) — skipping signal eval
+2026-07-08 06:48:56,940 [WARNING] main_loop: WS unhealthy: WS_LAG(2.5s) — skipping signal eval
+2026-07-08 06:48:57,442 [WARNING] main_loop: WS unhealthy: WS_LAG(3.0s) — skipping signal eval
+2026-07-08 06:48:57,943 [WARNING] main_loop: WS unhealthy: WS_LAG(3.5s) — skipping signal eval
+2026-07-08 06:48:58,444 [WARNING] main_loop: WS unhealthy: WS_LAG(4.0s) — skipping signal eval
+2026-07-08 06:48:58,946 [WARNING] main_loop: WS unhealthy: WS_LAG(4.5s) — skipping signal eval
+2026-07-08 06:48:59,447 [WARNING] main_loop: WS unhealthy: WS_LAG(5.0s) — skipping signal eval
+2026-07-08 06:48:59,949 [WARNING] main_loop: WS unhealthy: WS_LAG(5.5s) — skipping signal eval
+2026-07-08 06:49:00,450 [WARNING] main_loop: WS unhealthy: WS_LAG(6.0s) — skipping signal eval
+2026-07-08 06:49:00,951 [WARNING] main_loop: WS unhealthy: WS_LAG(6.5s) — skipping signal eval
+2026-07-08 06:49:01,452 [WARNING] main_loop: WS unhealthy: WS_LAG(7.0s) — skipping signal eval
+2026-07-08 06:49:01,954 [WARNING] main_loop: WS unhealthy: WS_LAG(7.5s) — skipping signal eval
+2026-07-08 06:49:02,455 [WARNING] main_loop: WS unhealthy: WS_LAG(8.0s) — skipping signal eval
+2026-07-08 06:49:02,957 [WARNING] main_loop: WS unhealthy: WS_LAG(8.5s) — skipping signal eval
+2026-07-08 06:49:03,458 [WARNING] main_loop: WS unhealthy: WS_LAG(9.0s) — skipping signal eval
+2026-07-08 06:49:03,959 [WARNING] main_loop: WS unhealthy: WS_LAG(9.6s) — skipping signal eval
+2026-07-08 06:49:04,461 [WARNING] main_loop: WS unhealthy: WS_LAG(10.1s) — skipping signal eval
+2026-07-08 06:49:04,962 [WARNING] main_loop: WS unhealthy: WS_LAG(10.6s) — skipping signal eval
+2026-07-08 06:49:07,070 [WARNING] main_loop: WS unhealthy: WS_LAG(1.0s) — skipping signal eval
+2026-07-08 06:49:07,571 [WARNING] main_loop: WS unhealthy: WS_LAG(1.5s) — skipping signal eval
+2026-07-08 06:49:08,073 [WARNING] main_loop: WS unhealthy: WS_LAG(2.0s) — skipping signal eval
+2026-07-08 06:49:08,574 [WARNING] main_loop: WS unhealthy: WS_LAG(2.5s) — skipping signal eval
+2026-07-08 06:49:09,076 [WARNING] main_loop: WS unhealthy: WS_LAG(3.0s) — skipping signal eval
+2026-07-08 06:49:09,577 [WARNING] main_loop: WS unhealthy: WS_LAG(3.5s) — skipping signal eval
+2026-07-08 06:49:10,078 [WARNING] main_loop: WS unhealthy: WS_LAG(4.0s) — skipping signal eval
+2026-07-08 06:49:10,580 [WARNING] main_loop: WS unhealthy: WS_LAG(4.5s) — skipping signal eval
+2026-07-08 06:49:11,081 [WARNING] main_loop: WS unhealthy: WS_LAG(5.0s) — skipping signal eval
+2026-07-08 06:49:11,583 [WARNING] main_loop: WS unhealthy: WS_LAG(5.5s) — skipping signal eval
+2026-07-08 06:49:12,085 [WARNING] main_loop: WS unhealthy: WS_LAG(6.0s) — skipping signal eval
+2026-07-08 06:49:12,587 [WARNING] main_loop: WS unhealthy: WS_LAG(6.5s) — skipping signal eval
+2026-07-08 06:49:13,088 [WARNING] main_loop: WS unhealthy: WS_LAG(7.0s) — skipping signal eval
+2026-07-08 06:49:13,590 [WARNING] main_loop: WS unhealthy: WS_LAG(7.5s) — skipping signal eval
+2026-07-08 06:49:13,745 [ERROR] services.market_data: WS error: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2026-07-08 06:49:13,751 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 06:49:14,091 [WARNING] main_loop: WS unhealthy: WS_LAG(8.1s) — skipping signal eval
+2026-07-08 06:49:14,593 [WARNING] main_loop: WS unhealthy: WS_LAG(8.6s) — skipping signal eval
+2026-07-08 06:49:15,095 [WARNING] main_loop: WS unhealthy: WS_LAG(9.1s) — skipping signal eval
+2026-07-08 06:49:15,597 [WARNING] main_loop: WS unhealthy: WS_LAG(9.6s) — skipping signal eval
+2026-07-08 06:49:16,099 [WARNING] main_loop: WS unhealthy: WS_LAG(10.1s) — skipping signal eval
+2026-07-08 06:49:16,600 [WARNING] main_loop: WS unhealthy: WS_LAG(10.6s) — skipping signal eval
+2026-07-08 06:49:17,101 [WARNING] main_loop: WS unhealthy: WS_LAG(11.1s) — skipping signal eval
+2026-07-08 06:49:17,602 [WARNING] main_loop: WS unhealthy: WS_LAG(11.6s) — skipping signal eval
+2026-07-08 06:49:18,103 [WARNING] main_loop: WS unhealthy: WS_LAG(12.1s) — skipping signal eval
+2026-07-08 06:49:18,604 [WARNING] main_loop: WS unhealthy: WS_LAG(12.6s) — skipping signal eval
+2026-07-08 06:49:19,106 [WARNING] main_loop: WS unhealthy: WS_LAG(13.1s) — skipping signal eval
+2026-07-08 06:49:19,608 [WARNING] main_loop: WS unhealthy: WS_LAG(13.6s) — skipping signal eval
+2026-07-08 06:49:20,110 [WARNING] main_loop: WS unhealthy: WS_LAG(14.1s) — skipping signal eval
+2026-07-08 06:49:20,611 [WARNING] main_loop: WS unhealthy: WS_LAG(14.6s) — skipping signal eval
+2026-07-08 06:49:21,113 [WARNING] main_loop: WS unhealthy: WS_LAG(15.1s) — skipping signal eval
+2026-07-08 06:49:21,461 [INFO] services.market_data: WS connected
+2026-07-08 06:49:37,293 [WARNING] main_loop: WS unhealthy: WS_LAG(1.0s) — skipping signal eval
+2026-07-08 06:49:37,796 [WARNING] main_loop: WS unhealthy: WS_LAG(1.5s) — skipping signal eval
+2026-07-08 06:49:38,297 [WARNING] main_loop: WS unhealthy: WS_LAG(2.0s) — skipping signal eval
+2026-07-08 06:49:38,798 [WARNING] main_loop: WS unhealthy: WS_LAG(2.5s) — skipping signal eval
+2026-07-08 06:49:58,084 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=0.04%  oi15=0.04%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.07%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:49:58,106 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.02%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.07%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:49:58,628 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=0.09%  oi15=-0.13%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.12%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:49:59,152 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.00%  oi15=-0.03%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.03%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:49:59,157 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=0.01%  oi15=0.32%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.10%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:50:01,809 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=-0.04%  oi15=-0.04%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.12%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:50:14,494 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=0.00%  oi15=0.06%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.09%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:50:23,512 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.00%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.02%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:50:29,358 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=0.01%  oi15=-0.13%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.03%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:51:31,534 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.02%  oi15=-0.03%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.53%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:52:16,010 [WARNING] main_loop: WS unhealthy: WS_LAG(1.0s) — skipping signal eval
+2026-07-08 06:52:16,513 [WARNING] main_loop: WS unhealthy: WS_LAG(1.5s) — skipping signal eval
+2026-07-08 06:52:17,014 [WARNING] main_loop: WS unhealthy: WS_LAG(2.0s) — skipping signal eval
+2026-07-08 06:52:17,516 [WARNING] main_loop: WS unhealthy: WS_LAG(2.6s) — skipping signal eval
+2026-07-08 06:52:18,017 [WARNING] main_loop: WS unhealthy: WS_LAG(3.1s) — skipping signal eval
+2026-07-08 06:52:18,519 [WARNING] main_loop: WS unhealthy: WS_LAG(3.6s) — skipping signal eval
+2026-07-08 06:52:19,020 [WARNING] main_loop: WS unhealthy: WS_LAG(4.1s) — skipping signal eval
+2026-07-08 06:52:19,522 [WARNING] main_loop: WS unhealthy: WS_LAG(4.6s) — skipping signal eval
+2026-07-08 06:52:20,024 [WARNING] main_loop: WS unhealthy: WS_LAG(5.1s) — skipping signal eval
+2026-07-08 06:52:20,525 [WARNING] main_loop: WS unhealthy: WS_LAG(5.6s) — skipping signal eval
+2026-07-08 06:52:21,027 [WARNING] main_loop: WS unhealthy: WS_LAG(6.1s) — skipping signal eval
+2026-07-08 06:52:21,528 [WARNING] main_loop: WS unhealthy: WS_LAG(6.6s) — skipping signal eval
+2026-07-08 06:52:22,030 [WARNING] main_loop: WS unhealthy: WS_LAG(7.1s) — skipping signal eval
+2026-07-08 06:52:22,532 [WARNING] main_loop: WS unhealthy: WS_LAG(7.6s) — skipping signal eval
+2026-07-08 06:52:23,034 [WARNING] main_loop: WS unhealthy: WS_LAG(8.1s) — skipping signal eval
+2026-07-08 06:52:23,535 [WARNING] main_loop: WS unhealthy: WS_LAG(8.6s) — skipping signal eval
+2026-07-08 06:52:24,037 [WARNING] main_loop: WS unhealthy: WS_LAG(9.1s) — skipping signal eval
+2026-07-08 06:52:24,539 [WARNING] main_loop: WS unhealthy: WS_LAG(9.6s) — skipping signal eval
+2026-07-08 06:52:25,040 [WARNING] main_loop: WS unhealthy: WS_LAG(10.1s) — skipping signal eval
+2026-07-08 06:52:25,542 [WARNING] main_loop: WS unhealthy: WS_LAG(10.6s) — skipping signal eval
+2026-07-08 06:52:30,909 [WARNING] main_loop: WS unhealthy: WS_LAG(1.0s) — skipping signal eval
+2026-07-08 06:52:31,411 [WARNING] main_loop: WS unhealthy: WS_LAG(1.5s) — skipping signal eval
+2026-07-08 06:52:31,912 [WARNING] main_loop: WS unhealthy: WS_LAG(2.0s) — skipping signal eval
+2026-07-08 06:52:32,414 [WARNING] main_loop: WS unhealthy: WS_LAG(2.5s) — skipping signal eval
+2026-07-08 06:52:32,916 [WARNING] main_loop: WS unhealthy: WS_LAG(3.0s) — skipping signal eval
+2026-07-08 06:52:33,417 [WARNING] main_loop: WS unhealthy: WS_LAG(3.5s) — skipping signal eval
+2026-07-08 06:52:36,624 [WARNING] main_loop: WS unhealthy: WS_LAG(1.2s) — skipping signal eval
+2026-07-08 06:52:37,127 [WARNING] main_loop: WS unhealthy: WS_LAG(1.7s) — skipping signal eval
+2026-07-08 06:52:37,628 [WARNING] main_loop: WS unhealthy: WS_LAG(2.2s) — skipping signal eval
+2026-07-08 06:52:38,130 [WARNING] main_loop: WS unhealthy: WS_LAG(2.7s) — skipping signal eval
+2026-07-08 06:52:38,631 [WARNING] main_loop: WS unhealthy: WS_LAG(3.2s) — skipping signal eval
+2026-07-08 06:54:58,176 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=0.11%  oi15=0.15%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.56%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:54:58,205 [INFO] services.signal_engine: [STATUS] HUSDT  score=2.5  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.05%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:54:58,731 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.38%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.57%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:54:59,261 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.00%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.07%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:54:59,267 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=-0.02%  oi15=0.30%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.40%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:55:01,953 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=-0.00%  oi15=-0.04%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.09%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:55:14,890 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.02%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.05%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:55:23,525 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.01%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.01%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:55:29,579 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.01%  oi15=-0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.02%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:56:31,863 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.71%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 06:57:40,441 [WARNING] main_loop: WS unhealthy: WS_LAG(1.1s) — skipping signal eval
+2026-07-08 06:57:40,944 [WARNING] main_loop: WS unhealthy: WS_LAG(1.6s) — skipping signal eval
+2026-07-08 06:59:54,105 [WARNING] main_loop: WS unhealthy: WS_LAG(1.5s) — skipping signal eval
+2026-07-08 06:59:54,609 [WARNING] main_loop: WS unhealthy: WS_LAG(2.0s) — skipping signal eval
+2026-07-08 06:59:55,111 [WARNING] main_loop: WS unhealthy: WS_LAG(2.5s) — skipping signal eval
+2026-07-08 06:59:55,612 [WARNING] main_loop: WS unhealthy: WS_LAG(3.0s) — skipping signal eval
+2026-07-08 06:59:56,114 [WARNING] main_loop: WS unhealthy: WS_LAG(3.5s) — skipping signal eval
+2026-07-08 06:59:56,615 [WARNING] main_loop: WS unhealthy: WS_LAG(4.0s) — skipping signal eval
+2026-07-08 06:59:57,117 [WARNING] main_loop: WS unhealthy: WS_LAG(4.5s) — skipping signal eval
+2026-07-08 06:59:57,618 [WARNING] main_loop: WS unhealthy: WS_LAG(5.0s) — skipping signal eval
+2026-07-08 06:59:58,120 [WARNING] main_loop: WS unhealthy: WS_LAG(5.5s) — skipping signal eval
+2026-07-08 06:59:58,621 [WARNING] main_loop: WS unhealthy: WS_LAG(6.0s) — skipping signal eval
+2026-07-08 06:59:59,123 [WARNING] main_loop: WS unhealthy: WS_LAG(6.5s) — skipping signal eval
+2026-07-08 06:59:59,626 [WARNING] main_loop: WS unhealthy: WS_LAG(7.0s) — skipping signal eval
+2026-07-08 07:00:00,127 [WARNING] main_loop: WS unhealthy: WS_LAG(7.5s) — skipping signal eval
+2026-07-08 07:00:00,629 [WARNING] main_loop: WS unhealthy: WS_LAG(8.0s) — skipping signal eval
+2026-07-08 07:00:01,131 [WARNING] main_loop: WS unhealthy: WS_LAG(8.5s) — skipping signal eval
+2026-07-08 07:00:01,633 [WARNING] main_loop: WS unhealthy: WS_LAG(9.0s) — skipping signal eval
+2026-07-08 07:00:02,134 [WARNING] main_loop: WS unhealthy: WS_LAG(9.5s) — skipping signal eval
+2026-07-08 07:00:02,636 [WARNING] main_loop: WS unhealthy: WS_LAG(10.0s) — skipping signal eval
+2026-07-08 07:00:03,138 [WARNING] main_loop: WS unhealthy: WS_LAG(10.5s) — skipping signal eval
+2026-07-08 07:00:03,639 [WARNING] main_loop: WS unhealthy: WS_LAG(11.0s) — skipping signal eval
+2026-07-08 07:00:04,162 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.29%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:00:04,165 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=-0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.04%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:00:04,168 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=0.04%  oi15=0.18%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.10%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:00:04,174 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=0.11%  oi15=0.11%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.30%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:00:04,179 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=0.15%  oi15=-0.14%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.04%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:00:04,189 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.00%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.17%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:00:14,928 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.03%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.00%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:00:24,072 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.04%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:00:29,696 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=0.00%  oi15=-0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.04%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:01:32,214 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=0.06%  oi15=0.04%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.05%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:04:18,699 [WARNING] main_loop: WS unhealthy: WS_LAG(1.2s) — skipping signal eval
+2026-07-08 07:04:19,202 [WARNING] main_loop: WS unhealthy: WS_LAG(1.7s) — skipping signal eval
+2026-07-08 07:04:19,704 [WARNING] main_loop: WS unhealthy: WS_LAG(2.2s) — skipping signal eval
+2026-07-08 07:04:20,205 [WARNING] main_loop: WS unhealthy: WS_LAG(2.7s) — skipping signal eval
+2026-07-08 07:04:20,707 [WARNING] main_loop: WS unhealthy: WS_LAG(3.2s) — skipping signal eval
+2026-07-08 07:05:04,411 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=-0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.03%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:05:04,414 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.01%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.02%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:05:04,417 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=0.01%  oi15=0.15%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.14%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:05:04,423 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=0.14%  oi15=0.23%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.06%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:05:04,428 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=0.57%  oi15=0.60%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.86%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:05:04,440 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.01%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.31%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:05:15,182 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.02%  oi15=-0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.09%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:05:24,391 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.19%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:05:29,867 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.47%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:06:32,500 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.07%  oi15=-0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.35%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:08:06,123 [WARNING] main_loop: WS unhealthy: WS_LAG(1.1s) — skipping signal eval
+2026-07-08 07:08:06,627 [WARNING] main_loop: WS unhealthy: WS_LAG(1.6s) — skipping signal eval
+2026-07-08 07:08:07,129 [WARNING] main_loop: WS unhealthy: WS_LAG(2.1s) — skipping signal eval
+2026-07-08 07:08:07,631 [WARNING] main_loop: WS unhealthy: WS_LAG(2.6s) — skipping signal eval
+2026-07-08 07:08:08,132 [WARNING] main_loop: WS unhealthy: WS_LAG(3.1s) — skipping signal eval
+2026-07-08 07:08:08,634 [WARNING] main_loop: WS unhealthy: WS_LAG(3.6s) — skipping signal eval
+2026-07-08 07:08:09,135 [WARNING] main_loop: WS unhealthy: WS_LAG(4.1s) — skipping signal eval
+2026-07-08 07:08:09,637 [WARNING] main_loop: WS unhealthy: WS_LAG(4.6s) — skipping signal eval
+2026-07-08 07:08:10,138 [WARNING] main_loop: WS unhealthy: WS_LAG(5.1s) — skipping signal eval
+2026-07-08 07:08:10,640 [WARNING] main_loop: WS unhealthy: WS_LAG(5.6s) — skipping signal eval
+2026-07-08 07:08:11,141 [WARNING] main_loop: WS unhealthy: WS_LAG(6.1s) — skipping signal eval
+2026-07-08 07:08:11,643 [WARNING] main_loop: WS unhealthy: WS_LAG(6.6s) — skipping signal eval
+2026-07-08 07:08:12,145 [WARNING] main_loop: WS unhealthy: WS_LAG(7.1s) — skipping signal eval
+2026-07-08 07:08:12,646 [WARNING] main_loop: WS unhealthy: WS_LAG(7.6s) — skipping signal eval
+2026-07-08 07:08:13,148 [WARNING] main_loop: WS unhealthy: WS_LAG(8.1s) — skipping signal eval
+2026-07-08 07:08:13,650 [WARNING] main_loop: WS unhealthy: WS_LAG(8.6s) — skipping signal eval
+2026-07-08 07:08:14,151 [WARNING] main_loop: WS unhealthy: WS_LAG(9.1s) — skipping signal eval
+2026-07-08 07:08:14,652 [WARNING] main_loop: WS unhealthy: WS_LAG(9.6s) — skipping signal eval
+2026-07-08 07:08:15,154 [WARNING] main_loop: WS unhealthy: WS_LAG(10.1s) — skipping signal eval
+2026-07-08 07:08:15,656 [WARNING] main_loop: WS unhealthy: WS_LAG(10.6s) — skipping signal eval
+2026-07-08 07:08:16,158 [WARNING] main_loop: WS unhealthy: WS_LAG(11.1s) — skipping signal eval
+2026-07-08 07:08:16,660 [WARNING] main_loop: WS unhealthy: WS_LAG(11.6s) — skipping signal eval
+2026-07-08 07:08:17,161 [WARNING] main_loop: WS unhealthy: WS_LAG(12.1s) — skipping signal eval
+2026-07-08 07:08:18,766 [WARNING] main_loop: WS unhealthy: WS_LAG(1.3s) — skipping signal eval
+2026-07-08 07:08:20,399 [WARNING] main_loop: WS unhealthy: WS_LAG(1.3s) — skipping signal eval
+2026-07-08 07:08:22,019 [WARNING] main_loop: WS unhealthy: WS_LAG(1.4s) — skipping signal eval
+2026-07-08 07:10:02,824 [WARNING] main_loop: WS unhealthy: WS_LAG(1.1s) — skipping signal eval
+2026-07-08 07:10:03,326 [WARNING] main_loop: WS unhealthy: WS_LAG(1.6s) — skipping signal eval
+2026-07-08 07:10:04,415 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=-0.02%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.11%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:10:04,417 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=-0.01%  oi15=-0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.05%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:10:04,422 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=0.19%  oi15=0.22%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.42%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:10:04,428 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=-0.09%  oi15=0.16%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.14%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:10:04,435 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=0.55%  oi15=1.30%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.45%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:10:04,461 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.02%  oi15=0.03%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.11%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:10:15,571 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.02%  oi15=-0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.65%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:10:24,541 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.01%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:10:30,187 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.06%  oi15=-0.06%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.09%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:10:46,379 [WARNING] main_loop: WS unhealthy: WS_LAG(1.0s) — skipping signal eval
+2026-07-08 07:11:20,542 [WARNING] main_loop: WS unhealthy: WS_LAG(1.3s) — skipping signal eval
+2026-07-08 07:11:21,046 [WARNING] main_loop: WS unhealthy: WS_LAG(1.8s) — skipping signal eval
+2026-07-08 07:11:21,547 [WARNING] main_loop: WS unhealthy: WS_LAG(2.3s) — skipping signal eval
+2026-07-08 07:11:22,049 [WARNING] main_loop: WS unhealthy: WS_LAG(2.8s) — skipping signal eval
+2026-07-08 07:11:22,550 [WARNING] main_loop: WS unhealthy: WS_LAG(3.3s) — skipping signal eval
+2026-07-08 07:11:23,052 [WARNING] main_loop: WS unhealthy: WS_LAG(3.8s) — skipping signal eval
+2026-07-08 07:11:23,554 [WARNING] main_loop: WS unhealthy: WS_LAG(4.3s) — skipping signal eval
+2026-07-08 07:11:24,055 [WARNING] main_loop: WS unhealthy: WS_LAG(4.8s) — skipping signal eval
+2026-07-08 07:11:24,557 [WARNING] main_loop: WS unhealthy: WS_LAG(5.3s) — skipping signal eval
+2026-07-08 07:11:25,059 [WARNING] main_loop: WS unhealthy: WS_LAG(5.8s) — skipping signal eval
+2026-07-08 07:11:25,560 [WARNING] main_loop: WS unhealthy: WS_LAG(6.3s) — skipping signal eval
+2026-07-08 07:11:26,062 [WARNING] main_loop: WS unhealthy: WS_LAG(6.8s) — skipping signal eval
+2026-07-08 07:11:26,563 [WARNING] main_loop: WS unhealthy: WS_LAG(7.3s) — skipping signal eval
+2026-07-08 07:11:27,065 [WARNING] main_loop: WS unhealthy: WS_LAG(7.8s) — skipping signal eval
+2026-07-08 07:11:27,567 [WARNING] main_loop: WS unhealthy: WS_LAG(8.3s) — skipping signal eval
+2026-07-08 07:11:28,069 [WARNING] main_loop: WS unhealthy: WS_LAG(8.8s) — skipping signal eval
+2026-07-08 07:11:28,570 [WARNING] main_loop: WS unhealthy: WS_LAG(9.3s) — skipping signal eval
+2026-07-08 07:11:29,072 [WARNING] main_loop: WS unhealthy: WS_LAG(9.8s) — skipping signal eval
+2026-07-08 07:11:29,574 [WARNING] main_loop: WS unhealthy: WS_LAG(10.3s) — skipping signal eval
+2026-07-08 07:11:30,075 [WARNING] main_loop: WS unhealthy: WS_LAG(10.8s) — skipping signal eval
+2026-07-08 07:11:30,577 [WARNING] main_loop: WS unhealthy: WS_LAG(11.3s) — skipping signal eval
+2026-07-08 07:11:31,079 [WARNING] main_loop: WS unhealthy: WS_LAG(11.8s) — skipping signal eval
+2026-07-08 07:11:31,580 [WARNING] main_loop: WS unhealthy: WS_LAG(12.3s) — skipping signal eval
+2026-07-08 07:11:32,081 [WARNING] main_loop: WS unhealthy: WS_LAG(12.8s) — skipping signal eval
+2026-07-08 07:11:32,583 [WARNING] main_loop: WS unhealthy: WS_LAG(13.3s) — skipping signal eval
+2026-07-08 07:11:33,084 [WARNING] main_loop: WS unhealthy: WS_LAG(13.8s) — skipping signal eval
+2026-07-08 07:11:33,586 [WARNING] main_loop: WS unhealthy: WS_LAG(14.3s) — skipping signal eval
+2026-07-08 07:11:34,089 [WARNING] main_loop: WS unhealthy: WS_LAG(14.8s) — skipping signal eval
+2026-07-08 07:11:34,590 [WARNING] main_loop: WS unhealthy: WS_LAG(15.3s) — skipping signal eval
+2026-07-08 07:11:35,092 [WARNING] main_loop: WS unhealthy: WS_LAG(15.8s) — skipping signal eval
+2026-07-08 07:11:35,594 [WARNING] main_loop: WS unhealthy: WS_LAG(16.3s) — skipping signal eval
+2026-07-08 07:11:36,095 [WARNING] main_loop: WS unhealthy: WS_LAG(16.8s) — skipping signal eval
+2026-07-08 07:11:36,596 [WARNING] main_loop: WS unhealthy: WS_LAG(17.3s) — skipping signal eval
+2026-07-08 07:11:37,098 [WARNING] main_loop: WS unhealthy: WS_LAG(17.8s) — skipping signal eval
+2026-07-08 07:11:37,599 [WARNING] main_loop: WS unhealthy: WS_LAG(18.3s) — skipping signal eval
+2026-07-08 07:11:38,101 [WARNING] main_loop: WS unhealthy: WS_LAG(18.8s) — skipping signal eval
+2026-07-08 07:11:38,602 [WARNING] main_loop: WS unhealthy: WS_LAG(19.3s) — skipping signal eval
+2026-07-08 07:11:39,104 [WARNING] main_loop: WS unhealthy: WS_LAG(19.8s) — skipping signal eval
+2026-07-08 07:11:39,606 [WARNING] main_loop: WS unhealthy: WS_LAG(20.3s) — skipping signal eval
+2026-07-08 07:11:40,108 [WARNING] main_loop: WS unhealthy: WS_LAG(20.8s) — skipping signal eval
+2026-07-08 07:11:40,610 [WARNING] main_loop: WS unhealthy: WS_LAG(21.3s) — skipping signal eval
+2026-07-08 07:11:41,111 [WARNING] main_loop: WS unhealthy: WS_LAG(21.8s) — skipping signal eval
+2026-07-08 07:11:41,613 [WARNING] main_loop: WS unhealthy: WS_LAG(22.4s) — skipping signal eval
+2026-07-08 07:11:41,693 [ERROR] services.market_data: WS error: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2026-07-08 07:11:41,786 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:11:42,115 [WARNING] main_loop: WS unhealthy: WS_LAG(22.9s) — skipping signal eval
+2026-07-08 07:11:42,616 [WARNING] main_loop: WS unhealthy: WS_LAG(23.4s) — skipping signal eval
+2026-07-08 07:11:43,118 [WARNING] main_loop: WS unhealthy: WS_LAG(23.9s) — skipping signal eval
+2026-07-08 07:11:43,619 [WARNING] main_loop: WS unhealthy: WS_LAG(24.4s) — skipping signal eval
+2026-07-08 07:11:44,120 [WARNING] main_loop: WS unhealthy: WS_LAG(24.9s) — skipping signal eval
+2026-07-08 07:11:44,621 [WARNING] main_loop: WS unhealthy: WS_LAG(25.4s) — skipping signal eval
+2026-07-08 07:11:45,123 [WARNING] main_loop: WS unhealthy: WS_LAG(25.9s) — skipping signal eval
+2026-07-08 07:11:45,624 [WARNING] main_loop: WS unhealthy: WS_LAG(26.4s) — skipping signal eval
+2026-07-08 07:11:46,126 [WARNING] main_loop: WS unhealthy: WS_LAG(26.9s) — skipping signal eval
+2026-07-08 07:11:46,629 [WARNING] main_loop: WS unhealthy: WS_LAG(27.4s) — skipping signal eval
+2026-07-08 07:11:47,131 [WARNING] main_loop: WS unhealthy: WS_LAG(27.9s) — skipping signal eval
+2026-07-08 07:11:47,632 [WARNING] main_loop: WS unhealthy: WS_LAG(28.4s) — skipping signal eval
+2026-07-08 07:11:48,134 [WARNING] main_loop: WS unhealthy: WS_LAG(28.9s) — skipping signal eval
+2026-07-08 07:11:48,556 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:11:48,556 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:11:48,637 [WARNING] main_loop: WS unhealthy: WS_LAG(29.4s) — skipping signal eval
+2026-07-08 07:11:49,139 [WARNING] main_loop: WS unhealthy: WS_LAG(29.9s) — skipping signal eval
+2026-07-08 07:11:49,641 [WARNING] main_loop: WS unhealthy: WS_LAG(30.4s) — skipping signal eval
+2026-07-08 07:11:50,141 [WARNING] main_loop: WS unhealthy: WS_LAG(30.9s) — skipping signal eval
+2026-07-08 07:11:50,644 [WARNING] main_loop: WS unhealthy: WS_LAG(31.4s) — skipping signal eval
+2026-07-08 07:11:51,144 [WARNING] main_loop: WS unhealthy: WS_LAG(31.9s) — skipping signal eval
+2026-07-08 07:11:51,646 [WARNING] main_loop: WS unhealthy: WS_LAG(32.4s) — skipping signal eval
+2026-07-08 07:11:52,147 [WARNING] main_loop: WS unhealthy: WS_LAG(32.9s) — skipping signal eval
+2026-07-08 07:11:52,649 [WARNING] main_loop: WS unhealthy: WS_LAG(33.4s) — skipping signal eval
+2026-07-08 07:11:53,150 [WARNING] main_loop: WS unhealthy: WS_LAG(33.9s) — skipping signal eval
+2026-07-08 07:11:53,563 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:11:53,563 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:11:53,651 [WARNING] main_loop: WS unhealthy: WS_LAG(34.4s) — skipping signal eval
+2026-07-08 07:11:54,153 [WARNING] main_loop: WS unhealthy: WS_LAG(34.9s) — skipping signal eval
+2026-07-08 07:11:54,655 [WARNING] main_loop: WS unhealthy: WS_LAG(35.4s) — skipping signal eval
+2026-07-08 07:11:55,158 [WARNING] main_loop: WS unhealthy: WS_LAG(35.9s) — skipping signal eval
+2026-07-08 07:11:55,659 [WARNING] main_loop: WS unhealthy: WS_LAG(36.4s) — skipping signal eval
+2026-07-08 07:11:56,160 [WARNING] main_loop: WS unhealthy: WS_LAG(36.9s) — skipping signal eval
+2026-07-08 07:11:56,662 [WARNING] main_loop: WS unhealthy: WS_LAG(37.4s) — skipping signal eval
+2026-07-08 07:11:57,164 [WARNING] main_loop: WS unhealthy: WS_LAG(37.9s) — skipping signal eval
+2026-07-08 07:11:57,666 [WARNING] main_loop: WS unhealthy: WS_LAG(38.4s) — skipping signal eval
+2026-07-08 07:11:58,167 [WARNING] main_loop: WS unhealthy: WS_LAG(38.9s) — skipping signal eval
+2026-07-08 07:11:58,568 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:11:58,568 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:11:58,669 [WARNING] main_loop: WS unhealthy: WS_LAG(39.4s) — skipping signal eval
+2026-07-08 07:11:59,171 [WARNING] main_loop: WS unhealthy: WS_LAG(39.9s) — skipping signal eval
+2026-07-08 07:11:59,672 [WARNING] main_loop: WS unhealthy: WS_LAG(40.4s) — skipping signal eval
+2026-07-08 07:12:00,174 [WARNING] main_loop: WS unhealthy: WS_LAG(40.9s) — skipping signal eval
+2026-07-08 07:12:00,675 [WARNING] main_loop: WS unhealthy: WS_LAG(41.4s) — skipping signal eval
+2026-07-08 07:12:01,177 [WARNING] main_loop: WS unhealthy: WS_LAG(41.9s) — skipping signal eval
+2026-07-08 07:12:01,678 [WARNING] main_loop: WS unhealthy: WS_LAG(42.4s) — skipping signal eval
+2026-07-08 07:12:02,180 [WARNING] main_loop: WS unhealthy: WS_LAG(42.9s) — skipping signal eval
+2026-07-08 07:12:02,681 [WARNING] main_loop: WS unhealthy: WS_LAG(43.4s) — skipping signal eval
+2026-07-08 07:12:03,183 [WARNING] main_loop: WS unhealthy: WS_LAG(43.9s) — skipping signal eval
+2026-07-08 07:12:03,574 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:03,575 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:03,684 [WARNING] main_loop: WS unhealthy: WS_LAG(44.4s) — skipping signal eval
+2026-07-08 07:12:04,186 [WARNING] main_loop: WS unhealthy: WS_LAG(44.9s) — skipping signal eval
+2026-07-08 07:12:04,688 [WARNING] main_loop: WS unhealthy: WS_LAG(45.4s) — skipping signal eval
+2026-07-08 07:12:05,190 [WARNING] main_loop: WS unhealthy: WS_LAG(45.9s) — skipping signal eval
+2026-07-08 07:12:05,691 [WARNING] main_loop: WS unhealthy: WS_LAG(46.4s) — skipping signal eval
+2026-07-08 07:12:06,192 [WARNING] main_loop: WS unhealthy: WS_LAG(46.9s) — skipping signal eval
+2026-07-08 07:12:06,693 [WARNING] main_loop: WS unhealthy: WS_LAG(47.4s) — skipping signal eval
+2026-07-08 07:12:07,194 [WARNING] main_loop: WS unhealthy: WS_LAG(47.9s) — skipping signal eval
+2026-07-08 07:12:07,696 [WARNING] main_loop: WS unhealthy: WS_LAG(48.4s) — skipping signal eval
+2026-07-08 07:12:08,197 [WARNING] main_loop: WS unhealthy: WS_LAG(48.9s) — skipping signal eval
+2026-07-08 07:12:08,579 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:08,580 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:08,699 [WARNING] main_loop: WS unhealthy: WS_LAG(49.4s) — skipping signal eval
+2026-07-08 07:12:09,200 [WARNING] main_loop: WS unhealthy: WS_LAG(49.9s) — skipping signal eval
+2026-07-08 07:12:09,701 [WARNING] main_loop: WS unhealthy: WS_LAG(50.4s) — skipping signal eval
+2026-07-08 07:12:10,203 [WARNING] main_loop: WS unhealthy: WS_LAG(50.9s) — skipping signal eval
+2026-07-08 07:12:10,705 [WARNING] main_loop: WS unhealthy: WS_LAG(51.4s) — skipping signal eval
+2026-07-08 07:12:11,207 [WARNING] main_loop: WS unhealthy: WS_LAG(51.9s) — skipping signal eval
+2026-07-08 07:12:11,709 [WARNING] main_loop: WS unhealthy: WS_LAG(52.4s) — skipping signal eval
+2026-07-08 07:12:12,210 [WARNING] main_loop: WS unhealthy: WS_LAG(52.9s) — skipping signal eval
+2026-07-08 07:12:12,712 [WARNING] main_loop: WS unhealthy: WS_LAG(53.4s) — skipping signal eval
+2026-07-08 07:12:13,213 [WARNING] main_loop: WS unhealthy: WS_LAG(54.0s) — skipping signal eval
+2026-07-08 07:12:13,585 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:13,585 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:13,715 [WARNING] main_loop: WS unhealthy: WS_LAG(54.5s) — skipping signal eval
+2026-07-08 07:12:14,217 [WARNING] main_loop: WS unhealthy: WS_LAG(55.0s) — skipping signal eval
+2026-07-08 07:12:14,718 [WARNING] main_loop: WS unhealthy: WS_LAG(55.5s) — skipping signal eval
+2026-07-08 07:12:15,219 [WARNING] main_loop: WS unhealthy: WS_LAG(56.0s) — skipping signal eval
+2026-07-08 07:12:15,720 [WARNING] main_loop: WS unhealthy: WS_LAG(56.5s) — skipping signal eval
+2026-07-08 07:12:16,222 [WARNING] main_loop: WS unhealthy: WS_LAG(57.0s) — skipping signal eval
+2026-07-08 07:12:16,724 [WARNING] main_loop: WS unhealthy: WS_LAG(57.5s) — skipping signal eval
+2026-07-08 07:12:17,225 [WARNING] main_loop: WS unhealthy: WS_LAG(58.0s) — skipping signal eval
+2026-07-08 07:12:17,726 [WARNING] main_loop: WS unhealthy: WS_LAG(58.5s) — skipping signal eval
+2026-07-08 07:12:18,227 [WARNING] main_loop: WS unhealthy: WS_LAG(59.0s) — skipping signal eval
+2026-07-08 07:12:18,590 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:18,590 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:18,729 [WARNING] main_loop: WS unhealthy: WS_LAG(59.5s) — skipping signal eval
+2026-07-08 07:12:19,233 [WARNING] main_loop: WS unhealthy: WS_LAG(60.0s) — skipping signal eval
+2026-07-08 07:12:19,733 [WARNING] main_loop: WS unhealthy: WS_LAG(60.5s) — skipping signal eval
+2026-07-08 07:12:20,235 [WARNING] main_loop: WS unhealthy: WS_LAG(61.0s) — skipping signal eval
+2026-07-08 07:12:20,737 [WARNING] main_loop: WS unhealthy: WS_LAG(61.5s) — skipping signal eval
+2026-07-08 07:12:21,238 [WARNING] main_loop: WS unhealthy: WS_LAG(62.0s) — skipping signal eval
+2026-07-08 07:12:21,740 [WARNING] main_loop: WS unhealthy: WS_LAG(62.5s) — skipping signal eval
+2026-07-08 07:12:22,242 [WARNING] main_loop: WS unhealthy: WS_LAG(63.0s) — skipping signal eval
+2026-07-08 07:12:22,744 [WARNING] main_loop: WS unhealthy: WS_LAG(63.5s) — skipping signal eval
+2026-07-08 07:12:23,246 [WARNING] main_loop: WS unhealthy: WS_LAG(64.0s) — skipping signal eval
+2026-07-08 07:12:23,594 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:23,594 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:23,747 [WARNING] main_loop: WS unhealthy: WS_LAG(64.5s) — skipping signal eval
+2026-07-08 07:12:24,249 [WARNING] main_loop: WS unhealthy: WS_LAG(65.0s) — skipping signal eval
+2026-07-08 07:12:24,750 [WARNING] main_loop: WS unhealthy: WS_LAG(65.5s) — skipping signal eval
+2026-07-08 07:12:25,251 [WARNING] main_loop: WS unhealthy: WS_LAG(66.0s) — skipping signal eval
+2026-07-08 07:12:25,752 [WARNING] main_loop: WS unhealthy: WS_LAG(66.5s) — skipping signal eval
+2026-07-08 07:12:26,254 [WARNING] main_loop: WS unhealthy: WS_LAG(67.0s) — skipping signal eval
+2026-07-08 07:12:26,756 [WARNING] main_loop: WS unhealthy: WS_LAG(67.5s) — skipping signal eval
+2026-07-08 07:12:27,258 [WARNING] main_loop: WS unhealthy: WS_LAG(68.0s) — skipping signal eval
+2026-07-08 07:12:27,761 [WARNING] main_loop: WS unhealthy: WS_LAG(68.5s) — skipping signal eval
+2026-07-08 07:12:28,264 [WARNING] main_loop: WS unhealthy: WS_LAG(69.0s) — skipping signal eval
+2026-07-08 07:12:28,600 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:28,600 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:28,766 [WARNING] main_loop: WS unhealthy: WS_LAG(69.5s) — skipping signal eval
+2026-07-08 07:12:29,267 [WARNING] main_loop: WS unhealthy: WS_LAG(70.0s) — skipping signal eval
+2026-07-08 07:12:29,768 [WARNING] main_loop: WS unhealthy: WS_LAG(70.5s) — skipping signal eval
+2026-07-08 07:12:30,270 [WARNING] main_loop: WS unhealthy: WS_LAG(71.0s) — skipping signal eval
+2026-07-08 07:12:30,774 [WARNING] main_loop: WS unhealthy: WS_LAG(71.5s) — skipping signal eval
+2026-07-08 07:12:31,276 [WARNING] main_loop: WS unhealthy: WS_LAG(72.0s) — skipping signal eval
+2026-07-08 07:12:31,779 [WARNING] main_loop: WS unhealthy: WS_LAG(72.5s) — skipping signal eval
+2026-07-08 07:12:32,280 [WARNING] main_loop: WS unhealthy: WS_LAG(73.0s) — skipping signal eval
+2026-07-08 07:12:32,783 [WARNING] main_loop: WS unhealthy: WS_LAG(73.5s) — skipping signal eval
+2026-07-08 07:12:33,285 [WARNING] main_loop: WS unhealthy: WS_LAG(74.0s) — skipping signal eval
+2026-07-08 07:12:33,606 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:33,607 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:33,786 [WARNING] main_loop: WS unhealthy: WS_LAG(74.5s) — skipping signal eval
+2026-07-08 07:12:34,289 [WARNING] main_loop: WS unhealthy: WS_LAG(75.0s) — skipping signal eval
+2026-07-08 07:12:34,791 [WARNING] main_loop: WS unhealthy: WS_LAG(75.5s) — skipping signal eval
+2026-07-08 07:12:35,293 [WARNING] main_loop: WS unhealthy: WS_LAG(76.0s) — skipping signal eval
+2026-07-08 07:12:35,795 [WARNING] main_loop: WS unhealthy: WS_LAG(76.5s) — skipping signal eval
+2026-07-08 07:12:36,298 [WARNING] main_loop: WS unhealthy: WS_LAG(77.0s) — skipping signal eval
+2026-07-08 07:12:36,800 [WARNING] main_loop: WS unhealthy: WS_LAG(77.5s) — skipping signal eval
+2026-07-08 07:12:37,301 [WARNING] main_loop: WS unhealthy: WS_LAG(78.0s) — skipping signal eval
+2026-07-08 07:12:37,803 [WARNING] main_loop: WS unhealthy: WS_LAG(78.5s) — skipping signal eval
+2026-07-08 07:12:38,306 [WARNING] main_loop: WS unhealthy: WS_LAG(79.0s) — skipping signal eval
+2026-07-08 07:12:38,612 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:38,613 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:38,808 [WARNING] main_loop: WS unhealthy: WS_LAG(79.5s) — skipping signal eval
+2026-07-08 07:12:39,311 [WARNING] main_loop: WS unhealthy: WS_LAG(80.0s) — skipping signal eval
+2026-07-08 07:12:39,812 [WARNING] main_loop: WS unhealthy: WS_LAG(80.5s) — skipping signal eval
+2026-07-08 07:12:40,315 [WARNING] main_loop: WS unhealthy: WS_LAG(81.1s) — skipping signal eval
+2026-07-08 07:12:40,817 [WARNING] main_loop: WS unhealthy: WS_LAG(81.6s) — skipping signal eval
+2026-07-08 07:12:41,320 [WARNING] main_loop: WS unhealthy: WS_LAG(82.1s) — skipping signal eval
+2026-07-08 07:12:41,822 [WARNING] main_loop: WS unhealthy: WS_LAG(82.6s) — skipping signal eval
+2026-07-08 07:12:42,324 [WARNING] main_loop: WS unhealthy: WS_LAG(83.1s) — skipping signal eval
+2026-07-08 07:12:42,827 [WARNING] main_loop: WS unhealthy: WS_LAG(83.6s) — skipping signal eval
+2026-07-08 07:12:43,329 [WARNING] main_loop: WS unhealthy: WS_LAG(84.1s) — skipping signal eval
+2026-07-08 07:12:43,619 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:43,619 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:43,830 [WARNING] main_loop: WS unhealthy: WS_LAG(84.6s) — skipping signal eval
+2026-07-08 07:12:44,333 [WARNING] main_loop: WS unhealthy: WS_LAG(85.1s) — skipping signal eval
+2026-07-08 07:12:44,836 [WARNING] main_loop: WS unhealthy: WS_LAG(85.6s) — skipping signal eval
+2026-07-08 07:12:45,339 [WARNING] main_loop: WS unhealthy: WS_LAG(86.1s) — skipping signal eval
+2026-07-08 07:12:45,841 [WARNING] main_loop: WS unhealthy: WS_LAG(86.6s) — skipping signal eval
+2026-07-08 07:12:46,344 [WARNING] main_loop: WS unhealthy: WS_LAG(87.1s) — skipping signal eval
+2026-07-08 07:12:46,846 [WARNING] main_loop: WS unhealthy: WS_LAG(87.6s) — skipping signal eval
+2026-07-08 07:12:47,347 [WARNING] main_loop: WS unhealthy: WS_LAG(88.1s) — skipping signal eval
+2026-07-08 07:12:47,849 [WARNING] main_loop: WS unhealthy: WS_LAG(88.6s) — skipping signal eval
+2026-07-08 07:12:48,351 [WARNING] main_loop: WS unhealthy: WS_LAG(89.1s) — skipping signal eval
+2026-07-08 07:12:48,626 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:48,626 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:48,854 [WARNING] main_loop: WS unhealthy: WS_LAG(89.6s) — skipping signal eval
+2026-07-08 07:12:49,357 [WARNING] main_loop: WS unhealthy: WS_LAG(90.1s) — skipping signal eval
+2026-07-08 07:12:49,858 [WARNING] main_loop: WS unhealthy: WS_LAG(90.6s) — skipping signal eval
+2026-07-08 07:12:50,361 [WARNING] main_loop: WS unhealthy: WS_LAG(91.1s) — skipping signal eval
+2026-07-08 07:12:50,864 [WARNING] main_loop: WS unhealthy: WS_LAG(91.6s) — skipping signal eval
+2026-07-08 07:12:51,367 [WARNING] main_loop: WS unhealthy: WS_LAG(92.1s) — skipping signal eval
+2026-07-08 07:12:51,869 [WARNING] main_loop: WS unhealthy: WS_LAG(92.6s) — skipping signal eval
+2026-07-08 07:12:52,372 [WARNING] main_loop: WS unhealthy: WS_LAG(93.1s) — skipping signal eval
+2026-07-08 07:12:52,875 [WARNING] main_loop: WS unhealthy: WS_LAG(93.6s) — skipping signal eval
+2026-07-08 07:12:53,377 [WARNING] main_loop: WS unhealthy: WS_LAG(94.1s) — skipping signal eval
+2026-07-08 07:12:53,631 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:53,631 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:53,880 [WARNING] main_loop: WS unhealthy: WS_LAG(94.6s) — skipping signal eval
+2026-07-08 07:12:54,383 [WARNING] main_loop: WS unhealthy: WS_LAG(95.1s) — skipping signal eval
+2026-07-08 07:12:54,885 [WARNING] main_loop: WS unhealthy: WS_LAG(95.6s) — skipping signal eval
+2026-07-08 07:12:55,388 [WARNING] main_loop: WS unhealthy: WS_LAG(96.1s) — skipping signal eval
+2026-07-08 07:12:55,890 [WARNING] main_loop: WS unhealthy: WS_LAG(96.6s) — skipping signal eval
+2026-07-08 07:12:56,391 [WARNING] main_loop: WS unhealthy: WS_LAG(97.1s) — skipping signal eval
+2026-07-08 07:12:56,893 [WARNING] main_loop: WS unhealthy: WS_LAG(97.6s) — skipping signal eval
+2026-07-08 07:12:57,396 [WARNING] main_loop: WS unhealthy: WS_LAG(98.1s) — skipping signal eval
+2026-07-08 07:12:57,898 [WARNING] main_loop: WS unhealthy: WS_LAG(98.6s) — skipping signal eval
+2026-07-08 07:12:58,400 [WARNING] main_loop: WS unhealthy: WS_LAG(99.1s) — skipping signal eval
+2026-07-08 07:12:58,637 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:12:58,637 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:12:58,903 [WARNING] main_loop: WS unhealthy: WS_LAG(99.6s) — skipping signal eval
+2026-07-08 07:12:59,406 [WARNING] main_loop: WS unhealthy: WS_LAG(100.1s) — skipping signal eval
+2026-07-08 07:12:59,907 [WARNING] main_loop: WS unhealthy: WS_LAG(100.6s) — skipping signal eval
+2026-07-08 07:13:00,410 [WARNING] main_loop: WS unhealthy: WS_LAG(101.1s) — skipping signal eval
+2026-07-08 07:13:00,913 [WARNING] main_loop: WS unhealthy: WS_LAG(101.6s) — skipping signal eval
+2026-07-08 07:13:01,415 [WARNING] main_loop: WS unhealthy: WS_LAG(102.2s) — skipping signal eval
+2026-07-08 07:13:01,918 [WARNING] main_loop: WS unhealthy: WS_LAG(102.7s) — skipping signal eval
+2026-07-08 07:13:02,421 [WARNING] main_loop: WS unhealthy: WS_LAG(103.2s) — skipping signal eval
+2026-07-08 07:13:02,922 [WARNING] main_loop: WS unhealthy: WS_LAG(103.7s) — skipping signal eval
+2026-07-08 07:13:03,424 [WARNING] main_loop: WS unhealthy: WS_LAG(104.2s) — skipping signal eval
+2026-07-08 07:13:03,643 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:13:03,643 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:13:03,927 [WARNING] main_loop: WS unhealthy: WS_LAG(104.7s) — skipping signal eval
+2026-07-08 07:13:04,427 [WARNING] main_loop: WS unhealthy: WS_LAG(105.2s) — skipping signal eval
+2026-07-08 07:13:04,930 [WARNING] main_loop: WS unhealthy: WS_LAG(105.7s) — skipping signal eval
+2026-07-08 07:13:05,432 [WARNING] main_loop: WS unhealthy: WS_LAG(106.2s) — skipping signal eval
+2026-07-08 07:13:05,934 [WARNING] main_loop: WS unhealthy: WS_LAG(106.7s) — skipping signal eval
+2026-07-08 07:13:06,437 [WARNING] main_loop: WS unhealthy: WS_LAG(107.2s) — skipping signal eval
+2026-07-08 07:13:06,938 [WARNING] main_loop: WS unhealthy: WS_LAG(107.7s) — skipping signal eval
+2026-07-08 07:13:07,442 [WARNING] main_loop: WS unhealthy: WS_LAG(108.2s) — skipping signal eval
+2026-07-08 07:13:07,944 [WARNING] main_loop: WS unhealthy: WS_LAG(108.7s) — skipping signal eval
+2026-07-08 07:13:08,447 [WARNING] main_loop: WS unhealthy: WS_LAG(109.2s) — skipping signal eval
+2026-07-08 07:13:08,649 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:13:08,649 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:13:08,949 [WARNING] main_loop: WS unhealthy: WS_LAG(109.7s) — skipping signal eval
+2026-07-08 07:13:09,452 [WARNING] main_loop: WS unhealthy: WS_LAG(110.2s) — skipping signal eval
+2026-07-08 07:13:09,953 [WARNING] main_loop: WS unhealthy: WS_LAG(110.7s) — skipping signal eval
+2026-07-08 07:13:10,456 [WARNING] main_loop: WS unhealthy: WS_LAG(111.2s) — skipping signal eval
+2026-07-08 07:13:10,958 [WARNING] main_loop: WS unhealthy: WS_LAG(111.7s) — skipping signal eval
+2026-07-08 07:13:11,459 [WARNING] main_loop: WS unhealthy: WS_LAG(112.2s) — skipping signal eval
+2026-07-08 07:13:11,962 [WARNING] main_loop: WS unhealthy: WS_LAG(112.7s) — skipping signal eval
+2026-07-08 07:13:12,465 [WARNING] main_loop: WS unhealthy: WS_LAG(113.2s) — skipping signal eval
+2026-07-08 07:13:12,967 [WARNING] main_loop: WS unhealthy: WS_LAG(113.7s) — skipping signal eval
+2026-07-08 07:13:13,470 [WARNING] main_loop: WS unhealthy: WS_LAG(114.2s) — skipping signal eval
+2026-07-08 07:13:13,655 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:13:13,655 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:13:13,972 [WARNING] main_loop: WS unhealthy: WS_LAG(114.7s) — skipping signal eval
+2026-07-08 07:13:14,475 [WARNING] main_loop: WS unhealthy: WS_LAG(115.2s) — skipping signal eval
+2026-07-08 07:13:14,976 [WARNING] main_loop: WS unhealthy: WS_LAG(115.7s) — skipping signal eval
+2026-07-08 07:13:15,478 [WARNING] main_loop: WS unhealthy: WS_LAG(116.2s) — skipping signal eval
+2026-07-08 07:13:15,978 [WARNING] main_loop: WS unhealthy: WS_LAG(116.7s) — skipping signal eval
+2026-07-08 07:13:16,480 [WARNING] main_loop: WS unhealthy: WS_LAG(117.2s) — skipping signal eval
+2026-07-08 07:13:16,982 [WARNING] main_loop: WS unhealthy: WS_LAG(117.7s) — skipping signal eval
+2026-07-08 07:13:17,483 [WARNING] main_loop: WS unhealthy: WS_LAG(118.2s) — skipping signal eval
+2026-07-08 07:13:17,985 [WARNING] main_loop: WS unhealthy: WS_LAG(118.7s) — skipping signal eval
+2026-07-08 07:13:18,487 [WARNING] main_loop: WS unhealthy: WS_LAG(119.2s) — skipping signal eval
+2026-07-08 07:13:18,659 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:13:18,660 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:13:18,988 [WARNING] main_loop: WS unhealthy: WS_LAG(119.7s) — skipping signal eval
+2026-07-08 07:13:19,489 [WARNING] main_loop: WS unhealthy: WS_LAG(120.2s) — skipping signal eval
+2026-07-08 07:13:19,990 [WARNING] main_loop: WS unhealthy: WS_LAG(120.7s) — skipping signal eval
+2026-07-08 07:13:20,491 [WARNING] main_loop: WS unhealthy: WS_LAG(121.2s) — skipping signal eval
+2026-07-08 07:13:20,993 [WARNING] main_loop: WS unhealthy: WS_LAG(121.7s) — skipping signal eval
+2026-07-08 07:13:21,494 [WARNING] main_loop: WS unhealthy: WS_LAG(122.2s) — skipping signal eval
+2026-07-08 07:13:21,996 [WARNING] main_loop: WS unhealthy: WS_LAG(122.7s) — skipping signal eval
+2026-07-08 07:13:22,498 [WARNING] main_loop: WS unhealthy: WS_LAG(123.2s) — skipping signal eval
+2026-07-08 07:13:22,999 [WARNING] main_loop: WS unhealthy: WS_LAG(123.7s) — skipping signal eval
+2026-07-08 07:13:23,501 [WARNING] main_loop: WS unhealthy: WS_LAG(124.2s) — skipping signal eval
+2026-07-08 07:13:23,664 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:13:23,665 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:13:24,002 [WARNING] main_loop: WS unhealthy: WS_LAG(124.7s) — skipping signal eval
+2026-07-08 07:13:24,503 [WARNING] main_loop: WS unhealthy: WS_LAG(125.2s) — skipping signal eval
+2026-07-08 07:13:25,005 [WARNING] main_loop: WS unhealthy: WS_LAG(125.7s) — skipping signal eval
+2026-07-08 07:13:25,508 [WARNING] main_loop: WS unhealthy: WS_LAG(126.2s) — skipping signal eval
+2026-07-08 07:13:26,010 [WARNING] main_loop: WS unhealthy: WS_LAG(126.7s) — skipping signal eval
+2026-07-08 07:13:26,512 [WARNING] main_loop: WS unhealthy: WS_LAG(127.2s) — skipping signal eval
+2026-07-08 07:13:27,013 [WARNING] main_loop: WS unhealthy: WS_LAG(127.8s) — skipping signal eval
+2026-07-08 07:13:27,515 [WARNING] main_loop: WS unhealthy: WS_LAG(128.3s) — skipping signal eval
+2026-07-08 07:13:28,017 [WARNING] main_loop: WS unhealthy: WS_LAG(128.8s) — skipping signal eval
+2026-07-08 07:13:28,519 [WARNING] main_loop: WS unhealthy: WS_LAG(129.3s) — skipping signal eval
+2026-07-08 07:13:28,675 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 07:13:28,675 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:13:29,020 [WARNING] main_loop: WS unhealthy: WS_LAG(129.8s) — skipping signal eval
+2026-07-08 07:13:29,522 [WARNING] main_loop: WS unhealthy: WS_LAG(130.3s) — skipping signal eval
+2026-07-08 07:13:30,024 [WARNING] main_loop: WS unhealthy: WS_LAG(130.8s) — skipping signal eval
+2026-07-08 07:13:30,526 [WARNING] main_loop: WS unhealthy: WS_LAG(131.3s) — skipping signal eval
+2026-07-08 07:13:31,028 [WARNING] main_loop: WS unhealthy: WS_LAG(131.8s) — skipping signal eval
+2026-07-08 07:13:31,531 [WARNING] main_loop: WS unhealthy: WS_LAG(132.3s) — skipping signal eval
+2026-07-08 07:13:32,032 [WARNING] main_loop: WS unhealthy: WS_LAG(132.8s) — skipping signal eval
+2026-07-08 07:13:32,534 [WARNING] main_loop: WS unhealthy: WS_LAG(133.3s) — skipping signal eval
+2026-07-08 07:13:33,036 [WARNING] main_loop: WS unhealthy: WS_LAG(133.8s) — skipping signal eval
+2026-07-08 07:13:33,537 [WARNING] main_loop: WS unhealthy: WS_LAG(134.3s) — skipping signal eval
+2026-07-08 07:13:34,039 [WARNING] main_loop: WS unhealthy: WS_LAG(134.8s) — skipping signal eval
+2026-07-08 07:13:34,300 [INFO] services.market_data: WS connected
+2026-07-08 07:13:34,605 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=0.45%  oi15=0.47%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.86%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:15:04,568 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.13%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.69%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:15:04,571 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.03%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.06%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:15:04,575 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=0.19%  oi15=0.39%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.07%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:15:04,578 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=-0.08%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.19%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:15:04,589 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=0.80%  oi15=1.95%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.67%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:15:04,613 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.02%  oi15=0.05%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.03%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:15:15,703 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.07%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.44%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:15:24,652 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=-0.00%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.19%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:15:30,250 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=0.02%  oi15=-0.04%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.05%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:15:59,014 [WARNING] main_loop: WS unhealthy: WS_LAG(1.4s) — skipping signal eval
+2026-07-08 07:18:34,883 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.01%  oi15=0.43%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.38%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:20:04,986 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=-0.02%  oi15=0.10%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.06%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:20:04,990 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=-0.00%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.10%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:20:04,996 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=0.04%  oi15=0.43%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.24%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:20:04,999 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=0.03%  oi15=-0.14%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.45%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:20:05,007 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=0.36%  oi15=1.72%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.02%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:20:05,052 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.03%  oi15=0.06%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.14%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:20:15,935 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.00%  oi15=-0.09%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.35%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:20:24,821 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.00%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.07%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:20:30,605 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=0.02%  oi15=-0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.31%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:23:35,025 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.00%  oi15=0.44%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.03%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:25:05,278 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.00%  oi15=0.11%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.20%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:25:05,282 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.00%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.01%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:25:05,285 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=0.01%  oi15=0.25%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.00%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:25:05,290 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=0.05%  oi15=-0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.01%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:25:05,293 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.08%  oi15=1.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.02%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:25:05,308 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.01%  oi15=0.06%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.30%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:25:16,224 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.01%  oi15=-0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.16%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:25:24,961 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.03%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:25:30,987 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=0.02%  oi15=0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.08%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:26:45,280 [WARNING] main_loop: WS unhealthy: WS_LAG(1.3s) — skipping signal eval
+2026-07-08 07:26:45,783 [WARNING] main_loop: WS unhealthy: WS_LAG(1.8s) — skipping signal eval
+2026-07-08 07:26:46,285 [WARNING] main_loop: WS unhealthy: WS_LAG(2.3s) — skipping signal eval
+2026-07-08 07:26:46,786 [WARNING] main_loop: WS unhealthy: WS_LAG(2.8s) — skipping signal eval
+2026-07-08 07:26:47,287 [WARNING] main_loop: WS unhealthy: WS_LAG(3.3s) — skipping signal eval
+2026-07-08 07:26:47,789 [WARNING] main_loop: WS unhealthy: WS_LAG(3.8s) — skipping signal eval
+2026-07-08 07:26:48,290 [WARNING] main_loop: WS unhealthy: WS_LAG(4.3s) — skipping signal eval
+2026-07-08 07:26:48,792 [WARNING] main_loop: WS unhealthy: WS_LAG(4.8s) — skipping signal eval
+2026-07-08 07:26:49,293 [WARNING] main_loop: WS unhealthy: WS_LAG(5.3s) — skipping signal eval
+2026-07-08 07:26:49,795 [WARNING] main_loop: WS unhealthy: WS_LAG(5.8s) — skipping signal eval
+2026-07-08 07:26:50,295 [WARNING] main_loop: WS unhealthy: WS_LAG(6.3s) — skipping signal eval
+2026-07-08 07:26:50,796 [WARNING] main_loop: WS unhealthy: WS_LAG(6.8s) — skipping signal eval
+2026-07-08 07:26:51,298 [WARNING] main_loop: WS unhealthy: WS_LAG(7.3s) — skipping signal eval
+2026-07-08 07:26:51,799 [WARNING] main_loop: WS unhealthy: WS_LAG(7.8s) — skipping signal eval
+2026-07-08 07:26:52,299 [WARNING] main_loop: WS unhealthy: WS_LAG(8.3s) — skipping signal eval
+2026-07-08 07:26:52,801 [WARNING] main_loop: WS unhealthy: WS_LAG(8.9s) — skipping signal eval
+2026-07-08 07:26:53,302 [WARNING] main_loop: WS unhealthy: WS_LAG(9.4s) — skipping signal eval
+2026-07-08 07:26:53,803 [WARNING] main_loop: WS unhealthy: WS_LAG(9.9s) — skipping signal eval
+2026-07-08 07:26:54,305 [WARNING] main_loop: WS unhealthy: WS_LAG(10.4s) — skipping signal eval
+2026-07-08 07:26:54,436 [ERROR] services.market_data: WS error: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2026-07-08 07:26:54,506 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:26:54,806 [WARNING] main_loop: WS unhealthy: WS_LAG(10.9s) — skipping signal eval
+2026-07-08 07:26:55,308 [WARNING] main_loop: WS unhealthy: WS_LAG(11.4s) — skipping signal eval
+2026-07-08 07:26:55,809 [WARNING] main_loop: WS unhealthy: WS_LAG(11.9s) — skipping signal eval
+2026-07-08 07:26:56,311 [WARNING] main_loop: WS unhealthy: WS_LAG(12.4s) — skipping signal eval
+2026-07-08 07:26:56,812 [WARNING] main_loop: WS unhealthy: WS_LAG(12.9s) — skipping signal eval
+2026-07-08 07:26:57,314 [WARNING] main_loop: WS unhealthy: WS_LAG(13.4s) — skipping signal eval
+2026-07-08 07:26:57,816 [WARNING] main_loop: WS unhealthy: WS_LAG(13.9s) — skipping signal eval
+2026-07-08 07:26:58,317 [WARNING] main_loop: WS unhealthy: WS_LAG(14.4s) — skipping signal eval
+2026-07-08 07:26:58,819 [WARNING] main_loop: WS unhealthy: WS_LAG(14.9s) — skipping signal eval
+2026-07-08 07:26:59,321 [WARNING] main_loop: WS unhealthy: WS_LAG(15.4s) — skipping signal eval
+2026-07-08 07:26:59,822 [WARNING] main_loop: WS unhealthy: WS_LAG(15.9s) — skipping signal eval
+2026-07-08 07:27:00,324 [WARNING] main_loop: WS unhealthy: WS_LAG(16.4s) — skipping signal eval
+2026-07-08 07:27:00,825 [WARNING] main_loop: WS unhealthy: WS_LAG(16.9s) — skipping signal eval
+2026-07-08 07:27:01,327 [WARNING] main_loop: WS unhealthy: WS_LAG(17.4s) — skipping signal eval
+2026-07-08 07:27:01,828 [WARNING] main_loop: WS unhealthy: WS_LAG(17.9s) — skipping signal eval
+2026-07-08 07:27:02,330 [WARNING] main_loop: WS unhealthy: WS_LAG(18.4s) — skipping signal eval
+2026-07-08 07:27:02,831 [WARNING] main_loop: WS unhealthy: WS_LAG(18.9s) — skipping signal eval
+2026-07-08 07:27:03,333 [WARNING] main_loop: WS unhealthy: WS_LAG(19.4s) — skipping signal eval
+2026-07-08 07:27:03,834 [WARNING] main_loop: WS unhealthy: WS_LAG(19.9s) — skipping signal eval
+2026-07-08 07:27:04,336 [WARNING] main_loop: WS unhealthy: WS_LAG(20.4s) — skipping signal eval
+2026-07-08 07:27:04,837 [WARNING] main_loop: WS unhealthy: WS_LAG(20.9s) — skipping signal eval
+2026-07-08 07:27:05,339 [WARNING] main_loop: WS unhealthy: WS_LAG(21.4s) — skipping signal eval
+2026-07-08 07:27:05,840 [WARNING] main_loop: WS unhealthy: WS_LAG(21.9s) — skipping signal eval
+2026-07-08 07:27:06,341 [WARNING] main_loop: WS unhealthy: WS_LAG(22.4s) — skipping signal eval
+2026-07-08 07:27:06,843 [WARNING] main_loop: WS unhealthy: WS_LAG(22.9s) — skipping signal eval
+2026-07-08 07:27:07,344 [WARNING] main_loop: WS unhealthy: WS_LAG(23.4s) — skipping signal eval
+2026-07-08 07:27:07,846 [WARNING] main_loop: WS unhealthy: WS_LAG(23.9s) — skipping signal eval
+2026-07-08 07:27:08,347 [WARNING] main_loop: WS unhealthy: WS_LAG(24.4s) — skipping signal eval
+2026-07-08 07:27:08,849 [WARNING] main_loop: WS unhealthy: WS_LAG(24.9s) — skipping signal eval
+2026-07-08 07:27:09,351 [WARNING] main_loop: WS unhealthy: WS_LAG(25.4s) — skipping signal eval
+2026-07-08 07:27:09,508 [ERROR] services.market_data: WS error: timed out during opening handshake
+2026-07-08 07:27:09,508 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 07:27:09,852 [WARNING] main_loop: WS unhealthy: WS_LAG(25.9s) — skipping signal eval
+2026-07-08 07:27:10,354 [WARNING] main_loop: WS unhealthy: WS_LAG(26.4s) — skipping signal eval
+2026-07-08 07:27:10,856 [WARNING] main_loop: WS unhealthy: WS_LAG(26.9s) — skipping signal eval
+2026-07-08 07:27:11,357 [WARNING] main_loop: WS unhealthy: WS_LAG(27.4s) — skipping signal eval
+2026-07-08 07:27:11,858 [WARNING] main_loop: WS unhealthy: WS_LAG(27.9s) — skipping signal eval
+2026-07-08 07:27:12,360 [WARNING] main_loop: WS unhealthy: WS_LAG(28.4s) — skipping signal eval
+2026-07-08 07:27:12,861 [WARNING] main_loop: WS unhealthy: WS_LAG(28.9s) — skipping signal eval
+2026-07-08 07:27:13,363 [WARNING] main_loop: WS unhealthy: WS_LAG(29.4s) — skipping signal eval
+2026-07-08 07:27:13,864 [WARNING] main_loop: WS unhealthy: WS_LAG(29.9s) — skipping signal eval
+2026-07-08 07:27:14,365 [WARNING] main_loop: WS unhealthy: WS_LAG(30.4s) — skipping signal eval
+2026-07-08 07:27:14,867 [WARNING] main_loop: WS unhealthy: WS_LAG(30.9s) — skipping signal eval
+2026-07-08 07:27:15,367 [WARNING] main_loop: WS unhealthy: WS_LAG(31.4s) — skipping signal eval
+2026-07-08 07:27:15,869 [WARNING] main_loop: WS unhealthy: WS_LAG(31.9s) — skipping signal eval
+2026-07-08 07:27:16,371 [WARNING] main_loop: WS unhealthy: WS_LAG(32.4s) — skipping signal eval
+2026-07-08 07:27:16,873 [WARNING] main_loop: WS unhealthy: WS_LAG(32.9s) — skipping signal eval
+2026-07-08 07:27:17,374 [WARNING] main_loop: WS unhealthy: WS_LAG(33.4s) — skipping signal eval
+2026-07-08 07:27:17,875 [WARNING] main_loop: WS unhealthy: WS_LAG(33.9s) — skipping signal eval
+2026-07-08 07:27:18,377 [WARNING] main_loop: WS unhealthy: WS_LAG(34.4s) — skipping signal eval
+2026-07-08 07:27:18,877 [WARNING] main_loop: WS unhealthy: WS_LAG(34.9s) — skipping signal eval
+2026-07-08 07:27:19,328 [INFO] services.market_data: WS connected
+2026-07-08 07:27:19,379 [WARNING] main_loop: WS unhealthy: WS_LAG(35.4s) — skipping signal eval
+2026-07-08 07:28:35,076 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.06%  oi15=-0.07%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.03%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:30:05,740 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=-0.15%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.58%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:30:05,745 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.01%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:30:05,751 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=0.08%  oi15=0.13%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=1.04%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:30:05,758 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=0.26%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.20%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:30:05,760 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.02%  oi15=0.26%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.23%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:30:05,788 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.01%  oi15=0.06%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.56%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:30:16,346 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.02%  oi15=-0.04%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.02%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:30:25,244 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.19%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:30:31,409 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.09%  oi15=-0.04%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.18%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:33:35,464 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.27%  oi15=-0.32%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.23%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:35:05,935 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.03%  oi15=-0.11%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.06%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:35:05,943 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.11%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:35:05,950 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=-0.06%  oi15=0.03%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.45%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:35:05,967 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=0.85%  oi15=1.11%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.15%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:35:05,969 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=0.04%  oi15=-0.06%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.14%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:35:05,993 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.00%  oi15=0.03%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.27%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:35:16,676 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.09%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:35:25,759 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.10%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:35:31,471 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.06%  oi15=-0.13%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.18%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:36:39,381 [WARNING] main_loop: WS unhealthy: WS_LAG(1.1s) — skipping signal eval
+2026-07-08 07:36:39,885 [WARNING] main_loop: WS unhealthy: WS_LAG(1.6s) — skipping signal eval
+2026-07-08 07:38:35,912 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=0.04%  oi15=-0.29%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.71%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:40:06,030 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.08%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.28%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:40:06,035 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=-0.01%  oi15=-0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.13%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:40:06,039 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=0.01%  oi15=0.03%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.02%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:40:06,067 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=-0.27%  oi15=0.86%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-1.13%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:40:06,069 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.09%  oi15=-0.07%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.14%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:40:06,078 [INFO] services.signal_engine: [STATUS] HUSDT  score=-17.5  oi5=0.02%  oi15=0.03%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.08%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:40:16,746 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.03%  oi15=-0.07%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.14%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:40:25,816 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.00%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.12%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:40:31,477 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.10%  oi15=-0.25%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.42%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:43:03,620 [WARNING] main_loop: WS unhealthy: WS_LAG(1.0s) — skipping signal eval
+2026-07-08 07:43:35,984 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=0.06%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.08%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:45:06,346 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=-0.01%  oi15=0.10%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.35%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:45:06,349 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.01%  oi15=0.03%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.02%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:45:06,354 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=-0.05%  oi15=-0.11%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.38%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:45:06,381 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=0.04%  oi15=0.68%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.29%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:45:06,383 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.02%  oi15=-0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.44%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:45:06,393 [INFO] services.signal_engine: [STATUS] HUSDT  score=2.5  oi5=-0.01%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.12%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:45:16,815 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.02%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.23%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:45:26,159 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.00%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.32%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:45:31,691 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.10%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:48:36,503 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.17%  oi15=-0.07%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.43%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:50:06,654 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.02%  oi15=0.09%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.15%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:50:06,656 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=-0.00%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.02%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:50:06,661 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=-0.05%  oi15=-0.10%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.19%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:50:06,690 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=-0.34%  oi15=-0.60%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.50%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:50:06,693 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.64%  oi15=-0.76%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.36%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:50:06,705 [INFO] services.signal_engine: [STATUS] HUSDT  score=2.5  oi5=0.01%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.35%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:50:16,889 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.02%  oi15=-0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.23%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:50:26,560 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.01%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.14%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:50:31,709 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.02%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.15%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:53:36,796 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=0.09%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.18%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:55:06,761 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.09%  oi15=0.10%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.51%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:55:06,764 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.01%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.16%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:55:06,769 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=2.5  oi5=-0.00%  oi15=-0.10%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.10%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:55:06,780 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=0.03%  oi15=-0.27%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.34%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:55:06,784 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.23%  oi15=-0.91%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.31%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:55:06,801 [INFO] services.signal_engine: [STATUS] HUSDT  score=2.5  oi5=-0.02%  oi15=-0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.36%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:55:17,440 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.04%  oi15=-0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.28%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:55:26,964 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.00%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.08%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:55:32,060 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=0.03%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.11%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 07:58:37,029 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.04%  oi15=-0.11%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.18%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:00:06,959 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.01%  oi15=0.11%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.09%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:00:06,962 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=-0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.08%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:00:06,965 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=5.0  oi5=0.09%  oi15=0.04%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.31%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:00:06,970 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=-0.05%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.11%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:00:06,973 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.40%  oi15=-1.32%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.05%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:00:06,994 [INFO] services.signal_engine: [STATUS] HUSDT  score=2.5  oi5=-0.00%  oi15=-0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-1.05%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:00:17,871 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.00%  oi15=-0.07%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.14%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:00:27,495 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.00%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.17%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:00:32,563 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.27%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:03:37,463 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.10%  oi15=-0.05%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.71%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:05:07,045 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.00%  oi15=0.10%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.11%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:05:07,050 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.07%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=1.09%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:05:07,055 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=5.0  oi5=0.31%  oi15=0.40%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=1.20%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:05:07,059 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=-0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.63%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:05:07,064 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.17%  oi15=-0.84%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.30%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:05:07,086 [INFO] services.signal_engine: [STATUS] HUSDT  score=2.5  oi5=0.04%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.70%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:05:17,887 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.10%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.09%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:05:28,003 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.01%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.15%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:05:33,086 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.00%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.12%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:06:42,058 [WARNING] main_loop: WS unhealthy: WS_LAG(1.3s) — skipping signal eval
+2026-07-08 08:06:42,560 [WARNING] main_loop: WS unhealthy: WS_LAG(1.8s) — skipping signal eval
+2026-07-08 08:06:43,062 [WARNING] main_loop: WS unhealthy: WS_LAG(2.3s) — skipping signal eval
+2026-07-08 08:06:43,564 [WARNING] main_loop: WS unhealthy: WS_LAG(2.8s) — skipping signal eval
+2026-07-08 08:06:44,066 [WARNING] main_loop: WS unhealthy: WS_LAG(3.3s) — skipping signal eval
+2026-07-08 08:06:44,567 [WARNING] main_loop: WS unhealthy: WS_LAG(3.8s) — skipping signal eval
+2026-07-08 08:08:37,790 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=0.06%  oi15=-0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.05%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:10:07,452 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=-0.05%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.64%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:10:07,456 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=-0.04%  oi15=0.03%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.18%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:10:07,460 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=5.0  oi5=0.02%  oi15=0.41%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.83%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:10:07,467 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=-0.02%  oi15=-0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.72%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:10:07,470 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.14%  oi15=-0.72%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.30%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:10:07,508 [INFO] services.signal_engine: [STATUS] HUSDT  score=2.5  oi5=0.01%  oi15=0.05%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.43%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:10:18,235 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.23%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:10:28,433 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.01%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.13%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:10:33,597 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.06%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.23%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:11:43,286 [WARNING] main_loop: WS unhealthy: WS_LAG(1.1s) — skipping signal eval
+2026-07-08 08:11:43,789 [WARNING] main_loop: WS unhealthy: WS_LAG(1.6s) — skipping signal eval
+2026-07-08 08:11:44,291 [WARNING] main_loop: WS unhealthy: WS_LAG(2.1s) — skipping signal eval
+2026-07-08 08:11:44,791 [WARNING] main_loop: WS unhealthy: WS_LAG(2.6s) — skipping signal eval
+2026-07-08 08:13:38,168 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.03%  oi15=-0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.86%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:15:07,546 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.14%  oi15=0.09%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.50%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:15:07,550 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=0.00%  oi15=0.04%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.28%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:15:07,558 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=5.0  oi5=-0.04%  oi15=0.26%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.03%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:15:07,565 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=-0.06%  oi15=-0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.14%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:15:07,568 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.09%  oi15=-0.43%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.12%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:15:07,595 [INFO] services.signal_engine: [STATUS] HUSDT  score=2.5  oi5=-0.01%  oi15=0.05%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.29%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:15:18,411 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.02%  oi15=-0.14%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.16%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:15:28,799 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.01%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.00%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:15:33,984 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=0.00%  oi15=-0.06%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.06%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:18:38,205 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.01%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.20%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:20:07,620 [INFO] services.signal_engine: [STATUS] BLUAIUSDT  score=5.0  oi5=0.00%  oi15=0.09%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.01%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:20:07,625 [INFO] services.signal_engine: [STATUS] GPSUSDT  score=5.0  oi5=-0.02%  oi15=-0.06%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.30%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:20:07,629 [INFO] services.signal_engine: [STATUS] SIRENUSDT  score=5.0  oi5=-0.05%  oi15=-0.08%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.07%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:20:07,634 [INFO] services.signal_engine: [STATUS] BILLUSDT  score=5.0  oi5=-0.19%  oi15=0.00%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.74%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:20:07,636 [INFO] services.signal_engine: [STATUS] OUSDT  score=5.0  oi5=-0.11%  oi15=-0.36%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.22%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:20:07,661 [INFO] services.signal_engine: [STATUS] HUSDT  score=2.5  oi5=0.01%  oi15=0.01%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.27%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:20:18,874 [INFO] services.signal_engine: [STATUS] MITOUSDT  score=5.0  oi5=-0.02%  oi15=-0.06%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.02%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:20:28,847 [INFO] services.signal_engine: [STATUS] B2USDT  score=5.0  oi5=0.00%  oi15=0.02%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.08%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:20:34,402 [INFO] services.signal_engine: [STATUS] TRUTHUSDT  score=5.0  oi5=-0.01%  oi15=-0.07%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=-0.06%  vol=1.0x  sp=0.0bp  brk1m=False
+2026-07-08 08:21:08,823 [WARNING] main_loop: WS unhealthy: WS_LAG(1.5s) — skipping signal eval
+2026-07-08 08:21:09,327 [WARNING] main_loop: WS unhealthy: WS_LAG(2.0s) — skipping signal eval
+2026-07-08 08:21:09,828 [WARNING] main_loop: WS unhealthy: WS_LAG(2.5s) — skipping signal eval
+2026-07-08 08:21:10,330 [WARNING] main_loop: WS unhealthy: WS_LAG(3.0s) — skipping signal eval
+2026-07-08 08:21:10,832 [WARNING] main_loop: WS unhealthy: WS_LAG(3.5s) — skipping signal eval
+2026-07-08 08:21:11,335 [WARNING] main_loop: WS unhealthy: WS_LAG(4.0s) — skipping signal eval
+2026-07-08 08:21:11,836 [WARNING] main_loop: WS unhealthy: WS_LAG(4.5s) — skipping signal eval
+2026-07-08 08:21:12,338 [WARNING] main_loop: WS unhealthy: WS_LAG(5.0s) — skipping signal eval
+2026-07-08 08:21:12,840 [WARNING] main_loop: WS unhealthy: WS_LAG(5.5s) — skipping signal eval
+2026-07-08 08:21:13,341 [WARNING] main_loop: WS unhealthy: WS_LAG(6.0s) — skipping signal eval
+2026-07-08 08:21:13,843 [WARNING] main_loop: WS unhealthy: WS_LAG(6.6s) — skipping signal eval
+2026-07-08 08:21:14,347 [WARNING] main_loop: WS unhealthy: WS_LAG(7.1s) — skipping signal eval
+2026-07-08 08:21:14,849 [WARNING] main_loop: WS unhealthy: WS_LAG(7.6s) — skipping signal eval
+2026-07-08 08:21:15,350 [WARNING] main_loop: WS unhealthy: WS_LAG(8.1s) — skipping signal eval
+2026-07-08 08:21:15,852 [WARNING] main_loop: WS unhealthy: WS_LAG(8.6s) — skipping signal eval
+2026-07-08 08:21:16,353 [WARNING] main_loop: WS unhealthy: WS_LAG(9.1s) — skipping signal eval
+2026-07-08 08:21:16,856 [WARNING] main_loop: WS unhealthy: WS_LAG(9.6s) — skipping signal eval
+2026-07-08 08:21:17,358 [WARNING] main_loop: WS unhealthy: WS_LAG(10.1s) — skipping signal eval
+2026-07-08 08:21:17,860 [WARNING] main_loop: WS unhealthy: WS_LAG(10.6s) — skipping signal eval
+2026-07-08 08:21:18,362 [WARNING] main_loop: WS unhealthy: WS_LAG(11.1s) — skipping signal eval
+2026-07-08 08:21:18,863 [WARNING] main_loop: WS unhealthy: WS_LAG(11.6s) — skipping signal eval
+2026-07-08 08:21:19,365 [WARNING] main_loop: WS unhealthy: WS_LAG(12.1s) — skipping signal eval
+2026-07-08 08:21:19,866 [WARNING] main_loop: WS unhealthy: WS_LAG(12.6s) — skipping signal eval
+2026-07-08 08:21:20,368 [WARNING] main_loop: WS unhealthy: WS_LAG(13.1s) — skipping signal eval
+2026-07-08 08:21:20,869 [WARNING] main_loop: WS unhealthy: WS_LAG(13.6s) — skipping signal eval
+2026-07-08 08:21:21,371 [WARNING] main_loop: WS unhealthy: WS_LAG(14.1s) — skipping signal eval
+2026-07-08 08:21:21,873 [WARNING] main_loop: WS unhealthy: WS_LAG(14.6s) — skipping signal eval
+2026-07-08 08:21:22,374 [WARNING] main_loop: WS unhealthy: WS_LAG(15.1s) — skipping signal eval
+2026-07-08 08:21:22,876 [WARNING] main_loop: WS unhealthy: WS_LAG(15.6s) — skipping signal eval
+2026-07-08 08:21:23,377 [WARNING] main_loop: WS unhealthy: WS_LAG(16.1s) — skipping signal eval
+2026-07-08 08:21:23,879 [WARNING] main_loop: WS unhealthy: WS_LAG(16.6s) — skipping signal eval
+2026-07-08 08:21:24,380 [WARNING] main_loop: WS unhealthy: WS_LAG(17.1s) — skipping signal eval
+2026-07-08 08:21:24,882 [WARNING] main_loop: WS unhealthy: WS_LAG(17.6s) — skipping signal eval
+2026-07-08 08:21:25,384 [WARNING] main_loop: WS unhealthy: WS_LAG(18.1s) — skipping signal eval
+2026-07-08 08:21:25,885 [WARNING] main_loop: WS unhealthy: WS_LAG(18.6s) — skipping signal eval
+2026-07-08 08:21:26,387 [WARNING] main_loop: WS unhealthy: WS_LAG(19.1s) — skipping signal eval
+2026-07-08 08:21:26,889 [WARNING] main_loop: WS unhealthy: WS_LAG(19.6s) — skipping signal eval
+2026-07-08 08:21:27,390 [WARNING] main_loop: WS unhealthy: WS_LAG(20.1s) — skipping signal eval
+2026-07-08 08:21:27,891 [WARNING] main_loop: WS unhealthy: WS_LAG(20.6s) — skipping signal eval
+2026-07-08 08:21:28,392 [WARNING] main_loop: WS unhealthy: WS_LAG(21.1s) — skipping signal eval
+2026-07-08 08:21:28,894 [WARNING] main_loop: WS unhealthy: WS_LAG(21.6s) — skipping signal eval
+2026-07-08 08:21:29,396 [WARNING] main_loop: WS unhealthy: WS_LAG(22.1s) — skipping signal eval
+2026-07-08 08:21:29,897 [WARNING] main_loop: WS unhealthy: WS_LAG(22.6s) — skipping signal eval
+2026-07-08 08:21:30,399 [WARNING] main_loop: WS unhealthy: WS_LAG(23.1s) — skipping signal eval
+2026-07-08 08:21:30,901 [WARNING] main_loop: WS unhealthy: WS_LAG(23.6s) — skipping signal eval
+2026-07-08 08:21:31,401 [WARNING] main_loop: WS unhealthy: WS_LAG(24.1s) — skipping signal eval
+2026-07-08 08:21:31,903 [WARNING] main_loop: WS unhealthy: WS_LAG(24.6s) — skipping signal eval
+2026-07-08 08:21:32,404 [WARNING] main_loop: WS unhealthy: WS_LAG(25.1s) — skipping signal eval
+2026-07-08 08:21:32,906 [WARNING] main_loop: WS unhealthy: WS_LAG(25.6s) — skipping signal eval
+2026-07-08 08:21:33,406 [WARNING] main_loop: WS unhealthy: WS_LAG(26.1s) — skipping signal eval
+2026-07-08 08:21:33,908 [WARNING] main_loop: WS unhealthy: WS_LAG(26.6s) — skipping signal eval
+2026-07-08 08:21:34,409 [WARNING] main_loop: WS unhealthy: WS_LAG(27.1s) — skipping signal eval
+2026-07-08 08:21:34,911 [WARNING] main_loop: WS unhealthy: WS_LAG(27.6s) — skipping signal eval
+2026-07-08 08:21:35,413 [WARNING] main_loop: WS unhealthy: WS_LAG(28.1s) — skipping signal eval
+2026-07-08 08:21:35,915 [WARNING] main_loop: WS unhealthy: WS_LAG(28.6s) — skipping signal eval
+2026-07-08 08:21:36,417 [WARNING] main_loop: WS unhealthy: WS_LAG(29.1s) — skipping signal eval
+2026-07-08 08:21:36,918 [WARNING] main_loop: WS unhealthy: WS_LAG(29.6s) — skipping signal eval
+2026-07-08 08:21:37,421 [WARNING] main_loop: WS unhealthy: WS_LAG(30.1s) — skipping signal eval
+2026-07-08 08:21:37,924 [WARNING] main_loop: WS unhealthy: WS_LAG(30.6s) — skipping signal eval
+2026-07-08 08:21:38,426 [WARNING] main_loop: WS unhealthy: WS_LAG(31.1s) — skipping signal eval
+2026-07-08 08:21:38,928 [WARNING] main_loop: WS unhealthy: WS_LAG(31.6s) — skipping signal eval
+2026-07-08 08:21:39,428 [WARNING] main_loop: WS unhealthy: WS_LAG(32.1s) — skipping signal eval
+2026-07-08 08:21:39,930 [WARNING] main_loop: WS unhealthy: WS_LAG(32.6s) — skipping signal eval
+2026-07-08 08:21:40,049 [ERROR] services.market_data: WS error: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2026-07-08 08:21:40,389 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:21:40,432 [WARNING] main_loop: WS unhealthy: WS_LAG(33.1s) — skipping signal eval
+2026-07-08 08:21:40,933 [WARNING] main_loop: WS unhealthy: WS_LAG(33.6s) — skipping signal eval
+2026-07-08 08:21:41,435 [WARNING] main_loop: WS unhealthy: WS_LAG(34.1s) — skipping signal eval
+2026-07-08 08:21:41,936 [WARNING] main_loop: WS unhealthy: WS_LAG(34.6s) — skipping signal eval
+2026-07-08 08:21:42,439 [WARNING] main_loop: WS unhealthy: WS_LAG(35.1s) — skipping signal eval
+2026-07-08 08:21:42,941 [WARNING] main_loop: WS unhealthy: WS_LAG(35.6s) — skipping signal eval
+2026-07-08 08:21:43,442 [WARNING] main_loop: WS unhealthy: WS_LAG(36.2s) — skipping signal eval
+2026-07-08 08:21:43,944 [WARNING] main_loop: WS unhealthy: WS_LAG(36.7s) — skipping signal eval
+2026-07-08 08:21:44,445 [WARNING] main_loop: WS unhealthy: WS_LAG(37.2s) — skipping signal eval
+2026-07-08 08:21:44,947 [WARNING] main_loop: WS unhealthy: WS_LAG(37.7s) — skipping signal eval
+2026-07-08 08:21:45,397 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:21:45,398 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:21:45,448 [WARNING] main_loop: WS unhealthy: WS_LAG(38.2s) — skipping signal eval
+2026-07-08 08:21:45,948 [WARNING] main_loop: WS unhealthy: WS_LAG(38.7s) — skipping signal eval
+2026-07-08 08:21:46,450 [WARNING] main_loop: WS unhealthy: WS_LAG(39.2s) — skipping signal eval
+2026-07-08 08:21:46,958 [WARNING] main_loop: WS unhealthy: WS_LAG(39.7s) — skipping signal eval
+2026-07-08 08:21:47,460 [WARNING] main_loop: WS unhealthy: WS_LAG(40.2s) — skipping signal eval
+2026-07-08 08:21:47,961 [WARNING] main_loop: WS unhealthy: WS_LAG(40.7s) — skipping signal eval
+2026-07-08 08:21:48,463 [WARNING] main_loop: WS unhealthy: WS_LAG(41.2s) — skipping signal eval
+2026-07-08 08:21:48,965 [WARNING] main_loop: WS unhealthy: WS_LAG(41.7s) — skipping signal eval
+2026-07-08 08:21:49,466 [WARNING] main_loop: WS unhealthy: WS_LAG(42.2s) — skipping signal eval
+2026-07-08 08:21:49,967 [WARNING] main_loop: WS unhealthy: WS_LAG(42.7s) — skipping signal eval
+2026-07-08 08:21:50,403 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:21:50,403 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:21:50,468 [WARNING] main_loop: WS unhealthy: WS_LAG(43.2s) — skipping signal eval
+2026-07-08 08:21:50,970 [WARNING] main_loop: WS unhealthy: WS_LAG(43.7s) — skipping signal eval
+2026-07-08 08:21:51,472 [WARNING] main_loop: WS unhealthy: WS_LAG(44.2s) — skipping signal eval
+2026-07-08 08:21:51,974 [WARNING] main_loop: WS unhealthy: WS_LAG(44.7s) — skipping signal eval
+2026-07-08 08:21:52,475 [WARNING] main_loop: WS unhealthy: WS_LAG(45.2s) — skipping signal eval
+2026-07-08 08:21:52,977 [WARNING] main_loop: WS unhealthy: WS_LAG(45.7s) — skipping signal eval
+2026-07-08 08:21:53,479 [WARNING] main_loop: WS unhealthy: WS_LAG(46.2s) — skipping signal eval
+2026-07-08 08:21:53,981 [WARNING] main_loop: WS unhealthy: WS_LAG(46.7s) — skipping signal eval
+2026-07-08 08:21:54,482 [WARNING] main_loop: WS unhealthy: WS_LAG(47.2s) — skipping signal eval
+2026-07-08 08:21:54,983 [WARNING] main_loop: WS unhealthy: WS_LAG(47.7s) — skipping signal eval
+2026-07-08 08:21:55,408 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:21:55,408 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:21:55,485 [WARNING] main_loop: WS unhealthy: WS_LAG(48.2s) — skipping signal eval
+2026-07-08 08:21:55,988 [WARNING] main_loop: WS unhealthy: WS_LAG(48.7s) — skipping signal eval
+2026-07-08 08:21:56,489 [WARNING] main_loop: WS unhealthy: WS_LAG(49.2s) — skipping signal eval
+2026-07-08 08:21:56,991 [WARNING] main_loop: WS unhealthy: WS_LAG(49.7s) — skipping signal eval
+2026-07-08 08:21:57,493 [WARNING] main_loop: WS unhealthy: WS_LAG(50.2s) — skipping signal eval
+2026-07-08 08:21:57,995 [WARNING] main_loop: WS unhealthy: WS_LAG(50.7s) — skipping signal eval
+2026-07-08 08:21:58,496 [WARNING] main_loop: WS unhealthy: WS_LAG(51.2s) — skipping signal eval
+2026-07-08 08:21:58,997 [WARNING] main_loop: WS unhealthy: WS_LAG(51.7s) — skipping signal eval
+2026-07-08 08:21:59,498 [WARNING] main_loop: WS unhealthy: WS_LAG(52.2s) — skipping signal eval
+2026-07-08 08:22:00,000 [WARNING] main_loop: WS unhealthy: WS_LAG(52.7s) — skipping signal eval
+2026-07-08 08:22:00,411 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:00,411 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:00,502 [WARNING] main_loop: WS unhealthy: WS_LAG(53.2s) — skipping signal eval
+2026-07-08 08:22:01,003 [WARNING] main_loop: WS unhealthy: WS_LAG(53.7s) — skipping signal eval
+2026-07-08 08:22:01,504 [WARNING] main_loop: WS unhealthy: WS_LAG(54.2s) — skipping signal eval
+2026-07-08 08:22:02,006 [WARNING] main_loop: WS unhealthy: WS_LAG(54.7s) — skipping signal eval
+2026-07-08 08:22:02,508 [WARNING] main_loop: WS unhealthy: WS_LAG(55.2s) — skipping signal eval
+2026-07-08 08:22:03,009 [WARNING] main_loop: WS unhealthy: WS_LAG(55.7s) — skipping signal eval
+2026-07-08 08:22:03,511 [WARNING] main_loop: WS unhealthy: WS_LAG(56.2s) — skipping signal eval
+2026-07-08 08:22:04,014 [WARNING] main_loop: WS unhealthy: WS_LAG(56.7s) — skipping signal eval
+2026-07-08 08:22:04,515 [WARNING] main_loop: WS unhealthy: WS_LAG(57.2s) — skipping signal eval
+2026-07-08 08:22:05,016 [WARNING] main_loop: WS unhealthy: WS_LAG(57.7s) — skipping signal eval
+2026-07-08 08:22:05,417 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:05,419 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:05,518 [WARNING] main_loop: WS unhealthy: WS_LAG(58.2s) — skipping signal eval
+2026-07-08 08:22:06,018 [WARNING] main_loop: WS unhealthy: WS_LAG(58.7s) — skipping signal eval
+2026-07-08 08:22:06,520 [WARNING] main_loop: WS unhealthy: WS_LAG(59.2s) — skipping signal eval
+2026-07-08 08:22:07,022 [WARNING] main_loop: WS unhealthy: WS_LAG(59.7s) — skipping signal eval
+2026-07-08 08:22:07,523 [WARNING] main_loop: WS unhealthy: WS_LAG(60.2s) — skipping signal eval
+2026-07-08 08:22:08,025 [WARNING] main_loop: WS unhealthy: WS_LAG(60.7s) — skipping signal eval
+2026-07-08 08:22:08,526 [WARNING] main_loop: WS unhealthy: WS_LAG(61.2s) — skipping signal eval
+2026-07-08 08:22:09,028 [WARNING] main_loop: WS unhealthy: WS_LAG(61.7s) — skipping signal eval
+2026-07-08 08:22:09,530 [WARNING] main_loop: WS unhealthy: WS_LAG(62.2s) — skipping signal eval
+2026-07-08 08:22:10,031 [WARNING] main_loop: WS unhealthy: WS_LAG(62.7s) — skipping signal eval
+2026-07-08 08:22:10,424 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:10,424 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:10,532 [WARNING] main_loop: WS unhealthy: WS_LAG(63.2s) — skipping signal eval
+2026-07-08 08:22:11,033 [WARNING] main_loop: WS unhealthy: WS_LAG(63.7s) — skipping signal eval
+2026-07-08 08:22:11,535 [WARNING] main_loop: WS unhealthy: WS_LAG(64.2s) — skipping signal eval
+2026-07-08 08:22:12,037 [WARNING] main_loop: WS unhealthy: WS_LAG(64.7s) — skipping signal eval
+2026-07-08 08:22:12,538 [WARNING] main_loop: WS unhealthy: WS_LAG(65.2s) — skipping signal eval
+2026-07-08 08:22:13,041 [WARNING] main_loop: WS unhealthy: WS_LAG(65.7s) — skipping signal eval
+2026-07-08 08:22:13,542 [WARNING] main_loop: WS unhealthy: WS_LAG(66.3s) — skipping signal eval
+2026-07-08 08:22:14,044 [WARNING] main_loop: WS unhealthy: WS_LAG(66.8s) — skipping signal eval
+2026-07-08 08:22:14,545 [WARNING] main_loop: WS unhealthy: WS_LAG(67.3s) — skipping signal eval
+2026-07-08 08:22:15,046 [WARNING] main_loop: WS unhealthy: WS_LAG(67.8s) — skipping signal eval
+2026-07-08 08:22:15,429 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:15,430 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:15,548 [WARNING] main_loop: WS unhealthy: WS_LAG(68.3s) — skipping signal eval
+2026-07-08 08:22:16,050 [WARNING] main_loop: WS unhealthy: WS_LAG(68.8s) — skipping signal eval
+2026-07-08 08:22:16,552 [WARNING] main_loop: WS unhealthy: WS_LAG(69.3s) — skipping signal eval
+2026-07-08 08:22:17,054 [WARNING] main_loop: WS unhealthy: WS_LAG(69.8s) — skipping signal eval
+2026-07-08 08:22:17,556 [WARNING] main_loop: WS unhealthy: WS_LAG(70.3s) — skipping signal eval
+2026-07-08 08:22:18,058 [WARNING] main_loop: WS unhealthy: WS_LAG(70.8s) — skipping signal eval
+2026-07-08 08:22:18,559 [WARNING] main_loop: WS unhealthy: WS_LAG(71.3s) — skipping signal eval
+2026-07-08 08:22:19,061 [WARNING] main_loop: WS unhealthy: WS_LAG(71.8s) — skipping signal eval
+2026-07-08 08:22:19,563 [WARNING] main_loop: WS unhealthy: WS_LAG(72.3s) — skipping signal eval
+2026-07-08 08:22:20,065 [WARNING] main_loop: WS unhealthy: WS_LAG(72.8s) — skipping signal eval
+2026-07-08 08:22:20,436 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:20,436 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:20,567 [WARNING] main_loop: WS unhealthy: WS_LAG(73.3s) — skipping signal eval
+2026-07-08 08:22:21,068 [WARNING] main_loop: WS unhealthy: WS_LAG(73.8s) — skipping signal eval
+2026-07-08 08:22:21,569 [WARNING] main_loop: WS unhealthy: WS_LAG(74.3s) — skipping signal eval
+2026-07-08 08:22:22,071 [WARNING] main_loop: WS unhealthy: WS_LAG(74.8s) — skipping signal eval
+2026-07-08 08:22:22,572 [WARNING] main_loop: WS unhealthy: WS_LAG(75.3s) — skipping signal eval
+2026-07-08 08:22:23,073 [WARNING] main_loop: WS unhealthy: WS_LAG(75.8s) — skipping signal eval
+2026-07-08 08:22:23,574 [WARNING] main_loop: WS unhealthy: WS_LAG(76.3s) — skipping signal eval
+2026-07-08 08:22:24,076 [WARNING] main_loop: WS unhealthy: WS_LAG(76.8s) — skipping signal eval
+2026-07-08 08:22:24,577 [WARNING] main_loop: WS unhealthy: WS_LAG(77.3s) — skipping signal eval
+2026-07-08 08:22:25,079 [WARNING] main_loop: WS unhealthy: WS_LAG(77.8s) — skipping signal eval
+2026-07-08 08:22:25,440 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:25,440 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:25,581 [WARNING] main_loop: WS unhealthy: WS_LAG(78.3s) — skipping signal eval
+2026-07-08 08:22:26,083 [WARNING] main_loop: WS unhealthy: WS_LAG(78.8s) — skipping signal eval
+2026-07-08 08:22:26,585 [WARNING] main_loop: WS unhealthy: WS_LAG(79.3s) — skipping signal eval
+2026-07-08 08:22:27,087 [WARNING] main_loop: WS unhealthy: WS_LAG(79.8s) — skipping signal eval
+2026-07-08 08:22:27,589 [WARNING] main_loop: WS unhealthy: WS_LAG(80.3s) — skipping signal eval
+2026-07-08 08:22:28,091 [WARNING] main_loop: WS unhealthy: WS_LAG(80.8s) — skipping signal eval
+2026-07-08 08:22:28,592 [WARNING] main_loop: WS unhealthy: WS_LAG(81.3s) — skipping signal eval
+2026-07-08 08:22:29,094 [WARNING] main_loop: WS unhealthy: WS_LAG(81.8s) — skipping signal eval
+2026-07-08 08:22:29,596 [WARNING] main_loop: WS unhealthy: WS_LAG(82.3s) — skipping signal eval
+2026-07-08 08:22:30,098 [WARNING] main_loop: WS unhealthy: WS_LAG(82.8s) — skipping signal eval
+2026-07-08 08:22:30,446 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:30,446 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:30,599 [WARNING] main_loop: WS unhealthy: WS_LAG(83.3s) — skipping signal eval
+2026-07-08 08:22:31,101 [WARNING] main_loop: WS unhealthy: WS_LAG(83.8s) — skipping signal eval
+2026-07-08 08:22:31,603 [WARNING] main_loop: WS unhealthy: WS_LAG(84.3s) — skipping signal eval
+2026-07-08 08:22:32,105 [WARNING] main_loop: WS unhealthy: WS_LAG(84.8s) — skipping signal eval
+2026-07-08 08:22:32,606 [WARNING] main_loop: WS unhealthy: WS_LAG(85.3s) — skipping signal eval
+2026-07-08 08:22:33,108 [WARNING] main_loop: WS unhealthy: WS_LAG(85.8s) — skipping signal eval
+2026-07-08 08:22:33,609 [WARNING] main_loop: WS unhealthy: WS_LAG(86.3s) — skipping signal eval
+2026-07-08 08:22:34,111 [WARNING] main_loop: WS unhealthy: WS_LAG(86.8s) — skipping signal eval
+2026-07-08 08:22:34,612 [WARNING] main_loop: WS unhealthy: WS_LAG(87.3s) — skipping signal eval
+2026-07-08 08:22:35,114 [WARNING] main_loop: WS unhealthy: WS_LAG(87.8s) — skipping signal eval
+2026-07-08 08:22:35,452 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:35,453 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:35,615 [WARNING] main_loop: WS unhealthy: WS_LAG(88.3s) — skipping signal eval
+2026-07-08 08:22:36,117 [WARNING] main_loop: WS unhealthy: WS_LAG(88.8s) — skipping signal eval
+2026-07-08 08:22:36,618 [WARNING] main_loop: WS unhealthy: WS_LAG(89.3s) — skipping signal eval
+2026-07-08 08:22:37,120 [WARNING] main_loop: WS unhealthy: WS_LAG(89.8s) — skipping signal eval
+2026-07-08 08:22:37,622 [WARNING] main_loop: WS unhealthy: WS_LAG(90.3s) — skipping signal eval
+2026-07-08 08:22:38,123 [WARNING] main_loop: WS unhealthy: WS_LAG(90.8s) — skipping signal eval
+2026-07-08 08:22:38,625 [WARNING] main_loop: WS unhealthy: WS_LAG(91.3s) — skipping signal eval
+2026-07-08 08:22:39,127 [WARNING] main_loop: WS unhealthy: WS_LAG(91.8s) — skipping signal eval
+2026-07-08 08:22:39,628 [WARNING] main_loop: WS unhealthy: WS_LAG(92.3s) — skipping signal eval
+2026-07-08 08:22:40,130 [WARNING] main_loop: WS unhealthy: WS_LAG(92.8s) — skipping signal eval
+2026-07-08 08:22:40,457 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:40,458 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:40,631 [WARNING] main_loop: WS unhealthy: WS_LAG(93.3s) — skipping signal eval
+2026-07-08 08:22:41,133 [WARNING] main_loop: WS unhealthy: WS_LAG(93.8s) — skipping signal eval
+2026-07-08 08:22:41,635 [WARNING] main_loop: WS unhealthy: WS_LAG(94.3s) — skipping signal eval
+2026-07-08 08:22:42,136 [WARNING] main_loop: WS unhealthy: WS_LAG(94.8s) — skipping signal eval
+2026-07-08 08:22:42,638 [WARNING] main_loop: WS unhealthy: WS_LAG(95.3s) — skipping signal eval
+2026-07-08 08:22:43,139 [WARNING] main_loop: WS unhealthy: WS_LAG(95.8s) — skipping signal eval
+2026-07-08 08:22:43,641 [WARNING] main_loop: WS unhealthy: WS_LAG(96.3s) — skipping signal eval
+2026-07-08 08:22:44,144 [WARNING] main_loop: WS unhealthy: WS_LAG(96.9s) — skipping signal eval
+2026-07-08 08:22:44,645 [WARNING] main_loop: WS unhealthy: WS_LAG(97.4s) — skipping signal eval
+2026-07-08 08:22:45,146 [WARNING] main_loop: WS unhealthy: WS_LAG(97.9s) — skipping signal eval
+2026-07-08 08:22:45,463 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:45,463 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:45,647 [WARNING] main_loop: WS unhealthy: WS_LAG(98.4s) — skipping signal eval
+2026-07-08 08:22:46,149 [WARNING] main_loop: WS unhealthy: WS_LAG(98.9s) — skipping signal eval
+2026-07-08 08:22:46,651 [WARNING] main_loop: WS unhealthy: WS_LAG(99.4s) — skipping signal eval
+2026-07-08 08:22:47,152 [WARNING] main_loop: WS unhealthy: WS_LAG(99.9s) — skipping signal eval
+2026-07-08 08:22:47,653 [WARNING] main_loop: WS unhealthy: WS_LAG(100.4s) — skipping signal eval
+2026-07-08 08:22:48,155 [WARNING] main_loop: WS unhealthy: WS_LAG(100.9s) — skipping signal eval
+2026-07-08 08:22:48,657 [WARNING] main_loop: WS unhealthy: WS_LAG(101.4s) — skipping signal eval
+2026-07-08 08:22:49,159 [WARNING] main_loop: WS unhealthy: WS_LAG(101.9s) — skipping signal eval
+2026-07-08 08:22:49,661 [WARNING] main_loop: WS unhealthy: WS_LAG(102.4s) — skipping signal eval
+2026-07-08 08:22:50,163 [WARNING] main_loop: WS unhealthy: WS_LAG(102.9s) — skipping signal eval
+2026-07-08 08:22:50,468 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:50,469 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:50,665 [WARNING] main_loop: WS unhealthy: WS_LAG(103.4s) — skipping signal eval
+2026-07-08 08:22:51,166 [WARNING] main_loop: WS unhealthy: WS_LAG(103.9s) — skipping signal eval
+2026-07-08 08:22:51,668 [WARNING] main_loop: WS unhealthy: WS_LAG(104.4s) — skipping signal eval
+2026-07-08 08:22:52,169 [WARNING] main_loop: WS unhealthy: WS_LAG(104.9s) — skipping signal eval
+2026-07-08 08:22:52,671 [WARNING] main_loop: WS unhealthy: WS_LAG(105.4s) — skipping signal eval
+2026-07-08 08:22:53,173 [WARNING] main_loop: WS unhealthy: WS_LAG(105.9s) — skipping signal eval
+2026-07-08 08:22:53,674 [WARNING] main_loop: WS unhealthy: WS_LAG(106.4s) — skipping signal eval
+2026-07-08 08:22:54,176 [WARNING] main_loop: WS unhealthy: WS_LAG(106.9s) — skipping signal eval
+2026-07-08 08:22:54,678 [WARNING] main_loop: WS unhealthy: WS_LAG(107.4s) — skipping signal eval
+2026-07-08 08:22:55,180 [WARNING] main_loop: WS unhealthy: WS_LAG(107.9s) — skipping signal eval
+2026-07-08 08:22:55,473 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:22:55,474 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:22:55,682 [WARNING] main_loop: WS unhealthy: WS_LAG(108.4s) — skipping signal eval
+2026-07-08 08:22:56,182 [WARNING] main_loop: WS unhealthy: WS_LAG(108.9s) — skipping signal eval
+2026-07-08 08:22:56,684 [WARNING] main_loop: WS unhealthy: WS_LAG(109.4s) — skipping signal eval
+2026-07-08 08:22:57,186 [WARNING] main_loop: WS unhealthy: WS_LAG(109.9s) — skipping signal eval
+2026-07-08 08:22:57,690 [WARNING] main_loop: WS unhealthy: WS_LAG(110.4s) — skipping signal eval
+2026-07-08 08:22:58,193 [WARNING] main_loop: WS unhealthy: WS_LAG(110.9s) — skipping signal eval
+2026-07-08 08:22:58,694 [WARNING] main_loop: WS unhealthy: WS_LAG(111.4s) — skipping signal eval
+2026-07-08 08:22:59,196 [WARNING] main_loop: WS unhealthy: WS_LAG(111.9s) — skipping signal eval
+2026-07-08 08:22:59,697 [WARNING] main_loop: WS unhealthy: WS_LAG(112.4s) — skipping signal eval
+2026-07-08 08:23:00,199 [WARNING] main_loop: WS unhealthy: WS_LAG(112.9s) — skipping signal eval
+2026-07-08 08:23:00,480 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:00,481 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:00,701 [WARNING] main_loop: WS unhealthy: WS_LAG(113.4s) — skipping signal eval
+2026-07-08 08:23:01,203 [WARNING] main_loop: WS unhealthy: WS_LAG(113.9s) — skipping signal eval
+2026-07-08 08:23:01,704 [WARNING] main_loop: WS unhealthy: WS_LAG(114.4s) — skipping signal eval
+2026-07-08 08:23:02,206 [WARNING] main_loop: WS unhealthy: WS_LAG(114.9s) — skipping signal eval
+2026-07-08 08:23:02,707 [WARNING] main_loop: WS unhealthy: WS_LAG(115.4s) — skipping signal eval
+2026-07-08 08:23:03,209 [WARNING] main_loop: WS unhealthy: WS_LAG(115.9s) — skipping signal eval
+2026-07-08 08:23:03,711 [WARNING] main_loop: WS unhealthy: WS_LAG(116.4s) — skipping signal eval
+2026-07-08 08:23:04,213 [WARNING] main_loop: WS unhealthy: WS_LAG(116.9s) — skipping signal eval
+2026-07-08 08:23:04,714 [WARNING] main_loop: WS unhealthy: WS_LAG(117.4s) — skipping signal eval
+2026-07-08 08:23:05,215 [WARNING] main_loop: WS unhealthy: WS_LAG(117.9s) — skipping signal eval
+2026-07-08 08:23:05,486 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:05,486 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:05,718 [WARNING] main_loop: WS unhealthy: WS_LAG(118.4s) — skipping signal eval
+2026-07-08 08:23:06,220 [WARNING] main_loop: WS unhealthy: WS_LAG(118.9s) — skipping signal eval
+2026-07-08 08:23:06,722 [WARNING] main_loop: WS unhealthy: WS_LAG(119.4s) — skipping signal eval
+2026-07-08 08:23:07,224 [WARNING] main_loop: WS unhealthy: WS_LAG(119.9s) — skipping signal eval
+2026-07-08 08:23:07,726 [WARNING] main_loop: WS unhealthy: WS_LAG(120.4s) — skipping signal eval
+2026-07-08 08:23:08,228 [WARNING] main_loop: WS unhealthy: WS_LAG(120.9s) — skipping signal eval
+2026-07-08 08:23:08,729 [WARNING] main_loop: WS unhealthy: WS_LAG(121.4s) — skipping signal eval
+2026-07-08 08:23:09,231 [WARNING] main_loop: WS unhealthy: WS_LAG(121.9s) — skipping signal eval
+2026-07-08 08:23:09,733 [WARNING] main_loop: WS unhealthy: WS_LAG(122.4s) — skipping signal eval
+2026-07-08 08:23:10,234 [WARNING] main_loop: WS unhealthy: WS_LAG(122.9s) — skipping signal eval
+2026-07-08 08:23:10,492 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:10,492 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:10,736 [WARNING] main_loop: WS unhealthy: WS_LAG(123.4s) — skipping signal eval
+2026-07-08 08:23:11,237 [WARNING] main_loop: WS unhealthy: WS_LAG(123.9s) — skipping signal eval
+2026-07-08 08:23:11,738 [WARNING] main_loop: WS unhealthy: WS_LAG(124.4s) — skipping signal eval
+2026-07-08 08:23:12,240 [WARNING] main_loop: WS unhealthy: WS_LAG(124.9s) — skipping signal eval
+2026-07-08 08:23:12,741 [WARNING] main_loop: WS unhealthy: WS_LAG(125.4s) — skipping signal eval
+2026-07-08 08:23:13,242 [WARNING] main_loop: WS unhealthy: WS_LAG(126.0s) — skipping signal eval
+2026-07-08 08:23:13,744 [WARNING] main_loop: WS unhealthy: WS_LAG(126.5s) — skipping signal eval
+2026-07-08 08:23:14,245 [WARNING] main_loop: WS unhealthy: WS_LAG(127.0s) — skipping signal eval
+2026-07-08 08:23:14,747 [WARNING] main_loop: WS unhealthy: WS_LAG(127.5s) — skipping signal eval
+2026-07-08 08:23:15,250 [WARNING] main_loop: WS unhealthy: WS_LAG(128.0s) — skipping signal eval
+2026-07-08 08:23:15,496 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:15,496 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:15,751 [WARNING] main_loop: WS unhealthy: WS_LAG(128.5s) — skipping signal eval
+2026-07-08 08:23:16,253 [WARNING] main_loop: WS unhealthy: WS_LAG(129.0s) — skipping signal eval
+2026-07-08 08:23:16,754 [WARNING] main_loop: WS unhealthy: WS_LAG(129.5s) — skipping signal eval
+2026-07-08 08:23:17,256 [WARNING] main_loop: WS unhealthy: WS_LAG(130.0s) — skipping signal eval
+2026-07-08 08:23:17,758 [WARNING] main_loop: WS unhealthy: WS_LAG(130.5s) — skipping signal eval
+2026-07-08 08:23:18,259 [WARNING] main_loop: WS unhealthy: WS_LAG(131.0s) — skipping signal eval
+2026-07-08 08:23:18,761 [WARNING] main_loop: WS unhealthy: WS_LAG(131.5s) — skipping signal eval
+2026-07-08 08:23:19,262 [WARNING] main_loop: WS unhealthy: WS_LAG(132.0s) — skipping signal eval
+2026-07-08 08:23:19,763 [WARNING] main_loop: WS unhealthy: WS_LAG(132.5s) — skipping signal eval
+2026-07-08 08:23:20,265 [WARNING] main_loop: WS unhealthy: WS_LAG(133.0s) — skipping signal eval
+2026-07-08 08:23:20,501 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:20,501 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:20,766 [WARNING] main_loop: WS unhealthy: WS_LAG(133.5s) — skipping signal eval
+2026-07-08 08:23:21,268 [WARNING] main_loop: WS unhealthy: WS_LAG(134.0s) — skipping signal eval
+2026-07-08 08:23:21,771 [WARNING] main_loop: WS unhealthy: WS_LAG(134.5s) — skipping signal eval
+2026-07-08 08:23:22,272 [WARNING] main_loop: WS unhealthy: WS_LAG(135.0s) — skipping signal eval
+2026-07-08 08:23:22,774 [WARNING] main_loop: WS unhealthy: WS_LAG(135.5s) — skipping signal eval
+2026-07-08 08:23:23,276 [WARNING] main_loop: WS unhealthy: WS_LAG(136.0s) — skipping signal eval
+2026-07-08 08:23:23,778 [WARNING] main_loop: WS unhealthy: WS_LAG(136.5s) — skipping signal eval
+2026-07-08 08:23:24,279 [WARNING] main_loop: WS unhealthy: WS_LAG(137.0s) — skipping signal eval
+2026-07-08 08:23:24,780 [WARNING] main_loop: WS unhealthy: WS_LAG(137.5s) — skipping signal eval
+2026-07-08 08:23:25,284 [WARNING] main_loop: WS unhealthy: WS_LAG(138.0s) — skipping signal eval
+2026-07-08 08:23:25,505 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:25,506 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:25,785 [WARNING] main_loop: WS unhealthy: WS_LAG(138.5s) — skipping signal eval
+2026-07-08 08:23:26,286 [WARNING] main_loop: WS unhealthy: WS_LAG(139.0s) — skipping signal eval
+2026-07-08 08:23:26,788 [WARNING] main_loop: WS unhealthy: WS_LAG(139.5s) — skipping signal eval
+2026-07-08 08:23:27,289 [WARNING] main_loop: WS unhealthy: WS_LAG(140.0s) — skipping signal eval
+2026-07-08 08:23:27,791 [WARNING] main_loop: WS unhealthy: WS_LAG(140.5s) — skipping signal eval
+2026-07-08 08:23:28,293 [WARNING] main_loop: WS unhealthy: WS_LAG(141.0s) — skipping signal eval
+2026-07-08 08:23:28,794 [WARNING] main_loop: WS unhealthy: WS_LAG(141.5s) — skipping signal eval
+2026-07-08 08:23:29,296 [WARNING] main_loop: WS unhealthy: WS_LAG(142.0s) — skipping signal eval
+2026-07-08 08:23:29,797 [WARNING] main_loop: WS unhealthy: WS_LAG(142.5s) — skipping signal eval
+2026-07-08 08:23:30,299 [WARNING] main_loop: WS unhealthy: WS_LAG(143.0s) — skipping signal eval
+2026-07-08 08:23:30,510 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:30,510 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:30,801 [WARNING] main_loop: WS unhealthy: WS_LAG(143.5s) — skipping signal eval
+2026-07-08 08:23:31,303 [WARNING] main_loop: WS unhealthy: WS_LAG(144.0s) — skipping signal eval
+2026-07-08 08:23:31,804 [WARNING] main_loop: WS unhealthy: WS_LAG(144.5s) — skipping signal eval
+2026-07-08 08:23:32,306 [WARNING] main_loop: WS unhealthy: WS_LAG(145.0s) — skipping signal eval
+2026-07-08 08:23:32,808 [WARNING] main_loop: WS unhealthy: WS_LAG(145.5s) — skipping signal eval
+2026-07-08 08:23:33,309 [WARNING] main_loop: WS unhealthy: WS_LAG(146.0s) — skipping signal eval
+2026-07-08 08:23:33,809 [WARNING] main_loop: WS unhealthy: WS_LAG(146.5s) — skipping signal eval
+2026-07-08 08:23:34,311 [WARNING] main_loop: WS unhealthy: WS_LAG(147.0s) — skipping signal eval
+2026-07-08 08:23:34,812 [WARNING] main_loop: WS unhealthy: WS_LAG(147.5s) — skipping signal eval
+2026-07-08 08:23:35,314 [WARNING] main_loop: WS unhealthy: WS_LAG(148.0s) — skipping signal eval
+2026-07-08 08:23:35,516 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:35,516 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:35,816 [WARNING] main_loop: WS unhealthy: WS_LAG(148.5s) — skipping signal eval
+2026-07-08 08:23:36,318 [WARNING] main_loop: WS unhealthy: WS_LAG(149.0s) — skipping signal eval
+2026-07-08 08:23:36,819 [WARNING] main_loop: WS unhealthy: WS_LAG(149.5s) — skipping signal eval
+2026-07-08 08:23:37,320 [WARNING] main_loop: WS unhealthy: WS_LAG(150.0s) — skipping signal eval
+2026-07-08 08:23:37,821 [WARNING] main_loop: WS unhealthy: WS_LAG(150.5s) — skipping signal eval
+2026-07-08 08:23:38,323 [WARNING] main_loop: WS unhealthy: WS_LAG(151.0s) — skipping signal eval
+2026-07-08 08:23:38,824 [WARNING] main_loop: WS unhealthy: WS_LAG(151.5s) — skipping signal eval
+2026-07-08 08:23:39,326 [WARNING] main_loop: WS unhealthy: WS_LAG(152.0s) — skipping signal eval
+2026-07-08 08:23:39,827 [WARNING] main_loop: WS unhealthy: WS_LAG(152.5s) — skipping signal eval
+2026-07-08 08:23:40,329 [WARNING] main_loop: WS unhealthy: WS_LAG(153.0s) — skipping signal eval
+2026-07-08 08:23:40,521 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:40,521 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:40,831 [WARNING] main_loop: WS unhealthy: WS_LAG(153.5s) — skipping signal eval
+2026-07-08 08:23:41,332 [WARNING] main_loop: WS unhealthy: WS_LAG(154.0s) — skipping signal eval
+2026-07-08 08:23:41,833 [WARNING] main_loop: WS unhealthy: WS_LAG(154.5s) — skipping signal eval
+2026-07-08 08:23:42,334 [WARNING] main_loop: WS unhealthy: WS_LAG(155.0s) — skipping signal eval
+2026-07-08 08:23:42,836 [WARNING] main_loop: WS unhealthy: WS_LAG(155.5s) — skipping signal eval
+2026-07-08 08:23:43,337 [WARNING] main_loop: WS unhealthy: WS_LAG(156.0s) — skipping signal eval
+2026-07-08 08:23:43,839 [WARNING] main_loop: WS unhealthy: WS_LAG(156.5s) — skipping signal eval
+2026-07-08 08:23:44,340 [WARNING] main_loop: WS unhealthy: WS_LAG(157.0s) — skipping signal eval
+2026-07-08 08:23:44,841 [WARNING] main_loop: WS unhealthy: WS_LAG(157.5s) — skipping signal eval
+2026-07-08 08:23:45,343 [WARNING] main_loop: WS unhealthy: WS_LAG(158.1s) — skipping signal eval
+2026-07-08 08:23:45,525 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:45,526 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:45,844 [WARNING] main_loop: WS unhealthy: WS_LAG(158.6s) — skipping signal eval
+2026-07-08 08:23:46,345 [WARNING] main_loop: WS unhealthy: WS_LAG(159.1s) — skipping signal eval
+2026-07-08 08:23:46,847 [WARNING] main_loop: WS unhealthy: WS_LAG(159.6s) — skipping signal eval
+2026-07-08 08:23:47,351 [WARNING] main_loop: WS unhealthy: WS_LAG(160.1s) — skipping signal eval
+2026-07-08 08:23:47,853 [WARNING] main_loop: WS unhealthy: WS_LAG(160.6s) — skipping signal eval
+2026-07-08 08:23:48,355 [WARNING] main_loop: WS unhealthy: WS_LAG(161.1s) — skipping signal eval
+2026-07-08 08:23:48,856 [WARNING] main_loop: WS unhealthy: WS_LAG(161.6s) — skipping signal eval
+2026-07-08 08:23:49,358 [WARNING] main_loop: WS unhealthy: WS_LAG(162.1s) — skipping signal eval
+2026-07-08 08:23:49,859 [WARNING] main_loop: WS unhealthy: WS_LAG(162.6s) — skipping signal eval
+2026-07-08 08:23:50,361 [WARNING] main_loop: WS unhealthy: WS_LAG(163.1s) — skipping signal eval
+2026-07-08 08:23:50,533 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:50,533 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:50,863 [WARNING] main_loop: WS unhealthy: WS_LAG(163.6s) — skipping signal eval
+2026-07-08 08:23:51,364 [WARNING] main_loop: WS unhealthy: WS_LAG(164.1s) — skipping signal eval
+2026-07-08 08:23:51,866 [WARNING] main_loop: WS unhealthy: WS_LAG(164.6s) — skipping signal eval
+2026-07-08 08:23:52,367 [WARNING] main_loop: WS unhealthy: WS_LAG(165.1s) — skipping signal eval
+2026-07-08 08:23:52,868 [WARNING] main_loop: WS unhealthy: WS_LAG(165.6s) — skipping signal eval
+2026-07-08 08:23:53,370 [WARNING] main_loop: WS unhealthy: WS_LAG(166.1s) — skipping signal eval
+2026-07-08 08:23:53,871 [WARNING] main_loop: WS unhealthy: WS_LAG(166.6s) — skipping signal eval
+2026-07-08 08:23:54,373 [WARNING] main_loop: WS unhealthy: WS_LAG(167.1s) — skipping signal eval
+2026-07-08 08:23:54,875 [WARNING] main_loop: WS unhealthy: WS_LAG(167.6s) — skipping signal eval
+2026-07-08 08:23:55,377 [WARNING] main_loop: WS unhealthy: WS_LAG(168.1s) — skipping signal eval
+2026-07-08 08:23:55,537 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:23:55,538 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:23:55,878 [WARNING] main_loop: WS unhealthy: WS_LAG(168.6s) — skipping signal eval
+2026-07-08 08:23:56,380 [WARNING] main_loop: WS unhealthy: WS_LAG(169.1s) — skipping signal eval
+2026-07-08 08:23:56,882 [WARNING] main_loop: WS unhealthy: WS_LAG(169.6s) — skipping signal eval
+2026-07-08 08:23:57,384 [WARNING] main_loop: WS unhealthy: WS_LAG(170.1s) — skipping signal eval
+2026-07-08 08:23:57,885 [WARNING] main_loop: WS unhealthy: WS_LAG(170.6s) — skipping signal eval
+2026-07-08 08:23:58,387 [WARNING] main_loop: WS unhealthy: WS_LAG(171.1s) — skipping signal eval
+2026-07-08 08:23:58,889 [WARNING] main_loop: WS unhealthy: WS_LAG(171.6s) — skipping signal eval
+2026-07-08 08:23:59,390 [WARNING] main_loop: WS unhealthy: WS_LAG(172.1s) — skipping signal eval
+2026-07-08 08:23:59,892 [WARNING] main_loop: WS unhealthy: WS_LAG(172.6s) — skipping signal eval
+2026-07-08 08:24:00,394 [WARNING] main_loop: WS unhealthy: WS_LAG(173.1s) — skipping signal eval
+2026-07-08 08:24:00,542 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:24:00,543 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:24:00,896 [WARNING] main_loop: WS unhealthy: WS_LAG(173.6s) — skipping signal eval
+2026-07-08 08:24:01,398 [WARNING] main_loop: WS unhealthy: WS_LAG(174.1s) — skipping signal eval
+2026-07-08 08:24:01,899 [WARNING] main_loop: WS unhealthy: WS_LAG(174.6s) — skipping signal eval
+2026-07-08 08:24:02,401 [WARNING] main_loop: WS unhealthy: WS_LAG(175.1s) — skipping signal eval
+2026-07-08 08:24:02,902 [WARNING] main_loop: WS unhealthy: WS_LAG(175.6s) — skipping signal eval
+2026-07-08 08:24:03,403 [WARNING] main_loop: WS unhealthy: WS_LAG(176.1s) — skipping signal eval
+2026-07-08 08:24:03,905 [WARNING] main_loop: WS unhealthy: WS_LAG(176.6s) — skipping signal eval
+2026-07-08 08:24:04,407 [WARNING] main_loop: WS unhealthy: WS_LAG(177.1s) — skipping signal eval
+2026-07-08 08:24:04,909 [WARNING] main_loop: WS unhealthy: WS_LAG(177.6s) — skipping signal eval
+2026-07-08 08:24:05,410 [WARNING] main_loop: WS unhealthy: WS_LAG(178.1s) — skipping signal eval
+2026-07-08 08:24:05,552 [ERROR] services.market_data: WS error: [Errno 8] nodename nor servname provided, or not known
+2026-07-08 08:24:05,553 [INFO] services.market_data: WS reconnecting in 5s...
+2026-07-08 08:24:05,912 [WARNING] main_loop: WS unhealthy: WS_LAG(178.6s) — skipping signal eval
+2026-07-08 08:24:06,414 [WARNING] main_loop: WS unhealthy: WS_LAG(179.1s) — skipping signal eval
+2026-07-08 08:24:06,915 [WARNING] main_loop: WS unhealthy: WS_LAG(179.6s) — skipping signal eval
+2026-07-08 08:24:07,416 [WARNING] main_loop: WS unhealthy: WS_LAG(180.1s) — skipping signal eval
+2026-07-08 08:24:07,919 [WARNING] main_loop: WS unhealthy: WS_LAG(180.6s) — skipping signal eval
+2026-07-08 08:24:08,420 [WARNING] main_loop: WS unhealthy: WS_LAG(181.1s) — skipping signal eval
+2026-07-08 08:24:08,921 [WARNING] main_loop: WS unhealthy: WS_LAG(181.6s) — skipping signal eval
+2026-07-08 08:24:09,423 [WARNING] main_loop: WS unhealthy: WS_LAG(182.1s) — skipping signal eval
+2026-07-08 08:24:09,925 [WARNING] main_loop: WS unhealthy: WS_LAG(182.6s) — skipping signal eval
+2026-07-08 08:24:10,426 [WARNING] main_loop: WS unhealthy: WS_LAG(183.1s) — skipping signal eval
+2026-07-08 08:24:10,928 [WARNING] main_loop: WS unhealthy: WS_LAG(183.6s) — skipping signal eval
+2026-07-08 08:24:11,401 [INFO] services.market_data: WS connected
+2026-07-08 08:24:11,431 [WARNING] main_loop: WS unhealthy: WS_LAG(184.1s) — skipping signal eval
+2026-07-08 08:24:11,989 [INFO] services.signal_engine: [STATUS] AKEUSDT  score=5.0  oi5=-0.07%  oi15=-0.11%  tb10=50%  tb30=50%  bi=1.00  bdc=0%  p5=0.28%  vol=1.0x  sp=0.0bp  brk1m=False

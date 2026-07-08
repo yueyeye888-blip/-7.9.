@@ -1,0 +1,62 @@
+symbols:
+  - MITOUSDT
+  - BLUAIUSDT
+  - B2USDT
+  - GPSUSDT
+  - SIRENUSDT
+  - AKEUSDT
+  - BILLUSDT
+  - OUSDT
+  - HUSDT
+  - TRUTHUSDT
+
+strategy:
+  min_score: 15             # 提高评分门槛，过滤低质量信号
+  oi_change_5m_min: 0.001
+  oi_change_15m_min: 0.001
+  price_change_5m_max: 0.05
+  volume_ratio_5m_min: 1.0
+  taker_buy_ratio_10s_min: 0.50
+  taker_buy_ratio_30s_min: 0.50
+  bid_depth_03_change_min: 0.30  # 提高到 30%，过滤微弱信号
+  book_imbalance_03_min: 1.50    # 提高到 1.5，更强买卫要求
+  spread_rate_max: 0.0020
+  max_holding_seconds: 300
+
+risk:
+  max_single_trade_loss_equity_pct: 0.05   # 单笔最大亏损 5%（=1 USDT）
+  max_symbol_loss_equity_pct: 0.10         # 单标的最大亏损 10%
+  max_daily_loss_equity_pct: 0.20          # 日最大亏损 20%
+  max_position_equity_pct: 0.60            # 单仓最大占比 60%（=12 USDT notional）
+  pause_symbol_after_losses: 2
+  pause_system_after_losses: 5
+
+execution:
+  mode: live                 # paper → live
+  paper_account_equity: 20.0
+  first_entry_pct: 0.50      # 50% × 20 USDT = 10 USDT notional（满足最小下单）
+  second_entry_pct: 0.25     # 25% × 20 USDT = 5 USDT notional
+  confirm_seconds: 5
+  no_profit_exit_seconds: 120   # 120s 无盈利才出场
+  reduce_after_no_profit_seconds: 60
+
+binance:
+  base_url: https://fapi.binance.com
+  ws_url: wss://fstream.binance.com
+  oi_poll_interval: 5       # 秒
+  depth_snapshot_limit: 500
+  api_key: "GxdUKCKeCnfwIGxpkeeR8W6P81ZTG3cxgxDVGXdeCXo8XLpKn0TTx0HelkkGNhRK"
+  api_secret: "NqxoVnXytujvUwZ4MLoSJbCoYTzdcMpNkayBpxH65DdJeEgLSkIQ42EmvtYVQnuA"
+  live_leverage: 10
+
+database:
+  path: data/ambush.db
+
+telegram:
+  enabled: true
+  token: "8107569068:AAGFRCk1S19U-YlfdgB8hWuRFF9mFz0xJqc"
+  chat_id: "8018345095"
+
+logging:
+  level: INFO
+  file: logs/ambush.log
