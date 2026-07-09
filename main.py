@@ -84,6 +84,8 @@ async def main_loop(
     while True:
         await asyncio.sleep(EVAL_INTERVAL)
 
+        await execution_engine.refresh_exchange_positions()
+
         ws_stats = ws_service.stats()
         ws_ok, ws_reason = risk_engine.is_ws_healthy(ws_stats["lag_seconds"])
         if not ws_ok:
@@ -131,6 +133,11 @@ async def main_loop(
                             "timestamp": signal.timestamp,
                             "score": signal.opportunity_score,
                             "type": signal.signal_type,
+                            "lane": signal.reason.get("entry_lane", "STANDARD"),
+                            "route": signal.reason.get("hour_route", "NEUTRAL"),
+                            "expected_bp": round(signal.reason.get("expected_move", 0.0) * 10000, 2),
+                            "cost_bp": round(signal.reason.get("estimated_cost", 0.0) * 10000, 2),
+                            "required_bp": round(signal.reason.get("required_move", 0.0) * 10000, 2),
                             "price": str(signal.entry_price),
                         })
 
@@ -145,10 +152,17 @@ async def main_loop(
         for sym, pos in execution_engine.positions.items():
             positions_snap[sym] = _pos_to_dict(pos)
 
+        # 合并交易所原生持仓（只读展示，不覆盖策略持仓）
+        for key, pos in execution_engine.exchange_positions.items():
+            if pos.get("symbol") in positions_snap:
+                continue
+            positions_snap[key] = pos
+
         risk_status = risk_engine.status()
         shared_state.positions = positions_snap
         shared_state.ws_stats = ws_stats
         shared_state.risk_status = risk_status
+        shared_state.signal_stats = signal_engine.runtime_stats()
 
 
 async def run() -> None:

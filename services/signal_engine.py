@@ -4,6 +4,7 @@
 import logging
 import time
 import uuid
+from collections import deque
 from decimal import Decimal
 from typing import Dict, Optional
 
@@ -136,10 +137,131 @@ class SignalEngine:
 
     def __init__(self, cfg: StrategyConfig):
         self._cfg = cfg
+        # 费后准入与双通道提频参数
+        self._round_trip_fee_floor = 0.0008   # Binance 合约实际双边 taker=0.08%
+        self._fast_lane_score_relax = 5.0      # 快通道评分放宽量（原3.0→5.0）
+        self._fast_lane_spread_max = min(cfg.spread_rate_max, 0.00060)  # 6bp
+        self._fast_lane_book_min = 1.10        # 快通道盘口失衡门槛（低于标准的1.5）
+        self._fast_lane_depth_min = 0.08       # 快通道深度变化门槛（低于标准的0.3）
+        self._fast_lane_taker10_min = max(cfg.taker_buy_ratio_10s_min, 0.50)
         # 记录各 symbol 最近信号失败次数（用于风险扣分）
         self._fail_counts: Dict[str, int] = {}
         # 近失败日志节流：每个 symbol 每 60s 最多打一次
         self._last_log_ts: Dict[str, float] = {}
+        self._stats: Dict[str, float] = {
+            "accepted_total": 0,
+            "accepted_standard": 0,
+            "accepted_fast": 0,
+            "blocked_conditions": 0,
+            "blocked_fee": 0,
+        }
+        self._recent_fee_blocks = deque(maxlen=20)
+        self._last_fast_lane_params: Dict[str, float] = {}
+
+    @staticmethod
+    def _clamp(value: float, low: float, high: float) -> float:
+        return max(low, min(high, value))
+
+    def _hour_route_profile(self, hour_utc: int) -> dict:
+        # 基于历史回测表现做小时段路由：
+        # 23 点段偏防守；0-2 点段适度提频；其余保持中性。
+        if hour_utc == 23:
+            return {
+                "name": "DEFENSIVE_23UTC",
+                "score_relax_delta": -0.8,
+                "spread_max_delta": -0.00008,
+                "book_min_delta": 0.10,
+                "depth_min_delta": 0.03,
+                "taker_min_delta": 0.01,
+                "margin_bp_delta": 0.8,
+            }
+        if hour_utc in (0, 1, 2):
+            return {
+                "name": "ACTIVE_0_2UTC",
+                "score_relax_delta": 0.7,
+                "spread_max_delta": 0.00005,
+                "book_min_delta": -0.05,
+                "depth_min_delta": -0.02,
+                "taker_min_delta": -0.01,
+                "margin_bp_delta": -0.2,
+            }
+        return {
+            "name": "NEUTRAL",
+            "score_relax_delta": 0.0,
+            "spread_max_delta": 0.0,
+            "book_min_delta": 0.0,
+            "depth_min_delta": 0.0,
+            "taker_min_delta": 0.0,
+            "margin_bp_delta": 0.0,
+        }
+
+    def _build_fast_lane_params(self, now_ts: float) -> dict:
+        hour_utc = time.gmtime(now_ts).tm_hour
+        route = self._hour_route_profile(hour_utc)
+
+        score_relax = self._fast_lane_score_relax + route["score_relax_delta"]
+        spread_max = self._fast_lane_spread_max + route["spread_max_delta"]
+        book_min = self._fast_lane_book_min + route["book_min_delta"]
+        depth_min = self._fast_lane_depth_min + route["depth_min_delta"]
+        taker_min = self._fast_lane_taker10_min + route["taker_min_delta"]
+        # 费后安全垫（bp），确保提频不牺牲费后质量。
+        margin_bp = 0.4 + route["margin_bp_delta"]
+
+        accepted = self._stats["accepted_total"]
+        blocked_cond = self._stats["blocked_conditions"]
+        blocked_fee = self._stats["blocked_fee"]
+
+        # 条件拦截显著高于通过，且费后拦截占比不高时，适度放宽以提升频率。
+        if blocked_cond > max(12, accepted * 4) and blocked_fee < blocked_cond * 0.55:
+            score_relax += 0.8
+            book_min -= 0.05
+            depth_min -= 0.03
+
+        # 无成交试跑档：长时间 0 通过时，进一步放宽 fast 通道，验证市场是否可交易。
+        # 注意：费后 required_move 仍保留，防止放宽后变成低质量冲单。
+        bootstrap_relax = False
+        if accepted == 0 and blocked_cond > 150:
+            bootstrap_relax = True
+            score_relax += 2.0
+            spread_max += 0.00010
+            book_min -= 0.15
+            depth_min -= 0.09
+            taker_min -= 0.05
+
+        # 若费后拦截过高，适度收紧但上限不超过 +0.2bp，避免正反馈死锁
+        if blocked_fee > max(8, accepted * 1.5):
+            score_relax -= 0.4
+            taker_min += 0.005
+            margin_bp += 0.2
+
+        score_relax = self._clamp(score_relax, 2.0, 7.0)
+        spread_max = self._clamp(spread_max, 0.00040, min(self._cfg.spread_rate_max, 0.00090))
+        book_min = self._clamp(book_min, 0.90, 1.60)
+        depth_min = self._clamp(depth_min, 0.05, 0.30)
+        taker_min = self._clamp(taker_min, 0.50, 0.60)
+        margin_bp = self._clamp(margin_bp, 0.3, 1.2)
+
+        return {
+            "route": route["name"],
+            "hour_utc": hour_utc,
+            "bootstrap_relax": bootstrap_relax,
+            "score_relax": score_relax,
+            "spread_max": spread_max,
+            "book_min": book_min,
+            "depth_min": depth_min,
+            "taker_min": taker_min,
+            "margin_bp": margin_bp,
+        }
+
+    def _estimate_expected_move(self, f: Features, total_score: float) -> float:
+        """粗略估计未来可捕获波动（百分比），用于费后准入守门。"""
+        score_edge   = max(0.0, total_score - self._cfg.min_score) * 0.00006  # 加权更高
+        flow_edge    = max(0.0, f.taker_buy_ratio_10s - 0.50) * 0.0016
+        book_edge    = max(0.0, f.book_imbalance_03 - 1.0) * 0.00065
+        depth_edge   = max(0.0, f.bid_depth_03_change) * 0.00065
+        breakout_edge = 0.00040 if f.price_breaks_1m_high else (0.00020 if f.price_breaks_30s_high else 0.0)
+        p5_edge      = max(0.0, f.price_change_5m) * 0.030   # 5分钟涨幅本身是动量证据
+        return score_edge + flow_edge + book_edge + depth_edge + breakout_edge + p5_edge
 
     def evaluate(self, f: Features) -> Optional[Signal]:
         """评估单个 symbol，返回有效信号或 None"""
@@ -182,10 +304,7 @@ class SignalEngine:
                 f.price_breaks_1m_high,
             )
 
-        if total_score < self._cfg.min_score:
-            return None
-
-        # 检查硬条件
+        # 检查硬条件（标准通道）
         c = self._cfg
         conditions = {
             "book_imbalance": f.book_imbalance_03 >= c.book_imbalance_03_min,
@@ -198,14 +317,91 @@ class SignalEngine:
             "price_breakout": f.price_breaks_30s_high,
         }
 
-        failed = [k for k, v in conditions.items() if not v]
-        if failed:
+        # 低成本快通道：允许略低分，但要求更低点差与更强微观结构
+        fast_params = self._build_fast_lane_params(now)
+        self._last_fast_lane_params = fast_params
+        fast_price_confirm_min = 0.00045 if fast_params.get("bootstrap_relax") else 0.0007
+        fast_breakout_or_momentum = (
+            f.price_breaks_30s_high or
+            (fast_params.get("bootstrap_relax") and f.price_change_10s > 0.0009)
+        )
+        fast_conditions = {
+            "spread_ultra_low": f.spread_rate <= fast_params["spread_max"],
+            "book_strong": f.book_imbalance_03 >= fast_params["book_min"],
+            "depth_strong": f.bid_depth_03_change >= fast_params["depth_min"],
+            "taker_active": f.taker_buy_ratio_10s >= fast_params["taker_min"],
+            "price_confirm": f.price_change_10s > fast_price_confirm_min,
+            "price_breakout": fast_breakout_or_momentum,
+        }
+
+        passed_standard = total_score >= self._cfg.min_score and all(conditions.values())
+        passed_fast = (
+            total_score >= self._cfg.min_score - fast_params["score_relax"]
+            and all(fast_conditions.values())
+        )
+        # 动量爆发通道：tb30 强势买盘 + 短期价格涨幅显著，即使盘口结构反向也允许进场
+        # 适用场景：强势买方以市价单压制卖盘（bi<1 但 tb30>70%+p5>1.5%）
+        passed_momentum_burst = (
+            f.taker_buy_ratio_30s >= 0.70
+            and f.price_change_5m > 0.015
+            and total_score >= 12
+            and f.spread_rate <= self._cfg.spread_rate_max
+            and not f.spread_abnormal
+            and not f.bid_depth_collapsed
+        )
+
+        if not passed_standard and not passed_fast and not passed_momentum_burst:
+            self._stats["blocked_conditions"] += 1
+            failed = [k for k, v in conditions.items() if not v]
             if total_score >= 40:
                 logger.info(
                     "[NEAR-MISS-COND] %s  score=%.1f  cond=%d/12  miss=%s",
                     f.symbol, total_score, 12 - len(failed), ",".join(failed),
                 )
             return None
+
+        entry_lane = "STANDARD"
+        lane_conditions = conditions
+        if not passed_standard and passed_fast:
+            entry_lane = "FAST_LOW_COST"
+            lane_conditions = fast_conditions
+        elif not passed_standard and not passed_fast and passed_momentum_burst:
+            entry_lane = "MOMENTUM_BURST"
+            lane_conditions = {"tb30_strong": True, "p5_burst": True, "spread_ok": True}
+
+        # 费后准入：只有在预估可覆盖费用和点差时才允许入场
+        expected_move = self._estimate_expected_move(f, total_score)
+        estimated_cost = self._round_trip_fee_floor + max(0.0, f.spread_rate)
+        required_move = estimated_cost + fast_params["margin_bp"] / 10000.0
+        if expected_move < required_move:
+            self._stats["blocked_fee"] += 1
+            self._recent_fee_blocks.append({
+                "symbol": f.symbol,
+                "score": round(total_score, 2),
+                "lane": entry_lane,
+                "expected_bp": round(expected_move * 10000, 2),
+                "cost_bp": round(estimated_cost * 10000, 2),
+                "required_bp": round(required_move * 10000, 2),
+                "route": fast_params["route"],
+                "ts": now,
+            })
+            if total_score >= self._cfg.min_score - self._fast_lane_score_relax:
+                logger.info(
+                    "[NEAR-MISS-FEE] %s lane=%s route=%s score=%.1f expect=%.2fbp req=%.2fbp",
+                    f.symbol,
+                    entry_lane,
+                    fast_params["route"],
+                    total_score,
+                    expected_move * 10000,
+                    required_move * 10000,
+                )
+            return None
+
+        self._stats["accepted_total"] += 1
+        if entry_lane == "FAST_LOW_COST":
+            self._stats["accepted_fast"] += 1
+        else:
+            self._stats["accepted_standard"] += 1
 
         return Signal(
             symbol=f.symbol,
@@ -215,9 +411,28 @@ class SignalEngine:
             opportunity_score=total_score,
             entry_price=f.price,
             breakout_price=f.price_1m_high,
-            reason={**reason, "conditions": conditions},
+            reason={
+                **reason,
+                "entry_lane": entry_lane,
+                "hour_route": fast_params["route"],
+                "expected_move": expected_move,
+                "estimated_cost": estimated_cost,
+                "required_move": required_move,
+                "fast_lane_params": fast_params,
+                "conditions": lane_conditions,
+            },
             features_snapshot=f,
         )
+
+    def runtime_stats(self) -> dict:
+        stats = dict(self._stats)
+        total_accepted = max(1.0, stats["accepted_total"])
+        stats["fast_lane_share_pct"] = round(
+            stats["accepted_fast"] / total_accepted * 100.0, 2
+        )
+        stats["fast_lane_live"] = self._last_fast_lane_params
+        stats["recent_fee_blocks"] = list(self._recent_fee_blocks)
+        return stats
 
     def record_signal_result(self, symbol: str, success: bool) -> None:
         """影子/实盘结果反馈，用于调整失败计数"""

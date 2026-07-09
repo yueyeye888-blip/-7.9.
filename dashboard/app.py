@@ -46,6 +46,7 @@ async def get_status():
         "started_at": _state.started_at,
         "ws": _state.ws_stats,
         "risk": _state.risk_status,
+        "signal_stats": _state.signal_stats,
     }
 
 
@@ -173,5 +174,6 @@ def _build_snapshot() -> dict:
         "positions": list(_state.positions.values()),
         "risk": risk,
         "ws": _state.ws_stats,
+        "signal_stats": _state.signal_stats,
         "recent_signals": _state.recent_signals[:30],
     }

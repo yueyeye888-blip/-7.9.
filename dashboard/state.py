@@ -24,6 +24,8 @@ class SharedState:
         self.ws_stats: dict = {}
         # 风控状态
         self.risk_status: dict = {}
+        # 信号统计（费后拦截/通道分布）
+        self.signal_stats: dict = {}
 
     def add_signal(self, sig_dict: dict) -> None:
         self.recent_signals.insert(0, sig_dict)

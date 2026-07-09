@@ -142,9 +142,11 @@ class SymbolFeatureState:
                 bid_01, ask_01 = book.get_depth(0.001)
                 bid_03, ask_03 = book.get_depth(0.003)
                 bid_05, ask_05 = book.get_depth(0.005)
+                bid_07, ask_07 = book.get_depth(0.007)
                 f.bid_depth_01, f.ask_depth_01 = bid_01, ask_01
                 f.bid_depth_03, f.ask_depth_03 = bid_03, ask_03
                 f.bid_depth_05, f.ask_depth_05 = bid_05, ask_05
+                f.bid_depth_07, f.ask_depth_07 = bid_07, ask_07
 
                 if ask_03 > 0:
                     f.book_imbalance_03 = bid_03 / ask_03
@@ -175,6 +177,7 @@ class SymbolFeatureState:
         f.price_30s_high = self._price_high(30, now)
         f.price_1m_high  = self._price_high(60, now)
         f.price_3m_high  = self._price_high(180, now)
+        f.price_5m_low   = self._price_low(300, now)
         # 对比 2s 前的高点：当前价 > 过去 2-32s内最高价 = 真实突破
         high_30s_prev = self._price_high_before(30, now, lag=2.0)
         high_1m_prev  = self._price_high_before(60, now, lag=2.0)
@@ -223,6 +226,15 @@ class SymbolFeatureState:
             if ts >= cutoff
         ]
         return max(highs) if highs else Decimal(0)
+
+    def _price_low(self, window_sec: float, now: float) -> Decimal:
+        """window_sec 秒内的最低价（用于进场前止损锚点）"""
+        cutoff = now - window_sec
+        lows = [
+            price for ts, (price, _) in self._prices._q
+            if ts >= cutoff and price > 0
+        ]
+        return min(lows) if lows else Decimal(0)
 
     def _price_high_before(self, window_sec: float, now: float, lag: float = 2.0) -> Decimal:
         """window_sec 秒内、但排除最近 lag 秒的最高价（用于突破判断）"""

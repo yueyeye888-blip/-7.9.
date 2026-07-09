@@ -88,6 +88,8 @@ class Features:
     ask_depth_03: float = 0.0
     bid_depth_05: float = 0.0
     ask_depth_05: float = 0.0
+    bid_depth_07: float = 0.0
+    ask_depth_07: float = 0.0
 
     # 盘口失衡
     book_imbalance_03: float = 1.0
@@ -111,6 +113,7 @@ class Features:
     price_30s_high: Decimal = Decimal(0)
     price_1m_high: Decimal = Decimal(0)
     price_3m_high: Decimal = Decimal(0)
+    price_5m_low: Decimal = Decimal(0)    # 进场前 5 分钟最低价（止损锚点）
 
     # 点差异常（突然扩大超过过去 5min 均值 2 倍）
     spread_abnormal: bool = False
@@ -139,6 +142,7 @@ class Position:
     qty: Decimal
     entry_price: Decimal
     entry_bid_depth_03: float
+    entry_bid_depth_07: float          # 进场时0.7%深度，用于深度崩塌检测
     breakout_price: Decimal
     opened_at: float                 # unix seconds
     signal_id: str
@@ -147,6 +151,9 @@ class Position:
     unrealized_pnl_pct: float = 0.0
     max_profit_pct: float = 0.0
     max_loss_pct: float = 0.0
+
+    # 止损价（开仓时从进场前 5 分钟最低价锚定）
+    sl_price: Decimal = Decimal(0)
 
     # 已减仓比例
     reduced_pct: float = 0.0

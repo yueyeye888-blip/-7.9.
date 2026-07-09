@@ -78,7 +78,7 @@ class RiskEngine:
         """检查 WebSocket 延迟"""
         if lag_seconds is None:
             return False, "WS_NO_DATA"
-        if lag_seconds > 1.0:
+        if lag_seconds > 1.5:
             return False, f"WS_LAG({lag_seconds:.1f}s)"
         return True, ""
 

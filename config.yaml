@@ -9,9 +9,15 @@ symbols:
   - OUSDT
   - HUSDT
   - TRUTHUSDT
+  - POWERUSDT
+  - CYSUSDT
+  - DODOXUSDT
+  - BULLAUSDT
+  - LABUSDT
+  - EVAAUSDT
 
 strategy:
-  min_score: 15             # 提高评分门槛，过滤低质量信号
+  min_score: 13             # 降低至13，扩大有效信号范围
   oi_change_5m_min: 0.001
   oi_change_15m_min: 0.001
   price_change_5m_max: 0.05

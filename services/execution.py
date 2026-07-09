@@ -43,6 +43,15 @@ class ExecutionEngine:
         self._closed_positions: List[Position] = []
         self._last_exit_ts: Dict[str, float] = {}   # symbol -> 平仓时间，用于冷却期
         self._last_hold_diag_ts: Dict[str, float] = {}  # symbol -> 最近一次持仓诊断日志时间
+        self._exchange_positions: Dict[str, dict] = {}  # 从交易所同步的持仓（只读展示）
+        self._last_exchange_sync_ts: float = 0.0
+        self._exchange_sync_ok: bool = False
+        self._last_exchange_sync_ok_ts: float = 0.0
+        self._last_exchange_guard_log_ts: float = 0.0
+        self._exchange_sync_grace_sec: float = 180.0
+        # 连续失败计数与退避重试（指数退避，减少 asyncio 事件循环压容）
+        self._exchange_sync_fail_count: int = 0
+        self._exchange_sync_backoff_until: float = 0.0
 
         # 实盘上下文（由 main.py 通过 set_live_context 注入）
         self._api_key: str = ""
@@ -121,8 +130,89 @@ class ExecutionEngine:
 
     async def _fetch_live_equity(self) -> Decimal:
         data = await self._api_call("GET", "/fapi/v2/account", {})
+        if isinstance(data, dict) and "code" in data:
+            logger.warning(f"[LIVE] fetch equity failed: {data}")
+            return Decimal(0)
         bal = data.get("totalMarginBalance", "0")
         return Decimal(str(bal))
+
+    async def refresh_exchange_positions(self, min_interval_sec: float = 10.0) -> None:
+        """同步交易所当前非零持仓到内存（只用于 Dashboard 展示，不参与策略仓位管理）。"""
+        if self._cfg.mode != "live":
+            self._exchange_positions = {}
+            self._exchange_sync_ok = True
+            self._last_exchange_sync_ok_ts = time.time()
+            return
+
+        now = time.time()
+        if now - self._last_exchange_sync_ts < min_interval_sec:
+            return
+        # 指数退避：-2015 等持续失败时稍后再试，避免占用事件循环
+        if now < self._exchange_sync_backoff_until:
+            return
+        self._last_exchange_sync_ts = now
+
+        try:
+            data = await self._api_call("GET", "/fapi/v2/positionRisk", {})
+            if isinstance(data, dict) and "code" in data:
+                self._exchange_sync_fail_count += 1
+                backoff_sec = min(30 * (2 ** (self._exchange_sync_fail_count - 1)), 300)
+                self._exchange_sync_backoff_until = now + backoff_sec
+                logger.warning(
+                    f"[LIVE] fetch exchange positions failed: {data} "
+                    f"(fail#{self._exchange_sync_fail_count}, backoff {backoff_sec:.0f}s)"
+                )
+                self._exchange_sync_ok = False
+                return
+
+            synced: Dict[str, dict] = {}
+            for row in data:
+                amt = Decimal(str(row.get("positionAmt", "0")))
+                if amt == 0:
+                    continue
+
+                symbol = row.get("symbol", "")
+                side = "LONG" if amt > 0 else "SHORT"
+                position_side = row.get("positionSide", "BOTH")
+                key = f"{symbol}:{position_side}"
+
+                notional = Decimal(str(row.get("notional", "0")))
+                unreal = Decimal(str(row.get("unRealizedProfit", "0")))
+                pnl_pct = float(unreal / abs(notional)) if notional != 0 else 0.0
+
+                synced[key] = {
+                    "symbol": symbol,
+                    "side": side,
+                    "qty": str(abs(amt)),
+                    "entry_price": row.get("entryPrice", "0"),
+                    "mark_price": row.get("markPrice", "0"),
+                    "unrealized_pnl_pct": pnl_pct,
+                    "max_profit_pct": 0.0,
+                    "max_loss_pct": 0.0,
+                    "opened_at": 0,
+                    "signal_id": f"EX:{position_side}",
+                    "status": "EXCHANGE",
+                    "source": "EXCHANGE",
+                    "position_side": position_side,
+                    "exit_diag": {},
+                }
+
+            self._exchange_positions = synced
+            self._exchange_sync_ok = True
+            self._last_exchange_sync_ok_ts = time.time()
+            # 成功后重置退避计数器
+            self._exchange_sync_fail_count = 0
+            self._exchange_sync_backoff_until = 0.0
+        except Exception as e:
+            self._exchange_sync_fail_count += 1
+            backoff_sec = min(30 * (2 ** (self._exchange_sync_fail_count - 1)), 300)
+            self._exchange_sync_backoff_until = time.time() + backoff_sec
+            logger.warning(f"[LIVE] refresh exchange positions error: {e} (backoff {backoff_sec:.0f}s)")
+            self._exchange_sync_ok = False
+
+    @property
+    def exchange_positions(self) -> Dict[str, dict]:
+        return self._exchange_positions
 
     async def _set_leverage(self, symbol: str, leverage: int) -> None:
         await self._api_call(
@@ -175,9 +265,42 @@ class ExecutionEngine:
         # 更新已有持仓
         await self._update_positions(f)
 
+        if self._cfg.mode == "live" and not self._exchange_sync_ok:
+            now = time.time()
+            sync_age = now - self._last_exchange_sync_ok_ts
+
+            # 首次同步成功前保持 fail-closed；成功后允许短时容错窗口，避免网络抖动导致持续停摆。
+            if self._last_exchange_sync_ok_ts <= 0 or sync_age > self._exchange_sync_grace_sec:
+                if now - self._last_exchange_guard_log_ts > 30:
+                    self._last_exchange_guard_log_ts = now
+                    logger.warning("[LIVE] skip new entry because exchange position sync is not ready")
+                return
+
+            if now - self._last_exchange_guard_log_ts > 30:
+                self._last_exchange_guard_log_ts = now
+                logger.warning(
+                    "[LIVE] exchange sync degraded, continue with cached positions (age=%.1fs)",
+                    sync_age,
+                )
+
         # 评估新进场
-        if signal and signal.is_valid and f.symbol not in self._positions:
+        if (
+            signal and signal.is_valid and
+            f.symbol not in self._positions and
+            not self._has_exchange_position_for_symbol(f.symbol)
+        ):
             await self._try_enter(signal, f)
+
+    def _has_exchange_position_for_symbol(self, symbol: str) -> bool:
+        for p in self._exchange_positions.values():
+            if p.get("symbol") != symbol:
+                continue
+            try:
+                if Decimal(str(p.get("qty", "0"))) > 0:
+                    return True
+            except Exception:
+                continue
+        return False
 
     # ------------------------------------------------------------------
     # 进场
@@ -207,15 +330,20 @@ class ExecutionEngine:
             fill_price = f.price
             mode_tag = "PAPER"
 
+        # 止损锚点：进场前 5 分钟最低价；若数据不足则退化为进场价 × 0.998（-0.2%）
+        sl_anchor = f.price_5m_low if f.price_5m_low > 0 else fill_price * Decimal("0.998")
+
         pos = Position(
             symbol=signal.symbol,
             side="LONG",
             qty=qty,
             entry_price=fill_price,
             entry_bid_depth_03=f.bid_depth_03,
+            entry_bid_depth_07=f.bid_depth_07,
             breakout_price=signal.breakout_price,
             opened_at=time.time(),
             signal_id=str(uuid.uuid4()),
+            sl_price=sl_anchor,
         )
         self._positions[signal.symbol] = pos
 
@@ -330,23 +458,38 @@ class ExecutionEngine:
         )
 
     def _should_exit(self, pos: Position, f: Features):
-        holding_sec = time.time() - pos.opened_at
+        pnl  = pos.unrealized_pnl_pct
+        peak = pos.max_profit_pct
 
-        # 1. 盘口信号反转：买压消失（进场条件的对立面）
-        if holding_sec > 30 and f.book_imbalance_03 < 1.0:
-            return True, "BOOK_IMBALANCE_REVERSED"
+        # 1. 止损：价格跌破进场前 5 分钟最低价
+        #    sl_price 在开仓时已锚定，0 表示数据不足（不触发）
+        if pos.sl_price > 0 and f.price <= pos.sl_price:
+            return True, f"SL_5M_LOW({float(pos.sl_price):.6f})"
 
-        # 2. 主动买入大幅减弱（价格代理：跌幅 > 0.25%）
-        if holding_sec > 30 and f.taker_buy_ratio_10s < 0.40:
-            return True, "TAKER_BUY_WEAKENED"
+        # 2. 追踪止盈
+        #    激活线：峰值盈利 ≥ 0.20%（确保触发时净利仍为正）
+        #    回撤量：动态分档，涨得越猛给越大的空间让行情充分发展
+        #      峰值 < 0.40%   → 追踪 0.10%（小行情，快速锁利）
+        #      峰值 0.40-1.0% → 追踪 0.18%（中等行情，允许正常震荡）
+        #      峰值 ≥ 1.0%    → 追踪 0.30%（大行情/暴拉，给足空间）
+        TRAIL_ON = 0.0020
+        if peak < 0.0040:
+            trail_dd = 0.0010
+        elif peak < 0.0100:
+            trail_dd = 0.0018
+        else:
+            trail_dd = 0.0030
 
-        # 3. 买盘深度崩塌 70%（大单撤单/被吃光）
-        if (pos.entry_bid_depth_03 > 0 and
-                f.bid_depth_03 < pos.entry_bid_depth_03 * 0.30):
+        if peak >= TRAIL_ON and pnl <= peak - trail_dd:
+            return True, f"TRAILING_STOP(peak={peak:.3%},dd={trail_dd:.3%})"
+
+        # 3. 买盘深度崩塌：扫描皅0.7%价位深度，跌至进场时30%以下立即出场
+        if (pos.entry_bid_depth_07 > 0 and
+                f.bid_depth_07 < pos.entry_bid_depth_07 * 0.30):
             return True, "BID_DEPTH_DISAPPEARED"
 
-        # 4. 点差异常（流动性恶化）
-        if f.spread_abnormal:
+        # 4. 点差异常：仅在账面浮亏时触发（暖拉时点差也会扩大，盈利时不应强制离场）
+        if f.spread_abnormal and pnl < 0:
             return True, "SPREAD_ABNORMAL"
 
         return False, ""
