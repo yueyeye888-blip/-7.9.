@@ -9,6 +9,11 @@ import time
 
 import aiohttp
 import uvicorn
+try:
+    from aiohttp_socks import ProxyConnector
+    _HAS_SOCKS = True
+except ImportError:
+    _HAS_SOCKS = False
 
 # 确保从 binance-ambush/ 目录运行
 sys.path.insert(0, os.path.dirname(__file__))
@@ -180,14 +185,29 @@ async def run() -> None:
     # 检测代理（US 服务器需要通过 Clash/Mihomo 绕过地理限制）
     _proxy = os.environ.get("HTTP_PROXY") or os.environ.get("HTTPS_PROXY") or os.environ.get("ALL_PROXY")
     if _proxy:
-        logger.info(f"Using HTTP proxy: {_proxy}")
-    connector = aiohttp.TCPConnector(limit=50)
-    async with aiohttp.ClientSession(connector=connector, trust_env=True) as session:
+        logger.info(f"Using proxy: {_proxy}")
+    if _proxy and _proxy.startswith("socks5://") and _HAS_SOCKS:
+        connector = ProxyConnector.from_url(_proxy, limit=50)
+        logger.info("SOCKS5 connector active")
+    else:
+        connector = aiohttp.TCPConnector(limit=50)
+    async with aiohttp.ClientSession(connector=connector, trust_env=not bool(_proxy and _proxy.startswith("socks5://"))) as session:
 
-        # ---- 验证 symbol ----
-        valid_symbols_info = await fetch_symbol_info(
-            cfg.binance.base_url, cfg.symbols, session
-        )
+        # ---- 验证 symbol（带重试，VMess/代理临时故障时不崩溃）----
+        valid_symbols_info = None
+        for _attempt in range(12):  # 最多重试 ~2 分钟
+            try:
+                valid_symbols_info = await fetch_symbol_info(
+                    cfg.binance.base_url, cfg.symbols, session
+                )
+                break
+            except Exception as _e:
+                wait = min(10 * (_attempt + 1), 30)
+                logger.warning(f"fetch_symbol_info failed (attempt {_attempt+1}/12): {_e}; retry in {wait}s")
+                await asyncio.sleep(wait)
+        if valid_symbols_info is None:
+            logger.error("fetch_symbol_info failed after all retries. Check proxy/VMess.")
+            return
         active_symbols = list(valid_symbols_info.keys())
         if not active_symbols:
             logger.error("No valid symbols found on Binance Futures. Check config.yaml.")

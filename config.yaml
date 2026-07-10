@@ -1,5 +1,4 @@
 symbols:
-  - MITOUSDT
   - BLUAIUSDT
   - B2USDT
   - GPSUSDT
@@ -14,7 +13,6 @@ symbols:
   - DODOXUSDT
   - BULLAUSDT
   - LABUSDT
-  - EVAAUSDT
 
 strategy:
   min_score: 13             # 降低至13，扩大有效信号范围

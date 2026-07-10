@@ -16,9 +16,9 @@ logger = logging.getLogger(__name__)
 class _TimeWindow:
     """定长时间窗口，自动丢弃过期元素"""
 
-    def __init__(self, max_seconds: float):
+    def __init__(self, max_seconds: float, maxlen: int = 0):
         self._max_sec = max_seconds
-        self._q: Deque[Tuple[float, object]] = deque()
+        self._q: Deque[Tuple[float, object]] = deque(maxlen=maxlen or None)
 
     def append(self, value: object, ts: float = None) -> None:
         t = ts if ts is not None else time.time()
@@ -48,21 +48,21 @@ class SymbolFeatureState:
     def __init__(self, symbol: str):
         self.symbol = symbol
 
-        # 成交记录（最大保留 15 分钟）
-        self._trades = _TimeWindow(900)
+        # 成交记录（最大保留 5 分钟，taker_buy 最大查询 300s）
+        self._trades = _TimeWindow(320, maxlen=60000)
 
-        # bookTicker 记录（最大保留 15 分钟）
-        self._book_ticks = _TimeWindow(900)
+        # bookTicker 记录（不再保留历史，实时快照已由 latest_book_tick 覆盖）
+        # _book_ticks 已移除，不再积累内存
 
-        # 价格快照（用于计算价格变化）
-        self._prices = _TimeWindow(900)
+        # 价格快照（用于计算价格变化，最大 15m = 900s）
+        self._prices = _TimeWindow(920, maxlen=100000)
 
         # 订单簿深度历史（用于计算 bid_depth_03_change 和 bid_depth_collapsed）
-        self._bid_depth_03_history = _TimeWindow(300)  # 5 分钟
-        self._bid_depth_03_5s = _TimeWindow(5)          # 5 秒内深度
+        self._bid_depth_03_history = _TimeWindow(300, maxlen=6000)  # 5 分钟
+        self._bid_depth_03_5s = _TimeWindow(5, maxlen=500)           # 5 秒内深度
 
         # 点差历史（用于判断点差异常）
-        self._spread_history = _TimeWindow(300)
+        self._spread_history = _TimeWindow(300, maxlen=6000)
 
         # 最新 bookTick
         self.latest_book_tick: Optional[BookTick] = None
@@ -71,7 +71,7 @@ class SymbolFeatureState:
         self.latest_mark_price: Optional[MarkPrice] = None
 
         # OI 历史
-        self._oi_history = _TimeWindow(900)
+        self._oi_history = _TimeWindow(920, maxlen=500)
 
         # 最新特征（缓存）
         self.latest_features: Optional[Features] = None
@@ -82,7 +82,6 @@ class SymbolFeatureState:
 
     def on_book_tick(self, tick: BookTick) -> None:
         self.latest_book_tick = tick
-        self._book_ticks.append(tick, tick.timestamp)
         spread = float(tick.best_ask - tick.best_bid)
         mid = (tick.best_bid + tick.best_ask) / 2
         mid_f = float(mid)
